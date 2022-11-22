@@ -1,6 +1,6 @@
 import { type Action } from "@ngrx/store";
 import { type UiState } from "./types";
-import { showLoading } from "./ui-feature.actions";
+import { hideLoading, showLoading } from "./ui-feature.actions";
 import { uiFeature } from "./ui-feature.reducer";
 
 const uiReducer = uiFeature.reducer;
@@ -29,6 +29,22 @@ describe("Given a uiReducer", () => {
       };
 
       const newUiState = uiReducer(initialUiState, showLoading());
+
+      expect(newUiState).toStrictEqual(expectedUiState);
+    });
+  });
+
+  describe("When it receives a current state with isLoading true and a hideLoading action", () => {
+    test("Then it should return a copy of the state with isLoading false", () => {
+      const currentUiState: UiState = {
+        isLoading: true,
+      };
+
+      const expectedUiState: UiState = {
+        isLoading: false,
+      };
+
+      const newUiState = uiReducer(currentUiState, hideLoading());
 
       expect(newUiState).toStrictEqual(expectedUiState);
     });
