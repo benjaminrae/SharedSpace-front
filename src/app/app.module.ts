@@ -8,14 +8,12 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../environments/environment";
 import { reducers, metaReducers } from "./store";
 import { EffectsModule } from "@ngrx/effects";
-import { UserFeatureModule } from "./store/user-feature/user-feature.module";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    UserFeatureModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
