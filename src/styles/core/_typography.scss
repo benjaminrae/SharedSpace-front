@@ -1,5 +1,20 @@
 @use "@fontsource/poppins/index.css";
+@use "../functions/calculatePxInRem";
+@use "../variables/typography";
 
 html {
   font-family: "Poppins";
+  font-size: typography.$baseFontSizeInPx;
+}
+
+h1 {
+  font-size: calculatePxInRem.calculatePxInRem(32);
+}
+
+h2 {
+  font-size: calculatePxInRem.calculatePxInRem(24);
+}
+
+h3 {
+  font-size: calculatePxInRem.calculatePxInRem(19);
 }

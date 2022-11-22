@@ -1,0 +1,6 @@
+@use "../variables/typography";
+
+@function calculatePxInRem($valueInPx) {
+  $remValue: calc($valueInPx / typography.$baseFontSizeInPx) + rem;
+  @return $remValue;
+}
