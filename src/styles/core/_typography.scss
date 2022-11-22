@@ -3,7 +3,7 @@
 @use "../variables/typography";
 
 html {
-  font-family: "Poppins";
+  font-family: "Poppins", Arial, sans-serif;
   font-size: typography.$baseFontSizeInPx + px;
 }
 
