@@ -1,0 +1,26 @@
+@use "@fontsource/poppins/index.css";
+@use "../functions/calculatePxInRem";
+@use "../variables/typography";
+
+html {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: typography.$baseFontSizeInPx + px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: typography.$superBold;
+}
+
+h1 {
+  font-size: calculatePxInRem.calculatePxInRem(32);
+}
+
+h2 {
+  font-size: calculatePxInRem.calculatePxInRem(24);
+}
+
+h3 {
+  font-size: calculatePxInRem.calculatePxInRem(19);
+}
