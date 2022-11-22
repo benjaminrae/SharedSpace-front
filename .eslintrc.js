@@ -10,6 +10,11 @@ module.exports = {
       files: ["*.ts", "*.tsx"],
       rules: {
         "new-cap": "off",
+        "no-negated-condition": "off",
+        "@typescript-eslint/consistent-type-definitions": [
+          "error",
+          "interface",
+        ],
       },
     },
   ],
