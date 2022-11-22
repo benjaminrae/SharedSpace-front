@@ -4,7 +4,13 @@
 
 html {
   font-family: "Poppins";
-  font-size: typography.$baseFontSizeInPx;
+  font-size: typography.$baseFontSizeInPx + px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: typography.$superBold;
 }
 
 h1 {

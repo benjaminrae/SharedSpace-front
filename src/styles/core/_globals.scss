@@ -1,0 +1,12 @@
+@use "../variables/colors";
+@use "../variables/sizes";
+
+body {
+  padding: sizes.$bodyPaddingMobile;
+  max-width: sizes.$bodyMaxWidth;
+  margin: 0 auto;
+}
+
+html {
+  color: colors.$primary;
+}
