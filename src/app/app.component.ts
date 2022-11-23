@@ -6,6 +6,7 @@ import { UiService } from "./services/ui/ui.service";
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
+  providers: [UiService],
 })
 export class AppComponent {
   title = "shared-space-front";

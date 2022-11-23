@@ -9,11 +9,8 @@ import { environment } from "../environments/environment";
 import { reducers, metaReducers } from "./store";
 import { EffectsModule } from "@ngrx/effects";
 import { CoreModule } from "./core/core.module";
-import { UserFeatureModule } from "./store/user-feature/user-feature.module";
-import { UiFeatureModule } from "./store/ui-feature/ui-feature.module";
 import { uiFeature } from "./store/ui-feature/ui-feature.reducer";
 import { userFeature } from "./store/user-feature/user-feature.reducer";
-import { LoadingComponent } from "./core/loading/loading.component";
 import { UiService } from "./services/ui/ui.service";
 
 @NgModule({
@@ -33,7 +30,7 @@ import { UiService } from "./services/ui/ui.service";
     EffectsModule.forRoot([]),
     CoreModule,
   ],
-  providers: [],
+  providers: [UiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { selectIsLoading } from "src/app/store/ui-feature/ui-feature.reducer";
+import { selectIsLoading } from "../../store/ui-feature/ui-feature.reducer";
 
 @Injectable({
   providedIn: "root",

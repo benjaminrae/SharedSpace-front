@@ -1,23 +1,19 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { render, screen } from "@testing-library/angular";
+import { LoadingComponent } from "./loading.component";
 
-import { LoadingComponent } from './loading.component';
+describe("Given a Loading component", () => {
+  describe("When it is rendered", () => {
+    test("Then it should show a loading animation on the screen with role 'alert' and aria-label 'The page is loading'", async () => {
+      const expectedRole = "alert";
+      const expectedLabel = "The page is loading";
 
-describe('LoadingComponent', () => {
-  let component: LoadingComponent;
-  let fixture: ComponentFixture<LoadingComponent>;
+      await render(LoadingComponent);
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ LoadingComponent ]
-    })
-    .compileComponents();
+      const renderedLoading = screen.queryByRole(expectedRole, {
+        name: expectedLabel,
+      });
 
-    fixture = TestBed.createComponent(LoadingComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+      expect(renderedLoading).toBeInTheDocument();
+    });
   });
 });
