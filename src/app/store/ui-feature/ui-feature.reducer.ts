@@ -1,10 +1,9 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
+import mockInitialUiState from "../../mocks/states/mockInitialUiState";
 import { type UiState } from "./types";
 import { hideLoading, showLoading } from "./ui-feature.actions";
 
-const intiialUiState: UiState = {
-  isLoading: false,
-};
+const intiialUiState: UiState = mockInitialUiState;
 
 export const uiFeature = createFeature({
   name: "ui",
