@@ -1,7 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { showModal } from "../../store/ui-feature/ui-feature.actions";
+import {
+  showModal,
+  hideModal,
+} from "../../store/ui-feature/ui-feature.actions";
 import { selectIsLoading } from "../../store/ui-feature/ui-feature.reducer";
 
 @Injectable({
@@ -24,5 +27,9 @@ export class UiService {
     this.store.dispatch(
       showModal({ payload: { isError: false, modalText: successText } })
     );
+  }
+
+  hideModal() {
+    this.store.dispatch(hideModal());
   }
 }

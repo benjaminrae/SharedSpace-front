@@ -9,3 +9,5 @@ export const showModal = createAction(
   "[UI] Show modal",
   props<{ payload: Modal }>()
 );
+
+export const hideModal = createAction("[UI] Hide modal");
