@@ -9,10 +9,11 @@ import { UiService } from "./services/ui/ui.service";
   providers: [UiService],
 })
 export class AppComponent {
-  title = "shared-space-front";
   isLoading$: Observable<boolean>;
+  showModal$: Observable<boolean>;
 
   constructor(private readonly uiService: UiService) {
     this.isLoading$ = this.uiService.getLoadingValue();
+    this.showModal$ = this.uiService.getShowModalValue();
   }
 }

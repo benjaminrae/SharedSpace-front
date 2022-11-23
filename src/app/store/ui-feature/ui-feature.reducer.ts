@@ -53,4 +53,11 @@ export const uiFeature = createFeature({
   ),
 });
 
-export const { name, reducer, selectIsLoading, selectUiState } = uiFeature;
+export const {
+  name,
+  reducer,
+  selectIsLoading,
+  selectUiState,
+  selectModalInformation,
+  selectShowModal,
+} = uiFeature;
