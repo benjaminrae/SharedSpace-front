@@ -1,0 +1,16 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <h2>Log in to SharedSpace</h2>
+
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input id="username" type="text" formControlName="username">
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input id="password" type="password" formControlName="password">
+  </div>
+
+  <app-button text="Login" [big]="true" [disabled]="loginForm.status === 'INVALID'"></app-button>
+
+</form>

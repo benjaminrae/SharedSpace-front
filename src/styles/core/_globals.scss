@@ -10,3 +10,22 @@ body {
 html {
   color: colors.$primary;
 }
+
+input {
+  background-color: colors.$primaryLightest;
+  padding: sizes.$buttonPadding;
+  border-radius: sizes.$borderRadius;
+  border: 2px solid colors.$primaryLight;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: sizes.$formGap;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}

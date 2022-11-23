@@ -19,4 +19,16 @@
     background-color: colors.$primaryLightest;
     color: colors.$primary;
   }
+
+  &--big {
+    width: 100%;
+  }
+
+  &:disabled {
+    background-color: colors.$primaryLightest;
+    color: colors.$primaryLight;
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
 }

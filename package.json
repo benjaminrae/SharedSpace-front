@@ -40,6 +40,7 @@
     "@testing-library/angular": "^12.1.2",
     "@testing-library/dom": "^8.19.0",
     "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.2.3",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
