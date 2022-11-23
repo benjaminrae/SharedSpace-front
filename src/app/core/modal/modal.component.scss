@@ -1,0 +1,31 @@
+@use "../../../styles/variables/colors";
+@use "../../../styles/variables/sizes";
+@use "../../../styles/mixins/modal";
+
+.modal {
+  @include modal.modal;
+
+  &__container {
+    background-color: colors.$primaryLightest;
+    padding: 2rem;
+    border: 2px solid currentColor;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    &--success {
+      color: colors.$green;
+    }
+    &--error {
+      color: colors.$red;
+    }
+  }
+  &__icon {
+    font-size: 2rem;
+  }
+}
