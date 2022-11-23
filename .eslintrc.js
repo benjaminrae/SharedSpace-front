@@ -7,7 +7,7 @@ module.exports = {
   overrides: [
     {
       extends: ["xo-typescript", "prettier"],
-      files: ["*.ts", "*.tsx"],
+      files: ["*.ts"],
       rules: {
         "new-cap": "off",
         "no-negated-condition": "off",
@@ -15,6 +15,7 @@ module.exports = {
           "error",
           "interface",
         ],
+        "@typescript-eslint/consistent-type-imports": "off",
       },
     },
   ],
