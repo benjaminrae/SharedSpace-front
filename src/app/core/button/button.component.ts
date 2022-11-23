@@ -10,7 +10,7 @@ export class ButtonComponent implements OnInit {
   @Input() text = "Click here";
   @Input() type = "submit";
   @Input() disabled!: boolean;
-  @Output() onClick = new EventEmitter<any>();
+  @Output() onClick = new EventEmitter();
 
   className!: string;
 

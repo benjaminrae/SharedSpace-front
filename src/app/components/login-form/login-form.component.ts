@@ -1,15 +1,10 @@
-import { Component, Output, EventEmitter } from "@angular/core";
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-} from "@angular/forms";
+import { Component } from "@angular/core";
+import { Validators, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-login-form",
   templateUrl: "./login-form.component.html",
-  styleUrls: ["./login-form.component.scss"],
+  styleUrls: [""],
 })
 export class LoginFormComponent {
   loginForm = this.fb.group({
