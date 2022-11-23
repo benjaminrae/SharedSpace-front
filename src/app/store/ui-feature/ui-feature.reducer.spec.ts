@@ -1,7 +1,12 @@
 import { type Action } from "@ngrx/store";
 import mockInitialUiState from "../../mocks/states/mockInitialUiState";
 import { Modal, type UiState } from "./types";
-import { hideLoading, showLoading, showModal } from "./ui-feature.actions";
+import {
+  hideLoading,
+  hideModal,
+  showLoading,
+  showModal,
+} from "./ui-feature.actions";
 import { uiFeature } from "./ui-feature.reducer";
 
 const uiReducer = uiFeature.reducer;
@@ -69,6 +74,24 @@ describe("Given a uiReducer", () => {
         initialUiState,
         showModal({ payload: showModalPayload })
       );
+
+      expect(newUiState).toStrictEqual(expectedUiState);
+    });
+  });
+
+  describe("When it receives the current state with showModal true and a hideModal action", () => {
+    test("Then it should return a copy of the state with showModal false", () => {
+      const currentState: UiState = {
+        ...initialUiState,
+        showModal: true,
+      };
+
+      const expectedUiState: UiState = {
+        ...currentState,
+        showModal: false,
+      };
+
+      const newUiState = uiReducer(currentState, hideModal());
 
       expect(newUiState).toStrictEqual(expectedUiState);
     });

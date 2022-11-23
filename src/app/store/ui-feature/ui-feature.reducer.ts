@@ -1,6 +1,11 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
 import { type UiState } from "./types";
-import { hideLoading, showLoading, showModal } from "./ui-feature.actions";
+import {
+  hideLoading,
+  hideModal,
+  showLoading,
+  showModal,
+} from "./ui-feature.actions";
 
 const intiialUiState: UiState = {
   isLoading: false,
@@ -35,6 +40,14 @@ export const uiFeature = createFeature({
         ...currentState,
         showModal: true,
         modalInformation: payload,
+      })
+    ),
+
+    on(
+      hideModal,
+      (currentState): UiState => ({
+        ...currentState,
+        showModal: false,
       })
     )
   ),
