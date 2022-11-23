@@ -1,12 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-
+import { NgModule } from "@angular/core";
+import { StoreModule } from "@ngrx/store";
+import { uiFeature } from "./ui-feature.reducer";
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [StoreModule.forFeature(uiFeature)],
 })
-export class UiFeatureModule { }
+export class UiFeatureModule {}
