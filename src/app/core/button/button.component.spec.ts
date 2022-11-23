@@ -6,10 +6,12 @@ describe("Given a Button component", () => {
   const buttonText = "Hello";
   const buttonRole = "button";
 
-  describe("When it is rendered with text 'Hello'", () => {
-    test("Then it should show a button with text 'Hello' on the screen", async () => {
+  describe("When it is rendered with text 'Hello' and inverted true", () => {
+    test("Then it should show a button with text 'Hello' on the screen and should have class name 'button--inverted'", async () => {
+      const invertedClassname = "button--inverted";
+
       await render(ButtonComponent, {
-        componentProperties: { inverted: false, text: buttonText },
+        componentProperties: { inverted: true, text: buttonText },
       });
 
       const renderedButton = screen.queryByRole(buttonRole, {
@@ -17,6 +19,7 @@ describe("Given a Button component", () => {
       });
 
       expect(renderedButton).toBeInTheDocument();
+      expect(renderedButton?.classList).toContain(invertedClassname);
     });
   });
 
