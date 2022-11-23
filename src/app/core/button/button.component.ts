@@ -10,6 +10,7 @@ import { Component, Input } from "@angular/core";
 })
 export class ButtonComponent {
   @Input() inverted!: boolean;
+  @Input() text = "Click here";
   @Output() onClick = new EventEmitter<any>();
 
   onClickButton(event: Event) {

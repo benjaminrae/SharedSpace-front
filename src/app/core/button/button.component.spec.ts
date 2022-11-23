@@ -1,23 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { render, screen } from "@testing-library/angular";
+import { ButtonComponent } from "./button.component";
 
-import { ButtonComponent } from './button.component';
+describe("Given a Button component", () => {
+  describe("When it is rendered with text 'Hello'", () => {
+    test("Then it should show a button with text 'Hello' on the screen", async () => {
+      const buttonText = "Hello";
+      const buttonRole = "button";
 
-describe('ButtonComponent', () => {
-  let component: ButtonComponent;
-  let fixture: ComponentFixture<ButtonComponent>;
+      await render(ButtonComponent, {
+        componentProperties: { inverted: false, text: buttonText },
+      });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ButtonComponent ]
-    })
-    .compileComponents();
+      const renderedButton = screen.queryByRole(buttonRole, {
+        name: buttonText,
+      });
 
-    fixture = TestBed.createComponent(ButtonComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+      expect(renderedButton).toBeInTheDocument();
+    });
   });
 });
