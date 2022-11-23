@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { StoreModule } from "@ngrx/store";
-import { userFeature, userFeatureKey } from "./user-feature.reducer";
+import { userFeature } from "./user-feature.reducer";
 
 @NgModule({
   declarations: [],
-  imports: [StoreModule.forFeature(userFeatureKey, userFeature.reducer)],
+  imports: [StoreModule.forFeature(userFeature)],
 })
 export class UserFeatureModule {}

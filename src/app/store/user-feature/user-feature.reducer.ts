@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
 import { loginUser } from "./user-feature.actions";
-import { type UserState } from "./types";
+import { UserState } from "./types";
 
 const initialUserState: UserState = {
   username: "",
@@ -25,7 +25,7 @@ export const userFeature = createFeature({
 });
 
 export const {
-  name: userFeatureKey,
+  name,
   reducer,
   selectUserState,
   selectIsLogged,
