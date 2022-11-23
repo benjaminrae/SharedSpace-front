@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Observable } from "rxjs";
-import { UiService } from "src/app/services/ui/ui.service";
-import { Modal } from "src/app/store/ui-feature/types";
+import { UiService } from "../../services/ui/ui.service";
+import { Modal } from "../../store/ui-feature/types";
 
 @Component({
   selector: "app-modal",
