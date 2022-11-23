@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { showModal } from "src/app/store/ui-feature/ui-feature.actions";
+import { showModal } from "../../store/ui-feature/ui-feature.actions";
 import { selectIsLoading } from "../../store/ui-feature/ui-feature.reducer";
 
 @Injectable({
