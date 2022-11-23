@@ -1,0 +1,22 @@
+@use "../../../styles/variables/colors";
+@use "../../../styles/variables/sizes";
+@use "../../../styles/variables/typography";
+
+.button {
+  background-color: colors.$primary;
+  color: colors.$neutralWhite;
+  padding: sizes.$buttonPadding;
+  border-radius: sizes.$borderRadius;
+  font-weight: typography.$semiBold;
+  border: 2px solid colors.$primary;
+
+  &:hover {
+    background-color: colors.$primaryLightest;
+    color: colors.$primary;
+  }
+
+  &--inverted {
+    background-color: colors.$primaryLightest;
+    color: colors.$primary;
+  }
+}

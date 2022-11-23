@@ -13,6 +13,6 @@ export class AppComponent {
   isLoading$: Observable<boolean>;
 
   constructor(private readonly uiService: UiService) {
-    this.isLoading$ = uiService.getLoadingValue();
+    this.isLoading$ = this.uiService.getLoadingValue();
   }
 }
