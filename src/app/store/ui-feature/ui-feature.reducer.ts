@@ -1,5 +1,4 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
-import mockInitialUiState from "../../mocks/states/mockInitialUiState";
 import { type UiState } from "./types";
 import { hideLoading, showLoading, showModal } from "./ui-feature.actions";
 
