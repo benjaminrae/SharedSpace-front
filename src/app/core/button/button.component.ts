@@ -1,8 +1,4 @@
-import { EventEmitter } from "@angular/core";
-import { HostBinding } from "@angular/core";
-import { Output } from "@angular/core";
-import { Component, Input } from "@angular/core";
-
+import { EventEmitter, Output, Component, Input } from "@angular/core";
 @Component({
   selector: "app-button",
   templateUrl: "./button.component.html",
