@@ -12,9 +12,11 @@ import { CoreModule } from "./core/core.module";
 import { uiFeature } from "./store/ui-feature/ui-feature.reducer";
 import { userFeature } from "./store/user-feature/user-feature.reducer";
 import { UiService } from "./services/ui/ui.service";
+import { LoginFormComponent } from "./components/login-form/login-form.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginFormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,6 +31,7 @@ import { UiService } from "./services/ui/ui.service";
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
     CoreModule,
+    ReactiveFormsModule,
   ],
   providers: [UiService],
   bootstrap: [AppComponent],

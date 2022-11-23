@@ -12,16 +12,14 @@ import {
   styleUrls: ["./login-form.component.scss"],
 })
 export class LoginFormComponent {
-  @Output() onSubmit = new EventEmitter();
-
   loginForm = this.fb.group({
-    username: ["", Validators.required],
-    password: ["", Validators.required],
+    username: ["", [Validators.required, Validators.minLength(5)]],
+    password: ["", [Validators.required, Validators.minLength(8)]],
   });
 
   constructor(private readonly fb: FormBuilder) {}
 
-  onSubmitForm() {
-    this.onSubmit.emit(this.loginForm.value);
+  onSubmit() {
+    return this.loginForm.value;
   }
 }
