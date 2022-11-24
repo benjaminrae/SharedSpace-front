@@ -24,7 +24,7 @@ export class UserService {
 
   getToken(loginFormData: UserCredentials): Observable<TokenResponse> {
     return this.http.post<TokenResponse>(
-      `${environment.apiUrl!}${this.userLoginPath}`,
+      `${environment.apiUrl}${this.userLoginPath}`,
       loginFormData
     );
   }
