@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { environment } from "src/environments/environment";
+import { environment } from "../../../environments/environment";
 import { User, UserCredentials } from "../../store/user-feature/types";
 import { TokenResponse } from "./types";
 import { Store } from "@ngrx/store";
-import { loginUser } from "src/app/store/user-feature/user-feature.actions";
+import { loginUser } from "../../store/user-feature/user-feature.actions";
+
 @Injectable({
   providedIn: "root",
 })

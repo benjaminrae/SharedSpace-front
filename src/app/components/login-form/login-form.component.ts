@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
 import { Validators, FormBuilder } from "@angular/forms";
-import { TokenService } from "src/app/services/token/token.service";
-import { UiService } from "src/app/services/ui/ui.service";
-import { UserService } from "src/app/services/user/user.service";
-import { UserCredentials } from "src/app/store/user-feature/types";
+import { TokenService } from "../../services/token/token.service";
+import { UiService } from "../../services/ui/ui.service";
+import { UserService } from "../../services/user/user.service";
+import { UserCredentials } from "../../store/user-feature/types";
 
 @Component({
   selector: "app-login-form",

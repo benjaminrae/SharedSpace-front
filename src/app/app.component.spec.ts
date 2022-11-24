@@ -2,6 +2,19 @@ import { render, screen } from "@testing-library/angular";
 import { AppComponent } from "./app.component";
 import { UiService } from "./services/ui/ui.service";
 import { provideMockStore } from "@ngrx/store/testing";
+import { TokenService } from "./services/token/token.service";
+import { UserService } from "./services/user/user.service";
+import { HttpClient, HttpHandler } from "@angular/common/http";
+
+const providers = [
+  UiService,
+  TokenService,
+  UiService,
+  UserService,
+  HttpClient,
+  HttpHandler,
+  provideMockStore({}),
+];
 
 describe("Given an AppComponent", () => {
   describe("When it is rendered", () => {
@@ -12,7 +25,7 @@ describe("Given an AppComponent", () => {
       };
 
       await render(AppComponent, {
-        providers: [UiService, provideMockStore({})],
+        providers,
       });
 
       const renderedHeading = screen.getByRole("heading", expectedHeading);

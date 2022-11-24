@@ -3,6 +3,23 @@ import userEvent from "@testing-library/user-event";
 import { FormBuilder } from "@angular/forms";
 import { LoginFormComponent } from "./login-form.component";
 import { ButtonComponent } from "../../core/button/button.component";
+import { UiService } from "../../services/ui/ui.service";
+import { TokenService } from "../../services/token/token.service";
+import { UserService } from "../../services/user/user.service";
+import { environment } from "../../../environments/environment";
+import { HttpClient, HttpHandler } from "@angular/common/http";
+import { provideMockStore } from "@ngrx/store/testing";
+
+const providers = [
+  FormBuilder,
+  TokenService,
+  UiService,
+  UserService,
+  HttpClient,
+  HttpHandler,
+  provideMockStore({}),
+];
+const declarations = [ButtonComponent];
 
 describe("Given a LoginFormComponent", () => {
   const usernameLabel = /username/i;
@@ -17,8 +34,8 @@ describe("Given a LoginFormComponent", () => {
       };
 
       await render(LoginFormComponent, {
-        providers: [FormBuilder],
-        declarations: [ButtonComponent],
+        providers,
+        declarations,
       });
 
       const usernameInput = screen.queryByRole("textbox", {
@@ -45,8 +62,8 @@ describe("Given a LoginFormComponent", () => {
       };
 
       await render(LoginFormComponent, {
-        providers: [FormBuilder],
-        declarations: [ButtonComponent],
+        providers,
+        declarations,
       });
 
       const usernameInput = screen.queryByRole("textbox", {
