@@ -42,7 +42,7 @@ describe("Given the service User Service", () => {
         expect(data.token).toBe("testtoken");
       });
 
-      const mockRequest = httpMock.expectOne(`${apiUrl}/users/login`);
+      const mockRequest = httpMock.expectOne(`${apiUrl!}/users/login`);
 
       mockRequest.flush({ token });
 
