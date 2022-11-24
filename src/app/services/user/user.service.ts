@@ -6,7 +6,7 @@ import { TokenResponse } from "./types";
 import { Store } from "@ngrx/store";
 import { loginUser } from "../../store/user-feature/user-feature.actions";
 import { UiService } from "../ui/ui.service";
-import { catchError, Observable } from "rxjs";
+import { catchError, Observable, tap } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -31,5 +31,14 @@ export class UserService {
 
   loginUser(userData: User) {
     this.store.dispatch(loginUser({ payload: userData }));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      this.uiService.showErrorModal("Something went wrong, try again later");
+      return;
+    }
+
+    this.uiService.showErrorModal(`There was an error: ${error.message}`);
   }
 }
