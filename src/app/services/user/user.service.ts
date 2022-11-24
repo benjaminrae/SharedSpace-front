@@ -6,7 +6,7 @@ import { TokenResponse } from "./types";
 import { Store } from "@ngrx/store";
 import { loginUser } from "../../store/user-feature/user-feature.actions";
 import { UiService } from "../ui/ui.service";
-import { catchError, Observable, tap } from "rxjs";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -24,7 +24,7 @@ export class UserService {
 
   getToken(loginFormData: UserCredentials): Observable<TokenResponse> {
     return this.http.post<TokenResponse>(
-      `${environment.apiUrl}${this.userLoginPath}`,
+      `${environment.apiUrl!}${this.userLoginPath}`,
       loginFormData
     );
   }
