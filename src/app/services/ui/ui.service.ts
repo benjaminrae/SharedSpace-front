@@ -5,6 +5,8 @@ import { Modal } from "src/app/store/ui-feature/types";
 import {
   showModal,
   hideModal,
+  showLoading,
+  hideLoading,
 } from "../../store/ui-feature/ui-feature.actions";
 import {
   selectIsLoading,
@@ -28,6 +30,14 @@ export class UiService {
 
   getModalInformation(): Observable<Modal> {
     return this.store.select(selectModalInformation);
+  }
+
+  showLoading() {
+    this.store.dispatch(showLoading());
+  }
+
+  hideLoading() {
+    this.store.dispatch(hideLoading());
   }
 
   showErrorModal(errorText: string) {
