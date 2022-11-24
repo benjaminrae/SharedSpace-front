@@ -36,6 +36,7 @@ export class LoginFormComponent {
       this.uiService.hideLoading();
       this.resetForm();
       this.uiService.showSuccessModal("You have logged in correctly");
+      this.tokenService.storeToken(token);
     });
   }
 
