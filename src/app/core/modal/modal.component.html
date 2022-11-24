@@ -4,6 +4,6 @@
       [className]="(modalInformation$ | async)?.isError ? 'modal__title modal__title--error': 'modal__title modal__title--success'">{{
       (modalInformation$ | async)?.isError ? "Error" : "Success" }}</span>
     <span class="modal__text">{{ (modalInformation$ | async)?.modalText }}</span>
-    <app-button text="Close"></app-button>
+    <app-button text="Close" (onClick)="onClick()"></app-button>
   </div>
 </div>

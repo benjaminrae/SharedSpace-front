@@ -11,7 +11,11 @@ import { Modal } from "../../store/ui-feature/types";
 export class ModalComponent {
   modalInformation$!: Observable<Modal>;
 
-  constructor(uiService: UiService) {
+  constructor(private readonly uiService: UiService) {
     this.modalInformation$ = uiService.getModalInformation();
+  }
+
+  onClick() {
+    this.uiService.hideModal();
   }
 }
