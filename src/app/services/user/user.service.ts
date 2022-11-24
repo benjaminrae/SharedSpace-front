@@ -1,10 +1,12 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { User, UserCredentials } from "../../store/user-feature/types";
 import { TokenResponse } from "./types";
 import { Store } from "@ngrx/store";
 import { loginUser } from "../../store/user-feature/user-feature.actions";
+import { UiService } from "../ui/ui.service";
+import { catchError, Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -16,10 +18,11 @@ export class UserService {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly store: Store
+    private readonly store: Store,
+    private readonly uiService: UiService
   ) {}
 
-  getToken(loginFormData: UserCredentials) {
+  getToken(loginFormData: UserCredentials): Observable<TokenResponse> {
     return this.http.post<TokenResponse>(
       `${environment.apiUrl}${this.userLoginPath}`,
       loginFormData

@@ -29,18 +29,28 @@ export class LoginFormComponent {
       this.loginForm.value as UserCredentials
     );
 
-    data.subscribe((data) => {
-      const { token } = data;
-      const { id, username } = this.tokenService.decodeToken(token);
-      this.userService.loginUser({ username, id, token });
-      this.uiService.hideLoading();
-      this.resetForm();
-      this.uiService.showSuccessModal("You have logged in correctly");
-      this.tokenService.storeToken(token);
-    });
+    data.subscribe(
+      (data) => {
+        const { token } = data;
+        const { id, username } = this.tokenService.decodeToken(token);
+        this.userService.loginUser({ username, id, token });
+        this.uiService.hideLoading();
+        this.resetForm();
+        this.uiService.showSuccessModal("You have logged in correctly");
+        this.tokenService.storeToken(token);
+      },
+
+      this.handleError
+    );
   }
 
   private resetForm() {
     this.loginForm.reset();
+  }
+
+  private handleError(error: unknown) {
+    this.uiService.showErrorModal(
+      `There was an error: ${(error as Error).message}`
+    );
   }
 }

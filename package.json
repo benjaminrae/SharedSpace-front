@@ -53,7 +53,6 @@
     "jest-preset-angular": "^12.2.2",
     "jest-ts-webcompat-resolver": "^1.0.0",
     "lint-staged": "^13.0.3",
-    "msw": "^0.49.0",
     "typescript": "^4.8.4"
   },
   "msw": {
