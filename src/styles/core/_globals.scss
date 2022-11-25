@@ -18,6 +18,24 @@ input {
   border: 2px solid colors.$primaryLight;
 }
 
+label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  background-color: colors.$primaryLightest;
+  border-radius: sizes.$borderRadius;
+  border: 2px solid colors.$primaryLight;
+  &:checked {
+    background-color: colors.$primary;
+  }
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -28,6 +46,12 @@ form {
 .form-group {
   display: flex;
   flex-direction: column;
+}
+
+.form__checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 a {

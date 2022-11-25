@@ -15,8 +15,9 @@ import { uiFeature } from "./store/ui-feature/ui-feature.reducer";
 import { userFeature } from "./store/user-feature/user-feature.reducer";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
+import { RegisterFormComponent } from './components/register-form/register-form.component';
 @NgModule({
-  declarations: [AppComponent, LoginFormComponent, LoginPageComponent],
+  declarations: [AppComponent, LoginFormComponent, LoginPageComponent, RegisterFormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
