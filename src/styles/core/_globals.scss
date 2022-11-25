@@ -27,11 +27,13 @@ label {
 input[type="checkbox"] {
   -webkit-appearance: none;
   appearance: none;
-  background-color: #fff;
   margin: 0;
   background-color: colors.$primaryLightest;
   border-radius: sizes.$borderRadius;
   border: 2px solid colors.$primaryLight;
+  &:checked {
+    background-color: colors.$primary;
+  }
 }
 
 form {
