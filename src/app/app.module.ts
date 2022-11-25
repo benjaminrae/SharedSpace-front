@@ -13,9 +13,10 @@ import { AppComponent } from "./app.component";
 import { metaReducers } from "./store";
 import { uiFeature } from "./store/ui-feature/ui-feature.reducer";
 import { userFeature } from "./store/user-feature/user-feature.reducer";
+import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 @NgModule({
-  declarations: [AppComponent, LoginFormComponent],
+  declarations: [AppComponent, LoginFormComponent, LoginPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

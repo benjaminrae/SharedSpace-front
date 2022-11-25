@@ -13,7 +13,7 @@ html {
 
 input {
   background-color: colors.$primaryLightest;
-  padding: sizes.$buttonPadding;
+  padding: sizes.$inputPadding;
   border-radius: sizes.$borderRadius;
   border: 2px solid colors.$primaryLight;
 }
@@ -28,4 +28,8 @@ form {
 .form-group {
   display: flex;
   flex-direction: column;
+}
+
+a {
+  font-weight: bold;
 }

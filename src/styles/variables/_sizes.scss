@@ -1,6 +1,7 @@
 @use "../functions/calculatePxInRem";
 
 $buttonPadding: 8px 16px;
+$inputPadding: 16px 16px;
 
 $checkboxHeight: calculatePxInRem.calculatePxInRem(20);
 $checkboxWidth: calculatePxInRem.calculatePxInRem(20);
