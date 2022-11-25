@@ -3,6 +3,7 @@ import { HttpClient, HttpHandler } from "@angular/common/http";
 import { FormBuilder } from "@angular/forms";
 import { provideMockStore } from "@ngrx/store/testing";
 import { render, screen } from "@testing-library/angular";
+import userEvent from "@testing-library/user-event/";
 import { ButtonComponent } from "../../core/button/button.component";
 
 import { RegisterFormComponent } from "./register-form.component";
@@ -46,6 +47,37 @@ describe("Given a RegisterFormComponent", () => {
       expect(renderedHeading).toBeInTheDocument();
       expect(checkbox).toBeInTheDocument();
       expect(signupButton).toBeInTheDocument();
+    });
+  });
+
+  describe("When it is rendered and the user types username 'john', password '12345' and confirm password '12345'", () => {
+    test("Then the login button should be disabled", async () => {
+      const userInput = {
+        username: "john",
+        password: "12345",
+        confirmPassword: "12345",
+      };
+
+      await render(RegisterFormComponent, {
+        providers,
+        declarations,
+      });
+
+      const usernameInput = screen.queryByRole("textbox", {
+        name: usernameLabel,
+      });
+      const passwordInput = screen.queryByLabelText(passwordLabel);
+      const confirmPasswordInput =
+        screen.queryByLabelText(confirmPasswordLabel);
+      const signupButton = screen.queryByRole("button", {
+        name: signupButtonText,
+      });
+
+      await userEvent.type(usernameInput!, userInput.username);
+      await userEvent.type(passwordInput!, userInput.password);
+      await userEvent.type(confirmPasswordInput!, userInput.confirmPassword);
+
+      expect(signupButton).toBeDisabled();
     });
   });
 });
