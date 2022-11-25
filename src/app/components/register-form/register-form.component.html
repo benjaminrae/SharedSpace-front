@@ -20,8 +20,10 @@
     <label for=""><input type="checkbox" name="" id=""> I want to offer a space</label>
   </div>
 
-  <app-button text="Sign up" [big]="true" [disabled]="registerForm.status === 'INVALID"></app-button>
+  <app-button text="Sign up" [big]="true" [disabled]="registerForm.status === 'INVALID'"></app-button>
 
-  <span>Already have an account? <a routerLink="/login">Login here</a> </span>
+  <span>Already have an account?
+    <a routerLink="/login">Login here</a>
+  </span>
 
 </form>
