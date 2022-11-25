@@ -11,3 +11,7 @@ export interface UserCredentials {
   username: string;
   password: string;
 }
+
+export interface RegisterUserCredentials extends UserCredentials {
+  confirmPassword: string;
+}

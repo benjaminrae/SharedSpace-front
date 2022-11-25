@@ -1,7 +1,11 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
-import { User, UserCredentials } from "../../store/user-feature/types";
+import {
+  RegisterUserCredentials,
+  User,
+  UserCredentials,
+} from "../../store/user-feature/types";
 import { TokenResponse } from "./types";
 import { Store } from "@ngrx/store";
 import { loginUser } from "../../store/user-feature/user-feature.actions";
@@ -16,6 +20,10 @@ export class UserService {
     return "/users/login";
   }
 
+  private get userRegisterPath() {
+    return "/users/register";
+  }
+
   constructor(
     private readonly http: HttpClient,
     private readonly store: Store,
@@ -26,6 +34,13 @@ export class UserService {
     return this.http.post<TokenResponse>(
       `${environment.apiUrl}${this.userLoginPath}`,
       loginFormData
+    );
+  }
+
+  registerUser(registerFormData: RegisterUserCredentials) {
+    return this.http.post(
+      `${environment.apiUrl}${this.userRegisterPath}`,
+      registerFormData
     );
   }
 
