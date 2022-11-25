@@ -5,7 +5,10 @@ import {
 import { TestBed } from "@angular/core/testing";
 import { provideMockStore } from "@ngrx/store/testing";
 import { lastValueFrom } from "rxjs";
-import { UserCredentials } from "src/app/store/user-feature/types";
+import {
+  RegisterUserCredentials,
+  UserCredentials,
+} from "src/app/store/user-feature/types";
 
 import { UserService } from "./user.service";
 import { environment } from "../../../environments/environment";
@@ -45,6 +48,32 @@ describe("Given the service User Service", () => {
       const mockRequest = httpMock.expectOne(`${apiUrl}/users/login`);
 
       mockRequest.flush({ token });
+
+      expect(mockRequest.request.method).toBe("POST");
+
+      httpMock.verify();
+    });
+  });
+
+  describe("When its method registerUser is invoked with username 'nimda', password 'nimda123' and confirmPassword 'nimda123'", () => {
+    test("Then it should return the message 'You have registered successfully'", () => {
+      const httpMock = TestBed.inject(HttpTestingController);
+      const registerFormData: RegisterUserCredentials = {
+        username: "nimda",
+        password: "nimda123",
+        confirmPassword: "nimda123",
+      };
+      const reponseBody = { message: "You have registered successfully" };
+
+      const response$ = service.registerUser(registerFormData);
+
+      response$.subscribe((data) => {
+        expect(data).toBe(reponseBody);
+      });
+
+      const mockRequest = httpMock.expectOne(`${apiUrl}/users/register`);
+
+      mockRequest.flush(reponseBody);
 
       expect(mockRequest.request.method).toBe("POST");
 
