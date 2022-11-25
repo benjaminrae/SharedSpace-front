@@ -1,0 +1,29 @@
+.login-page {
+  display: flex;
+  justify-content: space-between;
+  align-items: unset;
+  padding-top: 2rem;
+  gap: 2rem;
+
+  & img {
+    display: none;
+  }
+
+  &__form {
+    flex: 1;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .login-page {
+    & img {
+      display: block;
+      flex: 1;
+      max-width: 60%;
+    }
+
+    &__form {
+      flex: 1;
+    }
+  }
+} ;

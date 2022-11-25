@@ -1,7 +1,9 @@
-<h1>SharedSpace</h1>
+<div class="app">
+  <h1>SharedSpace</h1>
 
-<app-loading *ngIf="isLoading$ | async"></app-loading>
-<app-login-form>
-</app-login-form>
+  <app-loading *ngIf="isLoading$ | async"></app-loading>
 
-<app-modal *ngIf="showModal$ | async"></app-modal>
+  <app-modal *ngIf="showModal$ | async"></app-modal>
+
+  <app-login-page></app-login-page>
+</div>
