@@ -11,7 +11,7 @@ import { LoginPageComponent } from "./login-page.component";
 const providers = [FormBuilder, HttpClient, HttpHandler, provideMockStore({})];
 const declarations = [LoginFormComponent, ButtonComponent];
 
-describe("LoginPageComponent", () => {
+describe("Given the LoginPageComponent", () => {
   let component: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
 
@@ -25,8 +25,14 @@ describe("LoginPageComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
+  describe("When it is rendered", () => {
+    test("Then the component should be created", () => {
+      expect(component).toBeTruthy();
+    });
+
+    test("and then it should match the snapshot", () => {
+      expect(component).toMatchSnapshot();
+    });
   });
 });
 
