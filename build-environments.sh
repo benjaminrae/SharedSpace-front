@@ -1,8 +1,8 @@
 #!/bin/sh
 
 cd src
-mkdir _environments
-cd _environments
+mkdir environments
+cd environments
 
 echo "export const environment = {
   production: false,
