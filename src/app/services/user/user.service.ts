@@ -6,11 +6,12 @@ import {
   User,
   UserCredentials,
 } from "../../store/user-feature/types";
-import { TokenResponse } from "./types";
+import { RegisterResponse, TokenResponse } from "./types";
 import { Store } from "@ngrx/store";
 import { loginUser } from "../../store/user-feature/user-feature.actions";
 import { UiService } from "../ui/ui.service";
-import { Observable } from "rxjs";
+import { catchError, Observable, retry, throwError } from "rxjs";
+import { hideLoading } from "src/app/store/ui-feature/ui-feature.actions";
 
 @Injectable({
   providedIn: "root",
@@ -31,29 +32,40 @@ export class UserService {
   ) {}
 
   getToken(loginFormData: UserCredentials): Observable<TokenResponse> {
-    return this.http.post<TokenResponse>(
-      `${environment.apiUrl}${this.userLoginPath}`,
-      loginFormData
-    );
+    return this.http
+      .post<TokenResponse>(
+        `${environment.apiUrl}${this.userLoginPath}`,
+        loginFormData
+      )
+      .pipe(catchError((error) => this.handleError(error, this.uiService)));
   }
 
-  registerUser(registerFormData: RegisterUserCredentials) {
-    return this.http.post(
-      `${environment.apiUrl}${this.userRegisterPath}`,
-      registerFormData
-    );
+  registerUser(
+    registerFormData: RegisterUserCredentials
+  ): Observable<RegisterResponse> {
+    return this.http
+      .post<RegisterResponse>(
+        `${environment.apiUrl}${this.userRegisterPath}`,
+        registerFormData
+      )
+      .pipe(catchError((error) => this.handleError(error, this.uiService)));
   }
 
   loginUser(userData: User) {
     this.store.dispatch(loginUser({ payload: userData }));
   }
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      this.uiService.showErrorModal("Something went wrong, try again later");
-      return;
+  handleError(error: HttpErrorResponse, uiService: UiService) {
+    uiService.hideLoading();
+    if (error.error.error) {
+      uiService.showErrorModal(error.error.error);
+      return throwError(() => error);
     }
 
-    this.uiService.showErrorModal(`There was an error: ${error.message}`);
+    if (error.message) {
+      uiService.showErrorModal(error.message);
+    }
+
+    return throwError(() => error);
   }
 }

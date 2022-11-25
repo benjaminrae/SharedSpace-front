@@ -62,6 +62,7 @@ describe("Given the service User Service", () => {
         username: "nimda",
         password: "nimda123",
         confirmPassword: "nimda123",
+        owner: false,
       };
       const reponseBody = { message: "You have registered successfully" };
 
