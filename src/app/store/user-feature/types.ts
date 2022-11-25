@@ -14,4 +14,5 @@ export interface UserCredentials {
 
 export interface RegisterUserCredentials extends UserCredentials {
   confirmPassword: string;
+  owner: boolean;
 }
