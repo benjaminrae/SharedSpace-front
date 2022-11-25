@@ -14,5 +14,10 @@ jobs:
       - name: Install modules
         run: npm ci
 
+      - name: Build environments
+        run: sh build-environments.sh
+        env:
+          API_URL: ${{ secrets.API_URL }}
+
       - name: Testing
         run: npm test
