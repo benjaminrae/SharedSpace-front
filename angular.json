@@ -27,7 +27,7 @@
               "src/favicon.ico",
               "src/assets",
               "src/assets/svg/*.svg",
-              "netlify.toml"
+              "src/netlify.toml"
             ],
             "styles": ["src/styles/styles.scss"],
             "scripts": []
