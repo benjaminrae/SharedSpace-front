@@ -65,6 +65,6 @@ export class UserService {
       uiService.showErrorModal(error.message);
     }
 
-    return throwError(() => error);
+    return throwError(() => new Error(error.message));
   }
 }

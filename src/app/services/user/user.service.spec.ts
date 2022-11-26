@@ -18,10 +18,39 @@ import mockInitialUiState from "../../mocks/states/mockInitialUiState";
 import mockInitialUserState from "../../mocks/states/mockInitialUserState";
 import { loginUser } from "../../store/user-feature/user-feature.actions";
 import { createMock } from "@testing-library/angular/jest-utils";
+import { throwError } from "rxjs";
 
 const { apiUrl } = environment;
 
 const providers = [provideMockStore({})];
+
+const serverErrorMessage = "There was an error on the server";
+const clientErrorMessage = "Incorrect username or password";
+const serverError: Partial<HttpErrorResponse> = {
+  message: serverErrorMessage,
+  error: {
+    error: "",
+  },
+};
+const clientError: Partial<HttpErrorResponse> = {
+  error: {
+    error: clientErrorMessage,
+  },
+};
+const serverCallback = () => serverError;
+const clientCallback = () => clientError;
+
+jest.mock("rxjs", (): unknown => ({
+  ...jest.requireActual("rxjs"),
+  throwError: jest
+    .fn()
+    .mockImplementationOnce((callback: () => typeof clientError) => {
+      callback();
+    })
+    .mockImplementationOnce((callback: typeof serverCallback) => {
+      callback();
+    }),
+}));
 
 describe("Given the service User Service", () => {
   let service: UserService;
@@ -117,38 +146,25 @@ describe("Given the service User Service", () => {
 
   describe("When the method handleError is invoked with a HttpErrorResponse with 'Incorrect username or password' and the UiService", () => {
     test("Then UiService's showLoading and showErrorModal with the received error should be invoked and it should return a thrown error", () => {
-      const errorMessage = "Incorrect username or password";
-      const error: Partial<HttpErrorResponse> = {
-        error: {
-          error: errorMessage,
-        },
-      };
-
       const uiService = createMock(UiService);
 
-      service.handleError(error as HttpErrorResponse, uiService);
+      service.handleError(clientError as HttpErrorResponse, uiService);
 
       expect(uiService.hideLoading).toHaveBeenCalled();
-      expect(uiService.showErrorModal).toHaveBeenCalledWith(errorMessage);
+      expect(uiService.showErrorModal).toHaveBeenCalledWith(clientErrorMessage);
+      expect(throwError).toHaveBeenCalled();
     });
   });
 
   describe("When the method handleError is invoked with a HttpErrorResponse with 'There was an error on the server' and the UiService", () => {
     test("Then UiService's showLoading and showErrorModal with the received error should be invoked and it should return a thrown error", () => {
-      const errorMessage = "There was an error on the server";
-      const error: Partial<HttpErrorResponse> = {
-        message: errorMessage,
-        error: {
-          error: "",
-        },
-      };
-
       const uiService = createMock(UiService);
 
-      service.handleError(error as HttpErrorResponse, uiService);
+      service.handleError(serverError as HttpErrorResponse, uiService);
 
       expect(uiService.hideLoading).toHaveBeenCalled();
-      expect(uiService.showErrorModal).toHaveBeenCalledWith(errorMessage);
+      expect(uiService.showErrorModal).toHaveBeenCalledWith(serverErrorMessage);
+      expect(throwError).toHaveBeenCalled();
     });
   });
 });
