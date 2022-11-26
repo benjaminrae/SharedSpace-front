@@ -6,7 +6,7 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../environments/environment";
 import { EffectsModule } from "@ngrx/effects";
 import { CoreModule } from "./core/core.module";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { UiService } from "./services/ui/ui.service";
 import { AppComponent } from "./app.component";
@@ -15,9 +15,14 @@ import { uiFeature } from "./store/ui-feature/ui-feature.reducer";
 import { userFeature } from "./store/user-feature/user-feature.reducer";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
-import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { RegisterFormComponent } from "./components/register-form/register-form.component";
 @NgModule({
-  declarations: [AppComponent, LoginFormComponent, LoginPageComponent, RegisterFormComponent],
+  declarations: [
+    AppComponent,
+    LoginFormComponent,
+    LoginPageComponent,
+    RegisterFormComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -33,6 +38,7 @@ import { RegisterFormComponent } from './components/register-form/register-form.
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
     CoreModule,
+    FormsModule,
     ReactiveFormsModule,
   ],
   providers: [UiService],

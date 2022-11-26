@@ -7,6 +7,7 @@ import { UserService } from "../../services/user/user.service";
 @Component({
   selector: "app-register-form",
   templateUrl: "./register-form.component.html",
+  providers: [UserService, UiService],
 })
 export class RegisterFormComponent {
   registerForm = this.fb.group({
@@ -29,7 +30,7 @@ export class RegisterFormComponent {
       this.registerForm.value as RegisterUserCredentials
     );
 
-    data.subscribe((data) => {
+    data.subscribe(() => {
       this.uiService.hideLoading();
       this.uiService.showSuccessModal("You have successfully registered");
       this.resetForm();
