@@ -8,7 +8,10 @@ import {
 } from "../../store/user-feature/types";
 import { RegisterResponse, TokenResponse } from "./types";
 import { Store } from "@ngrx/store";
-import { loginUser } from "../../store/user-feature/user-feature.actions";
+import {
+  loginUser,
+  logoutUser,
+} from "../../store/user-feature/user-feature.actions";
 import { UiService } from "../ui/ui.service";
 import { catchError, Observable, throwError } from "rxjs";
 
@@ -52,6 +55,10 @@ export class UserService {
 
   loginUser(userData: User) {
     this.store.dispatch(loginUser({ payload: userData }));
+  }
+
+  logoutUser() {
+    this.store.dispatch(logoutUser());
   }
 
   handleError(error: HttpErrorResponse, uiService: UiService) {
