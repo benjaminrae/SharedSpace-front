@@ -132,4 +132,23 @@ describe("Given the service User Service", () => {
       expect(uiService.showErrorModal).toHaveBeenCalledWith(errorMessage);
     });
   });
+
+  describe("When the method handleError is invoked with a HttpErrorResponse with 'There was an error on the server' and the UiService", () => {
+    test("Then UiService's showLoading and showErrorModal with the received error should be invoked and it should return a thrown error", () => {
+      const errorMessage = "There was an error on the server";
+      const error: Partial<HttpErrorResponse> = {
+        message: errorMessage,
+        error: {
+          error: "",
+        },
+      };
+
+      const uiService = createMock(UiService);
+
+      service.handleError(error as HttpErrorResponse, uiService);
+
+      expect(uiService.hideLoading).toHaveBeenCalled();
+      expect(uiService.showErrorModal).toHaveBeenCalledWith(errorMessage);
+    });
+  });
 });
