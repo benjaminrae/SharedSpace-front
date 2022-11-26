@@ -11,12 +11,13 @@ import {
 } from "src/app/store/user-feature/types";
 import { UserService } from "./user.service";
 import { environment } from "../../../environments/environment";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { UiService } from "../ui/ui.service";
 import { ApplicationState } from "../../store/types";
 import mockInitialUiState from "../../mocks/states/mockInitialUiState";
 import mockInitialUserState from "../../mocks/states/mockInitialUserState";
 import { loginUser } from "../../store/user-feature/user-feature.actions";
+import { createMock } from "@testing-library/angular/jest-utils";
 
 const { apiUrl } = environment;
 
@@ -111,6 +112,24 @@ describe("Given the service User Service", () => {
       expect(dispatchSpy).toHaveBeenCalledWith(
         loginUser({ payload: loginUserData })
       );
+    });
+  });
+
+  describe("When the method handleError is invoked with a HttpErrorResponse with 'Incorrect username or password' and the UiService", () => {
+    test("Then UiService's showLoading and showErrorModal with the received error should be invoked and it should return a thrown error", () => {
+      const errorMessage = "Incorrect username or password";
+      const error: Partial<HttpErrorResponse> = {
+        error: {
+          error: errorMessage,
+        },
+      };
+
+      const uiService = createMock(UiService);
+
+      service.handleError(error as HttpErrorResponse, uiService);
+
+      expect(uiService.hideLoading).toHaveBeenCalled();
+      expect(uiService.showErrorModal).toHaveBeenCalledWith(errorMessage);
     });
   });
 });
