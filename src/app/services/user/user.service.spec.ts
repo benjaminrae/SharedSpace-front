@@ -44,7 +44,7 @@ jest.mock("rxjs", (): unknown => ({
   ...jest.requireActual("rxjs"),
   throwError: jest
     .fn()
-    .mockImplementationOnce((callback: () => typeof clientError) => {
+    .mockImplementationOnce((callback: () => typeof clientCallback) => {
       callback();
     })
     .mockImplementationOnce((callback: typeof serverCallback) => {
@@ -90,6 +90,32 @@ describe("Given the service User Service", () => {
     });
   });
 
+  describe("When its method getToken is invoked and the server returns 404", () => {
+    test("Then handleError should be called", () => {
+      const httpMock = TestBed.inject(HttpTestingController);
+
+      const userData: UserCredentials = {
+        username: "admin",
+        password: "admin123",
+      };
+
+      const handleError = jest.spyOn(service, "handleError");
+
+      const response$ = service.getToken(userData);
+      response$.subscribe();
+
+      const mockRequest = httpMock.expectOne(`${apiUrl}/users/login`);
+
+      mockRequest.flush("", { status: 404, statusText: "" });
+
+      expect(mockRequest.request.method).toBe("POST");
+
+      httpMock.verify();
+
+      expect(handleError).toHaveBeenCalled();
+    });
+  });
+
   describe("When its method registerUser is invoked with username 'nimda', password 'nimda123' and confirmPassword 'nimda123'", () => {
     test("Then it should return the message 'You have registered successfully'", () => {
       const httpMock = TestBed.inject(HttpTestingController);
@@ -114,6 +140,34 @@ describe("Given the service User Service", () => {
       expect(mockRequest.request.method).toBe("POST");
 
       httpMock.verify();
+    });
+  });
+
+  describe("When its method register user is invoked and the server returns status 500", () => {
+    test("Then handleError should be invoked", () => {
+      const httpMock = TestBed.inject(HttpTestingController);
+
+      const userData: RegisterUserCredentials = {
+        username: "admin",
+        password: "admin123",
+        confirmPassword: "admin123",
+        owner: false,
+      };
+
+      const handleError = jest.spyOn(service, "handleError");
+
+      const response$ = service.registerUser(userData);
+      response$.subscribe();
+
+      const mockRequest = httpMock.expectOne(`${apiUrl}/users/register`);
+
+      mockRequest.flush("", { status: 500, statusText: "" });
+
+      expect(mockRequest.request.method).toBe("POST");
+
+      httpMock.verify();
+
+      expect(handleError).toHaveBeenCalled();
     });
   });
 
