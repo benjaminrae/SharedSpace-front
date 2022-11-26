@@ -6,21 +6,21 @@ import { render, screen } from "@testing-library/angular";
 import { ButtonComponent } from "../../core/button/button.component";
 import { LoginFormComponent } from "../../components/login-form/login-form.component";
 
-import { LoginPageComponent } from "./login-page.component";
+import { CredentialsPageComponent } from "./credentials-page.component";
 
 const providers = [FormBuilder, HttpClient, HttpHandler, provideMockStore({})];
 const declarations = [LoginFormComponent, ButtonComponent];
 
 describe("Given the LoginPageComponent", () => {
-  let component: LoginPageComponent;
-  let fixture: ComponentFixture<LoginPageComponent>;
+  let component: CredentialsPageComponent;
+  let fixture: ComponentFixture<CredentialsPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LoginPageComponent],
+      declarations: [CredentialsPageComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LoginPageComponent);
+    fixture = TestBed.createComponent(CredentialsPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -45,7 +45,7 @@ describe("Given the LoginPage component", () => {
         name: "Log in to SharedSpace",
       };
 
-      await render(LoginPageComponent, { declarations, providers });
+      await render(CredentialsPageComponent, { declarations, providers });
 
       const renderedHeading = screen.queryByRole("heading", loginHeading);
       const renderedImage = screen.queryByRole("img", {
