@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" data-testid="form">
   <h2>Sign up for SharedSpace</h2>
 
   <div class="form-group">
@@ -17,11 +17,14 @@
   </div>
 
   <div class="form-group ">
-    <label for=""><input type="checkbox" name="" id=""> I want to offer a space</label>
+    <label for="owner"><input type="checkbox" name="owner" id="owner" formControlName="owner"> I want to offer a
+      space</label>
   </div>
 
-  <app-button text="Sign up" [big]="true"></app-button>
+  <app-button text="Sign up" [big]="true" [disabled]="registerForm.status === 'INVALID'"></app-button>
 
-  <span>Already have an account? <a routerLink="/login">Login here</a> </span>
+  <span>Already have an account?
+    <a routerLink="/login">Login here</a>
+  </span>
 
 </form>
