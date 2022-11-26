@@ -119,17 +119,14 @@ describe("Given a RegisterFormComponent", () => {
       const passwordInput = screen.queryByLabelText(passwordLabel);
       const confirmPasswordInput =
         screen.queryByLabelText(confirmPasswordLabel);
-      const signupButton = screen.queryByRole("button", {
-        name: signupButtonText,
-      });
 
       await userEvent.type(usernameInput!, userInput.username);
       await userEvent.type(passwordInput!, userInput.password);
       await userEvent.type(confirmPasswordInput!, userInput.confirmPassword);
 
       expect(usernameInput).toHaveValue(userInput.username);
-      expect(usernameInput).toHaveValue(userInput.username);
-      expect(usernameInput).toHaveValue(userInput.username);
+      expect(passwordInput).toHaveValue(userInput.password);
+      expect(confirmPasswordInput).toHaveValue(userInput.confirmPassword);
     });
   });
 
