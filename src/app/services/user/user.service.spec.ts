@@ -3,15 +3,20 @@ import {
   HttpTestingController,
 } from "@angular/common/http/testing";
 import { TestBed } from "@angular/core/testing";
-import { provideMockStore } from "@ngrx/store/testing";
-import { lastValueFrom } from "rxjs";
+import { getMockStore, provideMockStore } from "@ngrx/store/testing";
 import {
   RegisterUserCredentials,
+  User,
   UserCredentials,
 } from "src/app/store/user-feature/types";
-
 import { UserService } from "./user.service";
 import { environment } from "../../../environments/environment";
+import { HttpClient } from "@angular/common/http";
+import { UiService } from "../ui/ui.service";
+import { ApplicationState } from "../../store/types";
+import mockInitialUiState from "../../mocks/states/mockInitialUiState";
+import mockInitialUserState from "../../mocks/states/mockInitialUserState";
+import { loginUser } from "../../store/user-feature/user-feature.actions";
 
 const { apiUrl } = environment;
 
@@ -79,6 +84,33 @@ describe("Given the service User Service", () => {
       expect(mockRequest.request.method).toBe("POST");
 
       httpMock.verify();
+    });
+  });
+
+  describe("When its method loginUser is invoked with username 'admin', id 'testid' and token 'testtoken'", () => {
+    test("Then the store's dispatch should be invoked with a loginUser action and the user's details", () => {
+      const loginUserData: User = {
+        id: "testid",
+        token: "testtoken",
+        username: "admin",
+      };
+      const store = getMockStore<ApplicationState>({
+        initialState: { ui: mockInitialUiState, user: mockInitialUserState },
+      });
+
+      const userService = new UserService(
+        {} as HttpClient,
+        store,
+        {} as UiService
+      );
+
+      const dispatchSpy = jest.spyOn(store, "dispatch");
+
+      userService.loginUser(loginUserData);
+
+      expect(dispatchSpy).toHaveBeenCalledWith(
+        loginUser({ payload: loginUserData })
+      );
     });
   });
 });
