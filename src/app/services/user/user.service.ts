@@ -10,8 +10,7 @@ import { RegisterResponse, TokenResponse } from "./types";
 import { Store } from "@ngrx/store";
 import { loginUser } from "../../store/user-feature/user-feature.actions";
 import { UiService } from "../ui/ui.service";
-import { catchError, Observable, retry, throwError } from "rxjs";
-import { hideLoading } from "src/app/store/ui-feature/ui-feature.actions";
+import { catchError, Observable, throwError } from "rxjs";
 
 @Injectable({
   providedIn: "root",
