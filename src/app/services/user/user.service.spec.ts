@@ -16,7 +16,10 @@ import { UiService } from "../ui/ui.service";
 import { ApplicationState } from "../../store/types";
 import mockInitialUiState from "../../mocks/states/mockInitialUiState";
 import mockInitialUserState from "../../mocks/states/mockInitialUserState";
-import { loginUser } from "../../store/user-feature/user-feature.actions";
+import {
+  loginUser,
+  logoutUser,
+} from "../../store/user-feature/user-feature.actions";
 import { createMock } from "@testing-library/angular/jest-utils";
 import { throwError } from "rxjs";
 
@@ -219,6 +222,26 @@ describe("Given the service User Service", () => {
       expect(uiService.hideLoading).toHaveBeenCalled();
       expect(uiService.showErrorModal).toHaveBeenCalledWith(serverErrorMessage);
       expect(throwError).toHaveBeenCalled();
+    });
+  });
+
+  describe("When the method logoutUser is invoked", () => {
+    test("Then the store's method dispatch should be called with a logoutUser action", () => {
+      const store = getMockStore<ApplicationState>({
+        initialState: { ui: mockInitialUiState, user: mockInitialUserState },
+      });
+
+      const userService = new UserService(
+        {} as HttpClient,
+        store,
+        {} as UiService
+      );
+
+      const dispatchSpy = jest.spyOn(store, "dispatch");
+
+      userService.logoutUser();
+
+      expect(dispatchSpy).toHaveBeenCalledWith(logoutUser());
     });
   });
 });
