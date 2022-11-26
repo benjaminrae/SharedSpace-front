@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
-import { loginUser } from "./user-feature.actions";
+import { loginUser, logoutUser } from "./user-feature.actions";
 import { UserState } from "./types";
 
 const initialUserState: UserState = {
@@ -13,12 +13,24 @@ export const userFeature = createFeature({
   name: "user",
   reducer: createReducer(
     initialUserState,
+
     on(
       loginUser,
       (currentState, { payload }): UserState => ({
         ...currentState,
         ...payload,
         isLogged: true,
+      })
+    ),
+
+    on(
+      logoutUser,
+      (currentState): UserState => ({
+        ...currentState,
+        username: "",
+        id: "",
+        token: "",
+        isLogged: false,
       })
     )
   ),
