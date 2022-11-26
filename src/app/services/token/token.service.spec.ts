@@ -53,4 +53,16 @@ describe("Given the service TokenService", () => {
       expect(decodedToken).toHaveProperty(idProperty, id);
     });
   });
+
+  describe("When its method removeToken is invoked and there is a token in local storage", () => {
+    beforeEach(() => {
+      mockLocalStorage.setItem(tokenProperty, mockToken);
+    });
+
+    test("Then it the token should be removed from local storage", () => {
+      tokenService.removeToken();
+
+      expect(mockLocalStorage.getItem(tokenProperty)).toBe(undefined);
+    });
+  });
 });

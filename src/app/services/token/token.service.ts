@@ -21,4 +21,8 @@ export class TokenService {
   retrieveToken() {
     return localStorage.getItem(this.tokenProperty);
   }
+
+  removeToken() {
+    localStorage.removeItem(this.tokenProperty);
+  }
 }
