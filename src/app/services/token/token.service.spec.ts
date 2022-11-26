@@ -1,3 +1,4 @@
+import mockToken from "../../mocks/states/mockToken";
 import mockLocalStorage from "../../mocks/states/localStorage/mockLocalStorage";
 import { TokenService } from "./token.service";
 
@@ -38,8 +39,7 @@ describe("Given the service TokenService", () => {
   });
 
   describe("When its method decodeToken is invoked with a token that has username 'admin' and id 'testid' in the payload", () => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiJ0ZXN0aWQifQ.O2baxQ7ITyRYos-PfeswyIx4tyA3_OviE1nR5Ytgoxo";
+    const token = mockToken;
 
     test("Then it should return those properties", () => {
       const idProperty = "id";
