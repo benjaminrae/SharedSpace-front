@@ -14,4 +14,12 @@
     align-items: center;
     gap: sizes.$navigationGap;
   }
+
+  button {
+    border: none;
+    color: inherit;
+    background-color: transparent;
+    font-size: inherit;
+    font-weight: bold;
+  }
 }
