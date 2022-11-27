@@ -83,7 +83,6 @@ describe("Given the CredentialsPage component", () => {
       await fixture.ngZone!.run(async () => router.navigate(["/login"]));
 
       detectChanges();
-      screen.debug();
 
       const renderedHeading = screen.queryByRole("heading", loginHeading);
       const renderedImage = screen.queryByRole("img", {
@@ -138,7 +137,6 @@ describe("Given the CredentialsPage component", () => {
       await fixture.ngZone!.run(async () => router.navigate(["/register"]));
 
       detectChanges();
-      screen.debug();
 
       const renderedHeading = screen.queryByRole("heading", signupHeading);
       const renderedImage = screen.queryByRole("img", {
