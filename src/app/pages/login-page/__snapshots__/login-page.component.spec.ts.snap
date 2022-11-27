@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Given the LoginPageComponent When it is rendered and then it should match the snapshot 1`] = `
-LoginPageComponent {
-  "__ngContext__": 2,
-}
-`;
