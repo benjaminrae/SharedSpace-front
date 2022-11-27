@@ -16,6 +16,7 @@ import { userFeature } from "./store/user-feature/user-feature.reducer";
 import { CredentialsPageComponent } from "./pages/credentials-page/credentials-page.component";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { RegisterFormComponent } from "./components/register-form/register-form.component";
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { RegisterFormComponent } from "./components/register-form/register-form.
     LoginFormComponent,
     CredentialsPageComponent,
     RegisterFormComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,
