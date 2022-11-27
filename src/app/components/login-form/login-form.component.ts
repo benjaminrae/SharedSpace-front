@@ -31,8 +31,8 @@ export class LoginFormComponent {
 
     data.subscribe((data) => {
       const { token } = data;
-      const { id, username } = this.tokenService.decodeToken(token);
-      this.userService.loginUser({ username, id, token });
+      const { id, username, owner } = this.tokenService.decodeToken(token);
+      this.userService.loginUser({ username, id, token, owner });
       this.uiService.hideLoading();
       this.resetForm();
       this.uiService.showSuccessModal("You have logged in correctly");

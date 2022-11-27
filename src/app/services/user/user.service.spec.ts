@@ -180,6 +180,7 @@ describe("Given the service User Service", () => {
         id: "testid",
         token: "testtoken",
         username: "admin",
+        owner: false,
       };
       const store = getMockStore<ApplicationState>({
         initialState: { ui: mockInitialUiState, user: mockInitialUserState },

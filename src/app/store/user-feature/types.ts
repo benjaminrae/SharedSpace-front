@@ -5,6 +5,7 @@ export interface UserState extends User {
 export interface User extends Omit<UserCredentials, "password"> {
   id: string;
   token: string;
+  owner: boolean;
 }
 
 export interface UserCredentials {

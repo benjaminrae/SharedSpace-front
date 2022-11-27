@@ -5,6 +5,7 @@ const mockInitialUserState: UserState = {
   isLogged: false,
   token: "",
   username: "",
+  owner: false,
 };
 
 export default mockInitialUserState;

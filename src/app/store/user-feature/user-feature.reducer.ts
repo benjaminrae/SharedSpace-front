@@ -7,6 +7,7 @@ const initialUserState: UserState = {
   id: "",
   token: "",
   isLogged: false,
+  owner: false,
 };
 
 export const userFeature = createFeature({
