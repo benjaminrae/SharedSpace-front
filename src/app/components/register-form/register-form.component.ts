@@ -14,7 +14,7 @@ export class RegisterFormComponent {
     username: ["", [Validators.required, Validators.minLength(5)]],
     password: ["", [Validators.required, Validators.minLength(8)]],
     confirmPassword: ["", [Validators.required, Validators.minLength(8)]],
-    owner: [false],
+    owner: false,
   });
 
   constructor(
