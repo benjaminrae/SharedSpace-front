@@ -16,7 +16,7 @@ jobs:
       - name: Node Modules
         run: npm ci
       - name: Build environments
-        run: sh build-environments.sh
+        run: npm run build:environments
         env:
           API_URL: ${{ secrets.API_URL }}
       - name: Coverage
