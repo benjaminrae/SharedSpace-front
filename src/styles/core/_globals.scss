@@ -57,3 +57,11 @@ form {
 a {
   font-weight: bold;
 }
+
+ul {
+  list-style: none;
+  list-style-position: outside;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+}

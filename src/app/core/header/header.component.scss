@@ -1,0 +1,25 @@
+@use "../../../styles/variables/sizes";
+
+.main-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0 1rem 0;
+
+  &__title {
+    flex: 1;
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: sizes.$navigationGap;
+  }
+
+  button {
+    border: none;
+    color: inherit;
+    background-color: transparent;
+    font-size: inherit;
+    font-weight: bold;
+  }
+}

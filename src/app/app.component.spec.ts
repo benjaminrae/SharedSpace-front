@@ -5,6 +5,7 @@ import { provideMockStore } from "@ngrx/store/testing";
 import { TokenService } from "./services/token/token.service";
 import { UserService } from "./services/user/user.service";
 import { HttpClient, HttpHandler } from "@angular/common/http";
+import { HeaderComponent } from "./core/header/header.component";
 
 const providers = [
   UiService,
@@ -26,6 +27,7 @@ describe("Given an AppComponent", () => {
 
       await render(AppComponent, {
         providers,
+        declarations: [HeaderComponent],
       });
 
       const renderedHeading = screen.getByRole("heading", expectedHeading);
