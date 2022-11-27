@@ -11,6 +11,7 @@ describe("Given a userReducer", () => {
     isLogged: false,
     token: "",
     username: "",
+    owner: false,
   };
 
   describe("When it receives the initial user state and an unknown action", () => {
@@ -31,6 +32,7 @@ describe("Given a userReducer", () => {
         id: "1234",
         token: "testtoken",
         username: "admin",
+        owner: false,
       };
 
       const expectedUserState: UserState = {
@@ -54,6 +56,7 @@ describe("Given a userReducer", () => {
         isLogged: true,
         token: "token",
         username: "username",
+        owner: false,
       };
 
       const expectedUserState: UserState = {
@@ -61,6 +64,7 @@ describe("Given a userReducer", () => {
         isLogged: false,
         token: "",
         username: "",
+        owner: false,
       };
 
       const newUserState = userReducer(initialUserState, logoutUser);
