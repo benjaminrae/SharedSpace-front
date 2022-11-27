@@ -3,7 +3,7 @@ import { TestBed } from "@angular/core/testing";
 import { Router } from "@angular/router";
 import { RouterTestingModule } from "@angular/router/testing";
 import { provideMockStore } from "@ngrx/store/testing";
-import { fireEvent, render, screen } from "@testing-library/angular";
+import { render, screen } from "@testing-library/angular";
 import { createMock } from "@testing-library/angular/jest-utils";
 import userEvent from "@testing-library/user-event";
 import { routes } from "../../app-routing.module";
@@ -14,7 +14,7 @@ import mockInitialUserState from "../../mocks/states/mockInitialUserState";
 import { ApplicationState } from "../../store/types";
 import { UserState } from "../../store/user-feature/types";
 import { HeaderComponent } from "./header.component";
-import { Observable, of, Subject } from "rxjs";
+import { of } from "rxjs";
 
 describe("Given a Header component", () => {
   const homeLabel = /home/i;
