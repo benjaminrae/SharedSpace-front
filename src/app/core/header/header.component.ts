@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component } from "@angular/core";
 import { Observable } from "rxjs";
 import { TokenService } from "../../services/token/token.service";
 import { UserService } from "../../services/user/user.service";
