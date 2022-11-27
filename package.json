@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:environments": "sh scripts/build-environments.sh",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "test:dev": "jest --watch",
