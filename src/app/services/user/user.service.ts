@@ -14,7 +14,7 @@ import {
 } from "../../store/user-feature/user-feature.actions";
 import { UiService } from "../ui/ui.service";
 import { catchError, Observable, throwError } from "rxjs";
-import { selectIsLogged } from "src/app/store/user-feature/user-feature.reducer";
+import { selectIsLogged } from "../../store/user-feature/user-feature.reducer";
 
 @Injectable({
   providedIn: "root",
