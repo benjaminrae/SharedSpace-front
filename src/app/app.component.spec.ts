@@ -72,7 +72,7 @@ describe("Given an AppComponent", () => {
     const user = tokenService.decodeToken(mockToken);
 
     test("Then the user should be logged in", async () => {
-      const { fixture, detectChanges } = await render(AppComponent, {
+      await render(AppComponent, {
         providers,
         declarations: [
           HeaderComponent,

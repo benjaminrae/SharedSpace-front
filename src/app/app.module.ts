@@ -11,8 +11,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { UiService } from "./services/ui/ui.service";
 import { AppComponent } from "./app.component";
 import { metaReducers, reducers } from "./store";
-import { uiFeature } from "./store/ui-feature/ui-feature.reducer";
-import { userFeature } from "./store/user-feature/user-feature.reducer";
 import { CredentialsPageComponent } from "./pages/credentials-page/credentials-page.component";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { RegisterFormComponent } from "./components/register-form/register-form.component";
