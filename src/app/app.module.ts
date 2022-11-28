@@ -10,13 +10,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { UiService } from "./services/ui/ui.service";
 import { AppComponent } from "./app.component";
-import { metaReducers } from "./store";
-import { uiFeature } from "./store/ui-feature/ui-feature.reducer";
-import { userFeature } from "./store/user-feature/user-feature.reducer";
+import { metaReducers, reducers } from "./store";
 import { CredentialsPageComponent } from "./pages/credentials-page/credentials-page.component";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { RegisterFormComponent } from "./components/register-form/register-form.component";
-import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.component";
 
 @NgModule({
   declarations: [
@@ -34,10 +32,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
       maxAge: 25,
       logOnly: environment.production,
     }),
-    StoreModule.forRoot(
-      { ui: uiFeature.reducer, user: userFeature.reducer },
-      { metaReducers }
-    ),
+    StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
     CoreModule,

@@ -38,14 +38,14 @@ describe("Given the service TokenService", () => {
     });
   });
 
-  describe("When its method decodeToken is invoked with a token that has username 'admin' and id 'testid' in the payload", () => {
+  describe("When its method decodeToken is invoked with a token that has username 'admin' and id '637ca68b2e7c24060c5c7e20' in the payload", () => {
     const token = mockToken;
 
     test("Then it should return those properties", () => {
       const idProperty = "id";
       const usernameProperty = "username";
       const username = "admin";
-      const id = "testid";
+      const id = "637ca68b2e7c24060c5c7e20";
 
       const decodedToken = tokenService.decodeToken(token);
 
