@@ -1,8 +1,7 @@
-import { provideMockStore, MockStore } from "@ngrx/store/testing";
+import { provideMockStore } from "@ngrx/store/testing";
 import { render, screen } from "@testing-library/angular";
 import { createMock } from "@testing-library/angular/jest-utils";
 import userEvent from "@testing-library/user-event";
-import { ApplicationState } from "src/app/store/types";
 import { UiService } from "../../services/ui/ui.service";
 import { Modal, UiState } from "../../store/ui-feature/types";
 import { ButtonComponent } from "../button/button.component";
