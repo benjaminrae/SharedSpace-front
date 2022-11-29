@@ -69,4 +69,14 @@ describe("Given the service Ui Service", () => {
       );
     });
   });
+
+  describe("When its method navigate is invoked with '/login'", () => {
+    test("Then router's navigate should be invoked with ['/login']", async () => {
+      const path = "/login";
+
+      await service.navigate(path);
+
+      expect(router.navigate).toHaveBeenCalledWith([path]);
+    });
+  });
 });
