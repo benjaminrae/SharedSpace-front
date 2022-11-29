@@ -1,8 +1,8 @@
-<li class="location-card">
+<article class="location-card">
   <img src={{location.images.small}} alt={{location.name}} class="location-card__image">
   <h3 class="location-card__title">{{ location.name }}</h3>
   <span class="location-card__location">
     <ng-icon name="iconoirPinAlt" color="currentColor" strokeWidth="3"></ng-icon>{{ location.location }}
   </span>
   <app-button [disabled]="true" [big]="true" text="Info"></app-button>
-</li>
+</article>
