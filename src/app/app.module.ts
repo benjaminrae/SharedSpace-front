@@ -15,8 +15,11 @@ import { CredentialsPageComponent } from "./pages/credentials-page/credentials-p
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { RegisterFormComponent } from "./components/register-form/register-form.component";
 import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.component";
-import { LayoutComponent } from './components/layout/layout.component';
-import { HomePageComponent } from './pages/home-page/home-page.component';
+import { LayoutComponent } from "./components/layout/layout.component";
+import { HomePageComponent } from "./pages/home-page/home-page.component";
+import { LocationCardComponent } from "./components/location-card/location-card.component";
+import { NgIconsModule } from "@ng-icons/core";
+import { iconoirPinAlt } from "@ng-icons/iconoir";
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     NotFoundPageComponent,
     LayoutComponent,
     HomePageComponent,
+    LocationCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +46,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     CoreModule,
     FormsModule,
     ReactiveFormsModule,
+    NgIconsModule.withIcons({ iconoirPinAlt }),
   ],
   providers: [UiService],
   bootstrap: [AppComponent],

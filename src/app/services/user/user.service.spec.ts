@@ -183,7 +183,11 @@ describe("Given the service User Service", () => {
         owner: false,
       };
       const store = getMockStore<ApplicationState>({
-        initialState: { ui: mockInitialUiState, user: mockInitialUserState },
+        initialState: {
+          ui: mockInitialUiState,
+          user: mockInitialUserState,
+          locations: { locations: [] },
+        },
       });
 
       const userService = new UserService(
@@ -229,7 +233,11 @@ describe("Given the service User Service", () => {
   describe("When the method logoutUser is invoked", () => {
     test("Then the store's method dispatch should be called with a logoutUser action", () => {
       const store = getMockStore<ApplicationState>({
-        initialState: { ui: mockInitialUiState, user: mockInitialUserState },
+        initialState: {
+          ui: mockInitialUiState,
+          user: mockInitialUserState,
+          locations: { locations: [] },
+        },
       });
 
       const userService = new UserService(

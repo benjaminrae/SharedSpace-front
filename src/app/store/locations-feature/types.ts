@@ -5,6 +5,10 @@ export interface LocationStructure {
   location: string;
   owner: string;
   services?: Partial<Services>;
+  images: {
+    image: string;
+    small: string;
+  };
 }
 
 interface Services {

@@ -4,7 +4,7 @@ import { LocationStructure } from "../store/locations-feature/types";
 
 const locationFactory = Factory.define<LocationStructure>(() => ({
   name: faker.company.name(),
-  location: faker.address.nearbyGPSCoordinate().toString(),
+  location: faker.address.cityName(),
   owner: faker.database.mongodbObjectId(),
   images: {
     image: faker.image.business(),
@@ -31,6 +31,8 @@ const locationFactory = Factory.define<LocationStructure>(() => ({
     wifi: faker.datatype.boolean(),
   },
 }));
+
+export const getRandomLocation = () => locationFactory.build();
 
 export const getRandomLocations = (number: number) =>
   locationFactory.buildList(number);

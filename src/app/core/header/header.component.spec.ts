@@ -66,6 +66,7 @@ describe("Given a Header component", () => {
             initialState: {
               ui: mockInitialUiState,
               user: loggedUserState,
+              locations: { locations: [] },
             },
           }),
         ],
@@ -97,6 +98,7 @@ describe("Given a Header component", () => {
             initialState: {
               ui: mockInitialUiState,
               user: loggedUserState,
+              locations: { locations: [] },
             },
           }),
         ],

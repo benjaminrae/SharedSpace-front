@@ -1,0 +1,27 @@
+@use "../../../styles/variables/sizes";
+@use "../../../styles/variables/colors";
+
+.location-card {
+  display: flex;
+  flex-direction: column;
+  gap: sizes.$cardGap;
+
+  &__title {
+    padding: sizes.$cardTitleVerticalPadding 0;
+  }
+
+  &__location {
+    display: flex;
+    align-items: center;
+    gap: sizes.$cardGap;
+    line-height: 0;
+  }
+
+  &__image {
+    max-width: 100%;
+    max-height: 171px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: sizes.$borderRadius;
+  }
+}
