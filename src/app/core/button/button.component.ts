@@ -1,4 +1,12 @@
-import { EventEmitter, Output, Component, Input, OnInit } from "@angular/core";
+import {
+  EventEmitter,
+  Output,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+  ElementRef,
+} from "@angular/core";
 @Component({
   selector: "app-button",
   templateUrl: "./button.component.html",
@@ -11,6 +19,8 @@ export class ButtonComponent implements OnInit {
   @Input() type = "submit";
   @Input() disabled!: boolean;
   @Output() onClick = new EventEmitter();
+  @ViewChild("button", { read: ElementRef })
+  button!: ElementRef<HTMLButtonElement>;
 
   className!: string;
 
