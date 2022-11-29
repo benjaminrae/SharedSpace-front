@@ -15,6 +15,7 @@ import { CredentialsPageComponent } from "./pages/credentials-page/credentials-p
 import { ButtonComponent } from "./core/button/button.component";
 import mockLocalStorage from "./mocks/states/localStorage/mockLocalStorage";
 import { createMock } from "@testing-library/angular/jest-utils";
+import { LayoutComponent } from "./components/layout/layout.component";
 
 beforeAll(() => {
   Object.defineProperty(window, "localStorage", {
@@ -43,7 +44,7 @@ describe("Given an AppComponent", () => {
 
       await render(AppComponent, {
         providers,
-        declarations: [HeaderComponent],
+        declarations: [HeaderComponent, LayoutComponent],
       });
 
       const renderedHeading = screen.getByRole("heading", expectedHeading);
@@ -56,7 +57,7 @@ describe("Given an AppComponent", () => {
     test("Then the user should see the register form on the screen", async () => {
       await render(AppComponent, {
         providers,
-        declarations: [HeaderComponent],
+        declarations: [HeaderComponent, LayoutComponent],
         routes,
       });
 

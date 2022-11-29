@@ -15,6 +15,7 @@ import { CredentialsPageComponent } from "./pages/credentials-page/credentials-p
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { RegisterFormComponent } from "./components/register-form/register-form.component";
 import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.component";
+import { LayoutComponent } from './components/layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.com
     CredentialsPageComponent,
     RegisterFormComponent,
     NotFoundPageComponent,
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,
