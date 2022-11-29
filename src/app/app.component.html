@@ -1,9 +1,6 @@
 <div class="app">
-  <app-header></app-header>
+  <app-layout></app-layout>
 
   <app-loading *ngIf="isLoading$ | async"></app-loading>
-
   <app-modal *ngIf="showModal$ | async"></app-modal>
-
-  <router-outlet></router-outlet>
 </div>
