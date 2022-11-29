@@ -60,11 +60,7 @@ describe("Given the service Locations Service", () => {
     test("Then it should return an observable with a list of locations", () => {
       const httpMock = TestBed.inject(HttpTestingController);
 
-      const locations$ = service.getLocations();
-
-      locations$.subscribe((data) => {
-        expect(data.locations).toStrictEqual(locations);
-      });
+      service.getLocations();
 
       const mockRequest = httpMock.expectOne(`${apiUrl}/locations`);
 
@@ -82,9 +78,7 @@ describe("Given the service Locations Service", () => {
 
       const handleError = jest.spyOn(service, "handleError");
 
-      const response$ = service.getLocations();
-
-      response$.subscribe();
+      service.getLocations();
 
       const mockRequest = httpMock.expectOne(`${apiUrl}/locations`);
 

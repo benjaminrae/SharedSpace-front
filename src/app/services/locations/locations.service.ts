@@ -23,15 +23,12 @@ export class LocationsService {
   ) {}
 
   getLocations() {
-    return this.http
-      .get<{ locations: Locations }>(`${apiUrl}${this.paths.locations}`)
-      .pipe(catchError((error) => this.handleError(error, this.uiService)));
-  }
-
-  loadLocations() {
     this.uiService.showLoading();
 
-    const locations$ = this.getLocations();
+    const locations$ = this.http
+      .get<{ locations: Locations }>(`${apiUrl}${this.paths.locations}`)
+      .pipe(catchError((error) => this.handleError(error, this.uiService)));
+
     locations$.subscribe((data) => {
       this.store.dispatch(loadLocations({ payload: data.locations }));
       this.uiService.hideLoading();

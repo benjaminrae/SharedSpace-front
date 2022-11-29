@@ -12,7 +12,7 @@ export class HomePageComponent {
   locations$!: Observable<Locations>;
 
   constructor(private readonly locationsService: LocationsService) {
-    locationsService.loadLocations();
+    locationsService.getLocations();
     this.locations$ = locationsService.selectLocations();
   }
 }
