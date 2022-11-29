@@ -16,6 +16,7 @@ import { LoginFormComponent } from "./components/login-form/login-form.component
 import { RegisterFormComponent } from "./components/register-form/register-form.component";
 import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.component";
 import { LayoutComponent } from './components/layout/layout.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { LayoutComponent } from './components/layout/layout.component';
     RegisterFormComponent,
     NotFoundPageComponent,
     LayoutComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
