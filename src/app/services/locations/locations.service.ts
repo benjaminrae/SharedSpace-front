@@ -22,7 +22,7 @@ export class LocationsService {
 
   getLocations() {
     return this.http
-      .get<Locations>(`${apiUrl}${this.paths.locations}`)
+      .get<{ locations: Locations }>(`${apiUrl}${this.paths.locations}`)
       .pipe(catchError((error) => this.handleError(error, this.uiService)));
   }
 
