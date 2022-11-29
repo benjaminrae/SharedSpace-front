@@ -30,10 +30,11 @@ export class RegisterFormComponent {
       this.registerForm.value as RegisterUserCredentials
     );
 
-    data.subscribe(() => {
+    data.subscribe(async () => {
       this.uiService.hideLoading();
       this.uiService.showSuccessModal("You have successfully registered");
       this.resetForm();
+      await this.uiService.navigate("/login");
     });
   }
 
