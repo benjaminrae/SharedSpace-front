@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { getRandomLocations } from "../../factories/locationsFactory";
+import { Observable } from "rxjs";
+import { LocationsService } from "../../services/locations/locations.service";
 import { Locations } from "../../store/locations-feature/types";
 
 @Component({
@@ -8,9 +9,10 @@ import { Locations } from "../../store/locations-feature/types";
   styleUrls: ["./home-page.component.scss"],
 })
 export class HomePageComponent {
-  locations!: Locations;
+  locations$!: Observable<Locations>;
 
-  constructor() {
-    this.locations = getRandomLocations(20);
+  constructor(private readonly locationsService: LocationsService) {
+    locationsService.loadLocations();
+    this.locations$ = locationsService.selectLocations();
   }
 }

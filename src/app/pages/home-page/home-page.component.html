@@ -1,6 +1,6 @@
 <h2>Locations</h2>
 <ul>
 
-  <app-location-card *ngFor="let location of locations" [location]="location"></app-location-card>
+  <app-location-card *ngFor="let location of locations$ | async" [location]="location"></app-location-card>
 
 </ul>

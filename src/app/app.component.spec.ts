@@ -30,7 +30,11 @@ const providers = [
   HttpClient,
   HttpHandler,
   provideMockStore<ApplicationState>({
-    initialState: { ui: mockInitialUiState, user: mockInitialUserState },
+    initialState: {
+      ui: mockInitialUiState,
+      user: mockInitialUserState,
+      locations: { locations: [] },
+    },
   }),
 ];
 
