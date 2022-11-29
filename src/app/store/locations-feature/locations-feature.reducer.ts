@@ -1,4 +1,5 @@
-import { createFeature, createReducer } from "@ngrx/store";
+import { createFeature, createReducer, on } from "@ngrx/store";
+import { loadLocations } from "./locations-feature.actions";
 import { LocationsState } from "./types";
 
 const initialLocationsState: LocationsState = {
@@ -7,7 +8,17 @@ const initialLocationsState: LocationsState = {
 
 export const locationsFeature = createFeature({
   name: "locations",
-  reducer: createReducer(initialLocationsState),
+  reducer: createReducer(
+    initialLocationsState,
+
+    on(
+      loadLocations,
+      (currentState, { payload }): LocationsState => ({
+        ...currentState,
+        locations: payload,
+      })
+    )
+  ),
 });
 
 export const { name, reducer, selectLocations, selectLocationsState } =
