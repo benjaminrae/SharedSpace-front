@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { getRandomLocations } from "src/app/factories/locationsFactory";
-import { Locations } from "src/app/store/locations-feature/types";
+import { getRandomLocations } from "../../factories/locationsFactory";
+import { Locations } from "../../store/locations-feature/types";
 
 @Component({
   selector: "app-home-page",
