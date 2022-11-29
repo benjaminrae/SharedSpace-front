@@ -29,7 +29,7 @@ export class LoginFormComponent {
       this.loginForm.value as UserCredentials
     );
 
-    data.subscribe((data) => {
+    data.subscribe(async (data) => {
       const { token } = data;
       const { id, username, owner } = this.tokenService.decodeToken(token);
       this.userService.loginUser({ username, id, token, owner });
@@ -37,6 +37,7 @@ export class LoginFormComponent {
       this.resetForm();
       this.uiService.showSuccessModal("You have logged in correctly");
       this.tokenService.storeToken(token);
+      await this.uiService.navigate("");
     });
   }
 
