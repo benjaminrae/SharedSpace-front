@@ -9,6 +9,8 @@ import {
   showLoading,
   showModal,
 } from "../../store/ui-feature/ui-feature.actions";
+import { createMock } from "@testing-library/angular/jest-utils";
+import { Router } from "@angular/router";
 
 const store = getMockStore<ApplicationState>({
   initialState: { ui: mockInitialUiState, user: mockInitialUserState },
@@ -17,7 +19,8 @@ const store = getMockStore<ApplicationState>({
 const dispatchSpy = jest.spyOn(store, "dispatch");
 
 describe("Given the service Ui Service", () => {
-  const service = new UiService(store);
+  const router = createMock(Router);
+  const service = new UiService(store, router);
 
   describe("When it's method showLoading is invoked", () => {
     test("Then it should invoke the store's dispatch method with a show loading action", () => {
