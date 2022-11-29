@@ -13,7 +13,11 @@ import { createMock } from "@testing-library/angular/jest-utils";
 import { Router } from "@angular/router";
 
 const store = getMockStore<ApplicationState>({
-  initialState: { ui: mockInitialUiState, user: mockInitialUserState },
+  initialState: {
+    ui: mockInitialUiState,
+    user: mockInitialUserState,
+    locations: { locations: [] },
+  },
 });
 
 const dispatchSpy = jest.spyOn(store, "dispatch");

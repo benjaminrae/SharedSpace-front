@@ -5,6 +5,8 @@ import { UiService } from "../ui/ui.service";
 import { environment } from "../../../environments/environment";
 import { Locations } from "../../store/locations-feature/types";
 import { catchError, throwError } from "rxjs";
+import { loadLocations } from "../../store/locations-feature/locations-feature.actions";
+import { selectLocations } from "../../store/locations-feature/locations-feature.reducer";
 
 const { apiUrl } = environment;
 
@@ -24,6 +26,20 @@ export class LocationsService {
     return this.http
       .get<{ locations: Locations }>(`${apiUrl}${this.paths.locations}`)
       .pipe(catchError((error) => this.handleError(error, this.uiService)));
+  }
+
+  loadLocations() {
+    this.uiService.showLoading();
+
+    const locations$ = this.getLocations();
+    locations$.subscribe((data) => {
+      this.store.dispatch(loadLocations({ payload: data.locations }));
+      this.uiService.hideLoading();
+    });
+  }
+
+  selectLocations() {
+    return this.store.select(selectLocations);
   }
 
   handleError(error: HttpErrorResponse, uiService: UiService) {
