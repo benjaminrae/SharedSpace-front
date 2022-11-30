@@ -11,7 +11,8 @@ html {
   color: colors.$primary;
 }
 
-input {
+input,
+textarea {
   background-color: colors.$primaryLightest;
   padding: sizes.$inputPadding;
   border-radius: sizes.$borderRadius;

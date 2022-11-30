@@ -21,6 +21,7 @@ import { LocationCardComponent } from "./components/location-card/location-card.
 import { NgIconsModule } from "@ng-icons/core";
 import { iconoirPinAlt } from "@ng-icons/iconoir";
 import { LocationListComponent } from './components/location-list/location-list.component';
+import { LocationFormComponent } from './components/location-form/location-form.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { LocationListComponent } from './components/location-list/location-list.
     HomePageComponent,
     LocationCardComponent,
     LocationListComponent,
+    LocationFormComponent,
   ],
   imports: [
     BrowserModule,

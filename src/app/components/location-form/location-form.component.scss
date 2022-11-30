@@ -1,0 +1,29 @@
+@use "../../../styles/variables/colors";
+@use "../../../styles/variables/sizes";
+@use "../../../styles/variables/typography";
+
+.form__input--file::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.form__input--file::before {
+  content: "Select image file";
+  display: inline-block;
+  background-color: colors.$primary;
+  color: colors.$neutralWhite;
+  padding: sizes.$buttonPadding;
+  border-radius: sizes.$borderRadius;
+  font-weight: typography.$semiBold;
+  border: 2px solid colors.$primary;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+.form__input--file:hover::before {
+  background-color: colors.$primaryLightest;
+  color: colors.$primary;
+}
+.form__input--file:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
