@@ -4,6 +4,28 @@ ul {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: sizes.$cardListGap;
+  padding-top: 1rem;
+  padding-bottom: 6rem;
+}
+
+.location-list {
+  &__count {
+    padding-bottom: 1rem;
+  }
+
+  &__image {
+    max-height: 40vh;
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  &__no-results {
+    font-weight: bold;
+    font-size: 2rem;
+  }
 }
 
 @media only screen and (min-width: 588px) {

@@ -6,7 +6,10 @@ import { environment } from "../../../environments/environment";
 import { LocationsState } from "../../store/locations-feature/types";
 import { catchError, throwError } from "rxjs";
 import { loadLocations } from "../../store/locations-feature/locations-feature.actions";
-import { selectLocations } from "../../store/locations-feature/locations-feature.reducer";
+import {
+  selectCount,
+  selectLocations,
+} from "../../store/locations-feature/locations-feature.reducer";
 
 const { apiUrl } = environment;
 
@@ -37,6 +40,10 @@ export class LocationsService {
 
   selectLocations() {
     return this.store.select(selectLocations);
+  }
+
+  selectCount() {
+    return this.store.select(selectCount);
   }
 
   handleError(error: HttpErrorResponse, uiService: UiService) {
