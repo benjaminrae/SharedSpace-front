@@ -11,7 +11,8 @@ html {
   color: colors.$primary;
 }
 
-input {
+input,
+textarea {
   background-color: colors.$primaryLightest;
   padding: sizes.$inputPadding;
   border-radius: sizes.$borderRadius;
@@ -48,9 +49,9 @@ form {
   flex-direction: column;
 }
 
-.form__checkbox-group {
-  display: flex;
-  flex-direction: column;
+.form-group--checkboxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 0.5rem;
 }
 
