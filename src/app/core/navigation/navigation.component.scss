@@ -1,0 +1,77 @@
+@use "../../../styles/variables/sizes";
+@use "../../../styles/variables/colors";
+
+.navigation {
+  display: flex;
+  align-items: center;
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 100%;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    transition: all 0.5s ease-in-out;
+    background-color: white;
+    overflow: hidden;
+    width: auto;
+
+    li {
+      padding: 24px;
+    }
+
+    li:hover,
+    :focus {
+      background-color: colors.$primaryLightest;
+    }
+
+    &--open {
+      left: 0%;
+      z-index: 1;
+    }
+  }
+
+  &__logout {
+    border: none;
+    color: inherit;
+    background-color: transparent;
+    font-size: inherit;
+    font-weight: bold;
+  }
+
+  &__hamburger {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+    &--open {
+      z-index: 10;
+    }
+  }
+  .active {
+    border-bottom: 3px solid currentColor;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .navigation {
+    &__links {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: sizes.$navigationGap;
+      position: static;
+    }
+
+    li {
+      padding: 24px 0;
+    }
+
+    &__hamburger {
+      display: none;
+    }
+  }
+}

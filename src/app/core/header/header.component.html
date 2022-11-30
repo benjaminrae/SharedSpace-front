@@ -1,23 +1,5 @@
 <header class="main-header">
   <h1 class="main-header__title" routerLink="/">SharedSpace</h1>
 
-  <nav>
-    <ul class="main-header__links">
-
-      <div *ngIf="isLogged$ | async; then thenBlock else elseBlock">
-      </div>
-
-      <ng-template #thenBlock>
-        <li><a routerLink="/">Home</a></li>
-        <li><button (click)="onClick()">Logout</button></li>
-      </ng-template>
-
-      <ng-template #elseBlock>
-        <li><a routerLink="/">Home</a></li>
-        <li><a routerLink="/login">Login</a></li>
-        <li><a routerLink="/register">Register</a></li>
-      </ng-template>
-
-    </ul>
-  </nav>
+  <app-navigation></app-navigation>
 </header>
