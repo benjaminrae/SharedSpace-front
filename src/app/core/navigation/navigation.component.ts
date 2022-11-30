@@ -10,6 +10,7 @@ import { UserService } from "../../services/user/user.service";
 })
 export class NavigationComponent {
   isLogged$: Observable<boolean>;
+  isOpen = false;
 
   constructor(
     private readonly userService: UserService,
@@ -21,5 +22,9 @@ export class NavigationComponent {
   onClick() {
     this.userService.logoutUser();
     this.tokenService.removeToken();
+  }
+
+  toggleOpen() {
+    this.isOpen = !this.isOpen;
   }
 }

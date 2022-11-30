@@ -1,19 +1,48 @@
 <nav class="navigation">
-  <ul class="navigation__links">
+
+
+  <ul [className]="isOpen ? 'navigation__links navigation__links--open' : 'navigation__links' ">
 
     <div *ngIf="isLogged$ | async; then thenBlock else elseBlock">
     </div>
 
     <ng-template #thenBlock>
-      <li><a routerLink="/">Home</a></li>
-      <li><button class="navigation__logout" (click)="onClick()">Logout</button></li>
+      <li>
+        <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page"
+          [routerLinkActiveOptions]="{exact: true}">
+          Home
+        </a>
+      </li>
+      <li>
+        <button class="navigation__logout" (click)="onClick()">
+          Logout
+        </button>
+      </li>
     </ng-template>
 
     <ng-template #elseBlock>
-      <li><a routerLink="/">Home</a></li>
-      <li><a routerLink="/login">Login</a></li>
-      <li><a routerLink="/register">Register</a></li>
+      <li>
+        <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page"
+          [routerLinkActiveOptions]="{exact: true}">
+          Home
+        </a>
+      </li>
+      <li>
+        <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">
+          Login
+        </a>
+      </li>
+      <li>
+        <a routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page">
+          Register
+        </a>
+      </li>
     </ng-template>
 
   </ul>
+
+  <button [className]="isOpen ? 'navigation__hamburger navigation__hamburger--open' : 'navigation__hamburger' "
+    (click)="toggleOpen()">
+    <ng-icon name="iconoirMenu" color="currentColor" strokeWidth="3" size="32"></ng-icon>
+  </button>
 </nav>
