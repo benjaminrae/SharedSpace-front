@@ -20,10 +20,16 @@
   user-select: none;
   cursor: pointer;
 }
+
 .form__input--file:hover::before {
   background-color: colors.$primaryLightest;
   color: colors.$primary;
 }
+
 .form__input--file:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+form {
+  padding-bottom: 3rem;
 }

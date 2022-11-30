@@ -18,8 +18,61 @@
   <div class="form-group">
     <label for="image">Image</label>
     <input id="image" type="file" formControlName="image" class="form__input form__input--file"
-      accept="image/png, image/jpg, image/jpeg, image/webp,">
+      accept="image/png, image/jpg, image/jpeg, image/webp, image/avif">
   </div>
 
+  <span>Services</span>
+  <div class="form-group form-group--checkboxes">
+    <label for="allDayAccess"><input type="checkbox" name="allDayAccess" id="allDayAccess" formControlName="owner">
+      24h access
+    </label>
+    <label for="airConditioning"><input type="checkbox" name="airConditioning" id="airConditioning"
+        formControlName="airConditioning">
+      Air conditioning
+    </label>
+    <label for="freeTeaCoffee"><input type="checkbox" name="freeTeaCoffee" id="freeTeaCoffee"
+        formControlName="freeTeaCoffee">
+      Free tea/coffee
+    </label>
+    <label for="eventManagement"><input type="checkbox" name="eventManagement" id="eventManagement"
+        formControlName="eventManagement">
+      Event management
+    </label>
+    <label for="freeTrial"><input type="checkbox" name="freeTrial" id="freeTrial" formControlName="freeTrial">
+      Free trial
+    </label>
+    <label for="wifi"><input type="checkbox" name="wifi" id="wifi" formControlName="wifi">
+      WiFi
+    </label>
+    <label for="meetingRoom"><input type="checkbox" name="meetingRoom" id="meetingRoom" formControlName="meetingRoom">
+      Meeting room
+    </label>
+    <label for="reception"><input type="checkbox" name="reception" id="reception" formControlName="reception">
+      Reception
+    </label>
+    <label for="parking"><input type="checkbox" name="parking" id="parking" formControlName="parking">
+      Parking
+    </label>
+    <label for="photocopier"><input type="checkbox" name="photocopier" id="photocopier" formControlName="photocopier">
+      Photocopier
+    </label>
+    <label for="printer"><input type="checkbox" name="printer" id="printer" formControlName="printer">
+      Printer
+    </label>
+    <label for="projector"><input type="checkbox" name="projector" id="projector" formControlName="projector">
+      Projector
+    </label>
+    <label for="scanner"><input type="checkbox" name="scanner" id="scanner" formControlName="scanner">
+      Scanner
+    </label>
+    <label for="tv"><input type="checkbox" name="tv" id="tv" formControlName="tv">
+      TV
+    </label>
+    <label for="whiteboard"><input type="checkbox" name="whiteboard" id="whiteboard" formControlName="whiteboard">
+      Whiteboard
+    </label>
+  </div>
+
+  <app-button [big]="true" text="Save location"></app-button>
 
 </form>
