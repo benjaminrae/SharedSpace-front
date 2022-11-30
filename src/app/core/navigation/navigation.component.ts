@@ -19,12 +19,17 @@ export class NavigationComponent {
     this.isLogged$ = this.userService.getIsLogged();
   }
 
-  onClick() {
+  logoutUser() {
     this.userService.logoutUser();
     this.tokenService.removeToken();
+    this.closeMenu();
   }
 
-  toggleOpen() {
-    this.isOpen = !this.isOpen;
+  openMenu() {
+    this.isOpen = true;
+  }
+
+  closeMenu() {
+    this.isOpen = false;
   }
 }

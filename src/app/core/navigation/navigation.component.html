@@ -1,20 +1,25 @@
 <nav class="navigation">
 
+  <button [className]="isOpen ? 'navigation__hamburger navigation__hamburger--open' : 'navigation__hamburger' "
+    (click)="isOpen ? closeMenu() : openMenu()">
+    <ng-icon name="iconoirMenu" color="currentColor" strokeWidth="3" size="32"></ng-icon>
+  </button>
 
   <ul [className]="isOpen ? 'navigation__links navigation__links--open' : 'navigation__links' ">
 
     <div *ngIf="isLogged$ | async; then thenBlock else elseBlock">
     </div>
 
+
     <ng-template #thenBlock>
       <li>
         <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page"
-          [routerLinkActiveOptions]="{exact: true}">
+          [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">
           Home
         </a>
       </li>
       <li>
-        <button class="navigation__logout" (click)="onClick()">
+        <button class="navigation__logout" (click)="logoutUser()">
           Logout
         </button>
       </li>
@@ -23,17 +28,17 @@
     <ng-template #elseBlock>
       <li>
         <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page"
-          [routerLinkActiveOptions]="{exact: true}">
+          [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">
           Home
         </a>
       </li>
       <li>
-        <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="closeMenu()">
           Login
         </a>
       </li>
       <li>
-        <a routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <a routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="closeMenu()">
           Register
         </a>
       </li>
@@ -41,8 +46,4 @@
 
   </ul>
 
-  <button [className]="isOpen ? 'navigation__hamburger navigation__hamburger--open' : 'navigation__hamburger' "
-    (click)="toggleOpen()">
-    <ng-icon name="iconoirMenu" color="currentColor" strokeWidth="3" size="32"></ng-icon>
-  </button>
 </nav>

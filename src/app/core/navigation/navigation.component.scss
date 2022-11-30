@@ -22,7 +22,8 @@
       padding: 24px;
     }
 
-    li:hover {
+    li:hover,
+    :focus {
       background-color: colors.$primaryLightest;
     }
 
