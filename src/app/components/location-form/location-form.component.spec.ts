@@ -1,6 +1,8 @@
 import { FormBuilder } from "@angular/forms";
+import { DomSanitizer } from "@angular/platform-browser";
 import { render, screen } from "@testing-library/angular";
 import userEvent from "@testing-library/user-event/";
+import { MockProvider } from "ng-mocks";
 import { ButtonComponent } from "../../core/button/button.component";
 
 import { LocationFormComponent } from "./location-form.component";
@@ -78,11 +80,16 @@ describe("Given a LocationFormComponent", () => {
 
   describe("When it is rendered and the user uploads an image", () => {
     test("Then it should show a preview of the image", async () => {
-      const image = new File(["image"], "image.jpg", { type: "image/jpg" });
+      const image = new File(["image"], "image.png", { type: "image/png" });
+      const sanitize = jest.fn().mockReturnValue({
+        bypassSecurityTrustUrl: jest.fn().mockReturnValue(image.name),
+      });
+      URL.createObjectURL = jest.fn().mockReturnValue(image.name);
 
       await render(LocationFormComponent, {
-        providers: [FormBuilder],
+        providers: [FormBuilder, MockProvider(DomSanitizer, { sanitize })],
         declarations: [ButtonComponent],
+        detectChanges: true,
       });
 
       const renderedImage = screen.queryByAltText(imageAlt);
@@ -90,6 +97,7 @@ describe("Given a LocationFormComponent", () => {
 
       await userEvent.upload(imageInput!, image);
 
+      expect((imageInput as HTMLInputElement).files!.length).toBe(1);
       expect((renderedImage as HTMLImageElement).src).toBe("http://localhost/");
     });
   });
