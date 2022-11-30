@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { UiService } from "../ui/ui.service";
 import { environment } from "../../../environments/environment";
-import { Locations } from "../../store/locations-feature/types";
+import { LocationsState } from "../../store/locations-feature/types";
 import { catchError, throwError } from "rxjs";
 import { loadLocations } from "../../store/locations-feature/locations-feature.actions";
 import { selectLocations } from "../../store/locations-feature/locations-feature.reducer";
@@ -26,11 +26,11 @@ export class LocationsService {
     this.uiService.showLoading();
 
     const locations$ = this.http
-      .get<{ locations: Locations }>(`${apiUrl}${this.paths.locations}`)
+      .get<LocationsState>(`${apiUrl}${this.paths.locations}`)
       .pipe(catchError((error) => this.handleError(error, this.uiService)));
 
     locations$.subscribe((data) => {
-      this.store.dispatch(loadLocations({ payload: data.locations }));
+      this.store.dispatch(loadLocations({ payload: data }));
       this.uiService.hideLoading();
     });
   }

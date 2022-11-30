@@ -31,5 +31,8 @@ interface Services {
 }
 
 export interface LocationsState {
+  count: number;
+  next: string | undefined;
+  previous: string | undefined;
   locations: Locations;
 }
