@@ -11,7 +11,7 @@ export interface LocationStructure {
   };
 }
 
-interface Services {
+export interface Services {
   allDayAccess: boolean;
   airConditioning: boolean;
   kitchen: boolean;

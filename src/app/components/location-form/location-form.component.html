@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="locationForm" (ngSubmit)="submitForm()">
 
   <div class="form-group">
     <label for="name">Name</label>
@@ -18,12 +18,13 @@
   <div class="form-group">
     <label for="image">Image</label>
     <input id="image" type="file" formControlName="image" class="form__input form__input--file"
-      accept="image/png, image/jpg, image/jpeg, image/webp, image/avif">
+      accept="image/png, image/jpg, image/jpeg, image/webp, image/avif" (change)="onFileChange($event)">
   </div>
 
   <span>Services</span>
-  <div class="form-group form-group--checkboxes">
-    <label for="allDayAccess"><input type="checkbox" name="allDayAccess" id="allDayAccess" formControlName="owner">
+  <div class="form-group form-group--checkboxes" formGroupName="services">
+    <label for="allDayAccess"><input type="checkbox" name="allDayAccess" id="allDayAccess"
+        formControlName="allDayAccess">
       24h access
     </label>
     <label for="airConditioning"><input type="checkbox" name="airConditioning" id="airConditioning"
@@ -73,6 +74,13 @@
     </label>
   </div>
 
-  <app-button [big]="true" text="Save location"></app-button>
+  <app-button [big]="true" text="Save location" [disabled]="locationForm.status === 'INVALID'"></app-button>
 
 </form>
+
+<div class="location-form__image-preview">
+
+  <span>Preview your images</span>
+  <img [src]="fileUrl" alt="Your image">
+
+</div>

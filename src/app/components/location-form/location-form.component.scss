@@ -2,6 +2,12 @@
 @use "../../../styles/variables/sizes";
 @use "../../../styles/variables/typography";
 
+:host {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
 .form__input--file::-webkit-file-upload-button {
   visibility: hidden;
 }
@@ -32,4 +38,21 @@
 
 form {
   padding-bottom: 3rem;
+  flex: 1;
+}
+
+.location-form__image-preview {
+  display: none;
+}
+
+@media only screen and (min-width: 800px) {
+  .location-form__image-preview {
+    display: block;
+    flex: 0.5;
+  }
+}
+@media only screen and (min-width: 1115px) {
+  .location-form__image-preview {
+    flex: 1;
+  }
 }
