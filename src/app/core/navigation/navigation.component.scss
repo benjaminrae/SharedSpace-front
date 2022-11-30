@@ -1,0 +1,17 @@
+@use "../../../styles/variables/sizes";
+
+.navigation {
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: sizes.$navigationGap;
+  }
+
+  &__logout {
+    border: none;
+    color: inherit;
+    background-color: transparent;
+    font-size: inherit;
+    font-weight: bold;
+  }
+}

@@ -5,6 +5,7 @@ import { ButtonComponent } from "./button/button.component";
 import { ModalComponent } from "./modal/modal.component";
 import { HeaderComponent } from "./header/header.component";
 import { AppRoutingModule } from "../app-routing.module";
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { AppRoutingModule } from "../app-routing.module";
     ButtonComponent,
     ModalComponent,
     HeaderComponent,
+    NavigationComponent,
   ],
   imports: [CommonModule, AppRoutingModule],
   exports: [LoadingComponent, ButtonComponent, ModalComponent, HeaderComponent],

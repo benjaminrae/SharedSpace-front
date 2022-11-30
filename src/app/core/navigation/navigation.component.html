@@ -1,0 +1,19 @@
+<nav class="navigation">
+  <ul class="navigation__links">
+
+    <div *ngIf="isLogged$ | async; then thenBlock else elseBlock">
+    </div>
+
+    <ng-template #thenBlock>
+      <li><a routerLink="/">Home</a></li>
+      <li><button class="navigation__logout" (click)="onClick()">Logout</button></li>
+    </ng-template>
+
+    <ng-template #elseBlock>
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/login">Login</a></li>
+      <li><a routerLink="/register">Register</a></li>
+    </ng-template>
+
+  </ul>
+</nav>
