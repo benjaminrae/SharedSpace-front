@@ -3,6 +3,9 @@ import { loadLocations } from "./locations-feature.actions";
 import { LocationsState } from "./types";
 
 const initialLocationsState: LocationsState = {
+  count: 0,
+  next: "",
+  previous: "",
   locations: [],
 };
 
@@ -13,9 +16,15 @@ export const locationsFeature = createFeature({
 
     on(
       loadLocations,
-      (currentState, { payload }): LocationsState => ({
+      (
+        currentState,
+        { payload: { count, locations, next, previous } }
+      ): LocationsState => ({
         ...currentState,
-        locations: payload,
+        count,
+        locations,
+        next,
+        previous,
       })
     )
   ),
