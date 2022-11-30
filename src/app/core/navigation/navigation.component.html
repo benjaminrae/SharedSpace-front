@@ -1,7 +1,7 @@
 <nav class="navigation">
 
   <button [className]="isOpen ? 'navigation__hamburger navigation__hamburger--open' : 'navigation__hamburger' "
-    (click)="isOpen ? closeMenu() : openMenu()">
+    (click)="isOpen ? closeMenu() : openMenu()" aria-label="Toggle menu">
     <ng-icon name="iconoirMenu" color="currentColor" strokeWidth="3" size="32"></ng-icon>
   </button>
 
