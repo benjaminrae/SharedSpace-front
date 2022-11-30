@@ -33,7 +33,7 @@ const providers = [
     initialState: {
       ui: mockInitialUiState,
       user: mockInitialUserState,
-      locations: { locations: [] },
+      locations: { count: 0, next: "", previous: "", locations: [] },
     },
   }),
 ];

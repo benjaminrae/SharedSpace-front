@@ -186,7 +186,7 @@ describe("Given the service User Service", () => {
         initialState: {
           ui: mockInitialUiState,
           user: mockInitialUserState,
-          locations: { locations: [] },
+          locations: { count: 0, next: "", previous: "", locations: [] },
         },
       });
 
@@ -236,7 +236,7 @@ describe("Given the service User Service", () => {
         initialState: {
           ui: mockInitialUiState,
           user: mockInitialUserState,
-          locations: { locations: [] },
+          locations: { count: 0, next: "", previous: "", locations: [] },
         },
       });
 
