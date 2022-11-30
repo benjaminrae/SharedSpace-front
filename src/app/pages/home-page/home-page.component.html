@@ -1,13 +1,3 @@
 <h2>Locations</h2>
 
-<ul>
-
-  <li *ngFor="let location of locations$ | async">
-
-    <app-location-card [location]="location">
-
-    </app-location-card>
-
-  </li>
-
-</ul>
+<app-location-list [locations$]="locations$"></app-location-list>

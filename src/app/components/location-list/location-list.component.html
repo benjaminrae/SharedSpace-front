@@ -1,0 +1,11 @@
+<ul>
+
+  <li *ngFor="let location of locations$ | async">
+
+    <app-location-card [location]="location">
+
+    </app-location-card>
+
+  </li>
+
+</ul>
