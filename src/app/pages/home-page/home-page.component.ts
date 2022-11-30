@@ -10,9 +10,11 @@ import { Locations } from "../../store/locations-feature/types";
 })
 export class HomePageComponent {
   locations$!: Observable<Locations>;
+  count$!: Observable<number>;
 
   constructor(private readonly locationsService: LocationsService) {
     locationsService.getLocations();
     this.locations$ = locationsService.selectLocations();
+    this.count$ = locationsService.selectCount();
   }
 }

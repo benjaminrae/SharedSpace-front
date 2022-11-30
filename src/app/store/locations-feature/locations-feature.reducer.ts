@@ -30,5 +30,12 @@ export const locationsFeature = createFeature({
   ),
 });
 
-export const { name, reducer, selectLocations, selectLocationsState } =
-  locationsFeature;
+export const {
+  name,
+  reducer,
+  selectLocations,
+  selectLocationsState,
+  selectCount,
+  selectNext,
+  selectPrevious,
+} = locationsFeature;

@@ -1,0 +1,26 @@
+<span class="location-list__count">{{count$ | async}} locations found</span>
+
+<div *ngIf="count$ | async; then thenBlock else elseBlock"></div>
+
+<ng-template #thenBlock>
+
+  <ul>
+
+    <li *ngFor="let location of locations$ | async">
+
+      <app-location-card [location]="location">
+
+      </app-location-card>
+
+    </li>
+
+  </ul>
+</ng-template>
+
+<ng-template #elseBlock>
+  <div class="location-list__container">
+    <img class="location-list__image" src="../../../assets/svgs/no-results.svg" alt="No results found">
+    <span class="location-list__no-results">Try another search</span>
+  </div>
+
+</ng-template>
