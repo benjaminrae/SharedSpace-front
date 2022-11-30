@@ -1,5 +1,6 @@
 import { FormBuilder } from "@angular/forms";
 import { render, screen } from "@testing-library/angular";
+import { ButtonComponent } from "../../core/button/button.component";
 
 import { LocationFormComponent } from "./location-form.component";
 
@@ -42,6 +43,36 @@ describe("Given a LocationFormComponent", () => {
       const checkboxes = screen.queryAllByRole("checkbox");
 
       expect(checkboxes).toHaveLength(totalCheckboxes);
+    });
+
+    test("And it should show a button 'Save location' which is disabled", async () => {
+      const buttonText = /save location/i;
+
+      await render(LocationFormComponent, {
+        providers: [FormBuilder],
+        declarations: [ButtonComponent],
+      });
+
+      const renderedButton = screen.queryByRole("button", {
+        name: buttonText,
+      });
+
+      expect(renderedButton).toBeInTheDocument();
+      expect(renderedButton).toBeDisabled();
+    });
+
+    test("And it should show an image with alt 'Your image'", async () => {
+      const imageAlt = /your image/i;
+
+      await render(LocationFormComponent, {
+        providers: [FormBuilder],
+        declarations: [ButtonComponent],
+      });
+
+      screen.debug();
+      const renderedImage = screen.queryByAltText(imageAlt);
+
+      expect(renderedImage).toBeInTheDocument();
     });
   });
 });

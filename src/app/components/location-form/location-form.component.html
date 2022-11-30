@@ -74,13 +74,13 @@
     </label>
   </div>
 
-  <app-button [big]="true" text="Save location"></app-button>
+  <app-button [big]="true" text="Save location" [disabled]="locationForm.status === 'INVALID'"></app-button>
 
 </form>
 
 <div class="location-form__image-preview">
 
   <span>Preview your images</span>
-  <img [src]="fileUrl" alt="Your avatar">
+  <img [src]="fileUrl" alt="Your image">
 
 </div>
