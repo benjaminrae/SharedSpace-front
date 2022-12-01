@@ -8,4 +8,5 @@ import { LocationStructure } from "../../store/locations-feature/types";
 })
 export class LocationCardComponent {
   @Input() location!: LocationStructure;
+  @Input() owner!: boolean;
 }

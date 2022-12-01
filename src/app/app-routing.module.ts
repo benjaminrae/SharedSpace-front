@@ -4,6 +4,7 @@ import { AuthGuard } from "./auth/auth.guard";
 import { CredentialsPageComponent } from "./pages/credentials-page/credentials-page.component";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
 import { LocationFormPageComponent } from "./pages/location-form-page/location-form-page.component";
+import { MyLocationsPageComponent } from "./pages/my-locations-page/my-locations-page.component";
 import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.component";
 
 export const routes: Routes = [
@@ -14,6 +15,11 @@ export const routes: Routes = [
   {
     path: "add-location",
     component: LocationFormPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "my-locations",
+    component: MyLocationsPageComponent,
     canActivate: [AuthGuard],
   },
   { path: "**", component: NotFoundPageComponent },

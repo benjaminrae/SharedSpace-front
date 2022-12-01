@@ -11,6 +11,7 @@
 .form__input--file::-webkit-file-upload-button {
   visibility: hidden;
 }
+
 .form__input--file::before {
   content: "Select image file";
   display: inline-block;
@@ -39,6 +40,7 @@
 form {
   padding-bottom: 3rem;
   flex: 1;
+  width: 100%;
 }
 
 .location-form__image-preview {
