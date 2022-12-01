@@ -22,6 +22,7 @@ export class LocationsService {
     locations: "/locations",
     add: "/add",
     myLocations: "/my-locations",
+    deleteLocation: "/delete-location",
   };
 
   private token$!: Observable<string>;
@@ -77,6 +78,24 @@ export class LocationsService {
     }
 
     return throwError(() => new Error(error.message));
+  }
+
+  deleteLocation(locationId: string) {
+    const response$ = this.http
+      .delete<{ message: string }>(
+        `${apiUrl}${this.paths.locations}${this.paths.deleteLocation}/${locationId}`,
+        {
+          headers: {
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            Authorization: this.getBearerToken(),
+          },
+        }
+      )
+      .pipe(catchError((error) => this.handleError(error, this.uiService)));
+
+    response$.subscribe((data) => {
+      this.uiService.showSuccessModal(data.message);
+    });
   }
 
   getBearerToken() {
