@@ -10,4 +10,5 @@ import { Locations } from "src/app/store/locations-feature/types";
 export class LocationListComponent {
   @Input() locations$!: Observable<Locations>;
   @Input() count$!: Observable<number>;
+  @Input() owner!: boolean;
 }

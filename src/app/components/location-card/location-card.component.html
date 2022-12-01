@@ -4,5 +4,11 @@
   <span class="location-card__location">
     <ng-icon name="iconoirPinAlt" color="currentColor" strokeWidth="3"></ng-icon>{{ location.location }}
   </span>
+
+  <div class="location-card__owner-buttons" *ngIf="owner">
+    <app-button [disabled]="true" text="Modify" [big]="true"></app-button>
+    <app-button [disabled]="true" text="Delete" [big]="true"></app-button>
+  </div>
+
   <app-button [disabled]="true" [big]="true" text="Info"></app-button>
 </article>
