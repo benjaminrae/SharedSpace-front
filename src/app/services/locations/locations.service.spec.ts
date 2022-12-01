@@ -150,4 +150,26 @@ describe("Given the service Locations Service", () => {
       httpMock.verify();
     });
   });
+
+  describe("When its method addLocation is invoked and the server returns 409", () => {
+    test("Then handleError should be called", () => {
+      const httpMock = TestBed.inject(HttpTestingController);
+
+      const handleError = jest.spyOn(service, "handleError");
+
+      const error$ = service.addLocation(new FormData());
+
+      error$.subscribe();
+
+      const mockRequest = httpMock.expectOne(`${apiUrl}/locations/add`);
+
+      mockRequest.flush("", { status: 409, statusText: "" });
+
+      expect(mockRequest.request.method).toBe("POST");
+
+      httpMock.verify();
+
+      expect(handleError).toHaveBeenCalled();
+    });
+  });
 });
