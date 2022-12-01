@@ -4,12 +4,13 @@ import { Store } from "@ngrx/store";
 import { UiService } from "../ui/ui.service";
 import { environment } from "../../../environments/environment";
 import { LocationsState } from "../../store/locations-feature/types";
-import { catchError, throwError } from "rxjs";
+import { catchError, Observable, throwError } from "rxjs";
 import { loadLocations } from "../../store/locations-feature/locations-feature.actions";
 import {
   selectCount,
   selectLocations,
 } from "../../store/locations-feature/locations-feature.reducer";
+import { selectToken } from "src/app/store/user-feature/user-feature.reducer";
 
 const { apiUrl } = environment;
 
@@ -18,6 +19,8 @@ const { apiUrl } = environment;
 })
 export class LocationsService {
   private readonly paths = { locations: "/locations", add: "/add" };
+  private token$!: Observable<string>;
+  private token!: string;
 
   constructor(
     private readonly http: HttpClient,
@@ -40,7 +43,12 @@ export class LocationsService {
 
   addLocation(formData: FormData) {
     return this.http
-      .post(`${apiUrl}${this.paths.locations}${this.paths.add}`, formData)
+      .post(`${apiUrl}${this.paths.locations}${this.paths.add}`, formData, {
+        headers: {
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          Authorization: this.getBearerToken(),
+        },
+      })
       .pipe(catchError((error) => this.handleError(error, this.uiService)));
   }
 
@@ -64,5 +72,15 @@ export class LocationsService {
     }
 
     return throwError(() => new Error(error.message));
+  }
+
+  getBearerToken() {
+    this.token$ = this.store.select(selectToken);
+
+    this.token$.subscribe((data) => {
+      this.token = data;
+    });
+
+    return `Bearer ${this.token}`;
   }
 }

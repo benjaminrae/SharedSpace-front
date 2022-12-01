@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
+import { LocationsService } from "src/app/services/locations/locations.service";
+import { UiService } from "src/app/services/ui/ui.service";
 import { Services } from "src/app/store/locations-feature/types";
 
 @Component({
@@ -11,6 +13,7 @@ import { Services } from "src/app/store/locations-feature/types";
 export class LocationFormComponent {
   file!: File;
   fileUrl!: SafeUrl;
+  formData = new FormData();
 
   locationForm = this.fb.group({
     name: ["", [Validators.required]],
@@ -39,20 +42,32 @@ export class LocationFormComponent {
 
   constructor(
     private readonly sanitizer: DomSanitizer,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly uiService: UiService,
+    private readonly locationService: LocationsService
   ) {}
 
   submitForm() {
-    const formData = new FormData();
+    this.uiService.showLoading();
+    this.getFormData();
+    const response$ = this.locationService.addLocation(this.formData);
 
-    formData.append("image", this.file);
-    formData.append("name", this.locationForm.get("name")!.value!);
-    formData.append("location", this.locationForm.get("location")!.value!);
-    formData.append(
+    response$.subscribe(async () => {
+      this.uiService.showSuccessModal("Your location was added successfully");
+      this.uiService.hideLoading();
+      await this.uiService.navigate("/");
+    });
+  }
+
+  getFormData() {
+    this.formData.append("image", this.file);
+    this.formData.append("name", this.locationForm.get("name")!.value!);
+    this.formData.append("location", this.locationForm.get("location")!.value!);
+    this.formData.append(
       "description",
       this.locationForm.get("description")!.value!
     );
-    formData.append(
+    this.formData.append(
       "services",
       JSON.stringify({
         airConditioning: this.locationForm.get("services.airConditioning")!
@@ -75,8 +90,6 @@ export class LocationFormComponent {
         wifi: this.locationForm.get("services.wifi")!.value,
       } as Services)
     );
-
-    return formData;
   }
 
   onFileChange(event: Event) {
