@@ -18,7 +18,12 @@ const { apiUrl } = environment;
   providedIn: "root",
 })
 export class LocationsService {
-  private readonly paths = { locations: "/locations", add: "/add" };
+  private readonly paths = {
+    locations: "/locations",
+    add: "/add",
+    myLocations: "/my-locations",
+  };
+
   private token$!: Observable<string>;
   private token!: string;
 
@@ -82,5 +87,26 @@ export class LocationsService {
     });
 
     return `Bearer ${this.token}`;
+  }
+
+  getMyLocations() {
+    this.uiService.showLoading();
+
+    const locations$ = this.http
+      .get<LocationsState>(
+        `${apiUrl}${this.paths.locations}${this.paths.myLocations}`,
+        {
+          headers: {
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            Authorization: this.getBearerToken(),
+          },
+        }
+      )
+      .pipe(catchError((error) => this.handleError(error, this.uiService)));
+
+    locations$.subscribe((data) => {
+      this.store.dispatch(loadLocations({ payload: data }));
+      this.uiService.hideLoading();
+    });
   }
 }

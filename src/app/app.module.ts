@@ -23,6 +23,7 @@ import { iconoirPinAlt } from "@ng-icons/iconoir";
 import { LocationListComponent } from './components/location-list/location-list.component';
 import { LocationFormComponent } from './components/location-form/location-form.component';
 import { LocationFormPageComponent } from './pages/location-form-page/location-form-page.component';
+import { MyLocationsPageComponent } from './pages/my-locations-page/my-locations-page.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { LocationFormPageComponent } from './pages/location-form-page/location-f
     LocationListComponent,
     LocationFormComponent,
     LocationFormPageComponent,
+    MyLocationsPageComponent,
   ],
   imports: [
     BrowserModule,
