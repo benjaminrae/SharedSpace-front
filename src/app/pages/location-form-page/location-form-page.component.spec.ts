@@ -1,23 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { screen, render } from "@testing-library/angular";
 
-import { LocationFormPageComponent } from './location-form-page.component';
+import { LocationFormPageComponent } from "./location-form-page.component";
 
-describe('LocationFormPageComponent', () => {
-  let component: LocationFormPageComponent;
-  let fixture: ComponentFixture<LocationFormPageComponent>;
+describe("Given a LocationFormPageComponent", () => {
+  describe("When it is rendered", () => {
+    test("Then it should show a heading level 2 with 'Add your location'", async () => {
+      const expectedHeading = {
+        level: 2,
+        name: "Add your location",
+      };
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ LocationFormPageComponent ]
-    })
-    .compileComponents();
+      await render(LocationFormPageComponent);
 
-    fixture = TestBed.createComponent(LocationFormPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+      const renderedHeading = screen.queryByRole("heading", expectedHeading);
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+      expect(renderedHeading).toBeInTheDocument();
+    });
   });
 });
