@@ -107,7 +107,9 @@ describe("Given a LocationFormComponent", () => {
       await userEvent.upload(imageInput!, image);
 
       expect((imageInput as HTMLInputElement).files!.length).toBe(1);
-      expect((renderedImage as HTMLImageElement).src).toBe("http://localhost/");
+      expect((renderedImage as HTMLImageElement).src).toBe(
+        "http://localhost/assets/svgs/image-preview.svg"
+      );
     });
   });
 
