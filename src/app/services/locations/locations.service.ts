@@ -10,7 +10,7 @@ import {
   selectCount,
   selectLocations,
 } from "../../store/locations-feature/locations-feature.reducer";
-import { selectToken } from "src/app/store/user-feature/user-feature.reducer";
+import { selectToken } from "../../store/user-feature/user-feature.reducer";
 
 const { apiUrl } = environment;
 

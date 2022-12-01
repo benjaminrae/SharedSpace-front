@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
-import { LocationsService } from "src/app/services/locations/locations.service";
-import { UiService } from "src/app/services/ui/ui.service";
-import { Services } from "src/app/store/locations-feature/types";
+import { LocationsService } from "../../services/locations/locations.service";
+import { UiService } from "../../services/ui/ui.service";
+import { Services } from "../../store/locations-feature/types";
 
 @Component({
   selector: "app-location-form",

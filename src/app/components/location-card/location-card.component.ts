@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { LocationStructure } from "src/app/store/locations-feature/types";
+import { LocationStructure } from "../../store/locations-feature/types";
 
 @Component({
   selector: "app-location-card",
