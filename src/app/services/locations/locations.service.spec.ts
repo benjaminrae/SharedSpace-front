@@ -5,7 +5,10 @@ import {
 } from "@angular/common/http/testing";
 import { TestBed } from "@angular/core/testing";
 import { provideMockStore } from "@ngrx/store/testing";
-import { getRandomLocations } from "../../factories/locationsFactory";
+import {
+  getRandomLocation,
+  getRandomLocations,
+} from "../../factories/locationsFactory";
 import { environment } from "../../../environments/environment.prod";
 import { LocationsService } from "./locations.service";
 import { createMock } from "@testing-library/angular/jest-utils";
@@ -113,6 +116,38 @@ describe("Given the service Locations Service", () => {
       expect(uiService.hideLoading).toHaveBeenCalled();
       expect(uiService.showErrorModal).toHaveBeenCalledWith(serverErrorMessage);
       expect(throwError).toHaveBeenCalled();
+    });
+  });
+
+  describe("When the method addLocation is called with a new location and image", () => {
+    test("Then it should return an observable with the new location", () => {
+      const newLocation = getRandomLocation();
+      const image = new File(["image"], "image.png", {
+        type: "image/png",
+      });
+
+      const formData = new FormData();
+
+      formData.append("name", newLocation.name);
+      formData.append("description", newLocation.description);
+      formData.append("location", newLocation.location);
+      formData.append("image", image);
+
+      const httpMock = TestBed.inject(HttpTestingController);
+
+      const newLocation$ = service.addLocation(formData);
+
+      newLocation$.subscribe((data) => {
+        expect(data).toStrictEqual({ location: newLocation });
+      });
+
+      const mockRequest = httpMock.expectOne(`${apiUrl}/locations/add`);
+
+      mockRequest.flush({ location: newLocation });
+
+      expect(mockRequest.request.method).toBe("POST");
+
+      httpMock.verify();
     });
   });
 });

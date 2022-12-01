@@ -17,7 +17,7 @@ const { apiUrl } = environment;
   providedIn: "root",
 })
 export class LocationsService {
-  private readonly paths = { locations: "/locations" };
+  private readonly paths = { locations: "/locations", add: "/add" };
 
   constructor(
     private readonly http: HttpClient,
@@ -36,6 +36,12 @@ export class LocationsService {
       this.store.dispatch(loadLocations({ payload: data }));
       this.uiService.hideLoading();
     });
+  }
+
+  addLocation(formData: FormData) {
+    return this.http
+      .post(`${apiUrl}${this.paths.locations}${this.paths.add}`, formData)
+      .pipe(catchError((error) => this.handleError(error, this.uiService)));
   }
 
   selectLocations() {
