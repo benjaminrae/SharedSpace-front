@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, type Routes } from "@angular/router";
 import { AuthGuard } from "./auth/auth.guard";
-import { LocationFormComponent } from "./components/location-form/location-form.component";
 import { CredentialsPageComponent } from "./pages/credentials-page/credentials-page.component";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
+import { LocationFormPageComponent } from "./pages/location-form-page/location-form-page.component";
 import { NotFoundPageComponent } from "./pages/not-found-page/not-found-page.component";
 
 export const routes: Routes = [
@@ -13,7 +13,7 @@ export const routes: Routes = [
   { path: "register", component: CredentialsPageComponent },
   {
     path: "add-location",
-    component: LocationFormComponent,
+    component: LocationFormPageComponent,
     canActivate: [AuthGuard],
   },
   { path: "**", component: NotFoundPageComponent },
