@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Observable } from "rxjs";
-import { LocationsService } from "src/app/services/locations/locations.service";
-import { Locations } from "src/app/store/locations-feature/types";
+import { LocationsService } from "../../services/locations/locations.service";
+import { Locations } from "../../store/locations-feature/types";
 
 @Component({
   selector: "app-my-locations-page",
