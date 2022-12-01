@@ -3,9 +3,11 @@ module.exports = {
   setupFilesAfterEnv: ["<rootDir>/setup-jest.ts"],
   globalSetup: "jest-preset-angular/global-setup",
   collectCoverageFrom: [
+    "<rootDir>/src/app/*.ts",
     "<rootDir>/src/app/**/*.ts",
     "!<rootDir>/src/app/**/index.ts",
     "!<rootDir>/src/app/**/*.module.ts",
+    "<rootDir>/src/app/**/app-routing.module.ts",
   ],
 
   coverageDirectory: "coverage",
