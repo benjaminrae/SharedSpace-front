@@ -231,7 +231,8 @@ describe("Given the service User Service", () => {
   });
 
   describe("When the method logoutUser is invoked", () => {
-    test("Then the store's method dispatch should be called with a logoutUser action", () => {
+    test("Then the store's method dispatch should be called with a logoutUser action and showSuccessModal with ''You have logged out successfully", () => {
+      const logoutMessage = "You have logged out successfully";
       const store = getMockStore<ApplicationState>({
         initialState: {
           ui: mockInitialUiState,
@@ -240,17 +241,16 @@ describe("Given the service User Service", () => {
         },
       });
 
-      const userService = new UserService(
-        {} as HttpClient,
-        store,
-        {} as UiService
-      );
+      const uiService = createMock(UiService);
+
+      const userService = new UserService({} as HttpClient, store, uiService);
 
       const dispatchSpy = jest.spyOn(store, "dispatch");
 
       userService.logoutUser();
 
       expect(dispatchSpy).toHaveBeenCalledWith(logoutUser());
+      expect(uiService.showSuccessModal).toHaveBeenCalledWith(logoutMessage);
     });
   });
 });

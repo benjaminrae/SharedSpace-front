@@ -60,6 +60,7 @@ export class UserService {
 
   logoutUser() {
     this.store.dispatch(logoutUser());
+    this.uiService.showSuccessModal("You have logged out successfully");
   }
 
   handleError(error: HttpErrorResponse, uiService: UiService) {
