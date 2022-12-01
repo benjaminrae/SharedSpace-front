@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, type Routes } from "@angular/router";
+import { AuthGuard } from "./auth/auth.guard";
 import { LocationFormComponent } from "./components/location-form/location-form.component";
 import { CredentialsPageComponent } from "./pages/credentials-page/credentials-page.component";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
@@ -10,7 +11,11 @@ export const routes: Routes = [
   { path: "locations", redirectTo: "", pathMatch: "full" },
   { path: "login", component: CredentialsPageComponent },
   { path: "register", component: CredentialsPageComponent },
-  { path: "add-location", component: LocationFormComponent },
+  {
+    path: "add-location",
+    component: LocationFormComponent,
+    canActivate: [AuthGuard],
+  },
   { path: "**", component: NotFoundPageComponent },
 ];
 
