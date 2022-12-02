@@ -3,7 +3,11 @@ import {
   getRandomLocation,
   getRandomLocations,
 } from "../../factories/locationsFactory";
-import { deleteLocation, loadLocations } from "./locations-feature.actions";
+import {
+  deleteLocation,
+  loadLocations,
+  loadMoreLocations,
+} from "./locations-feature.actions";
 import { locationsFeature } from "./locations-feature.reducer";
 import { LocationsState } from "./types";
 
@@ -75,6 +79,41 @@ describe("Given a locationsReducer", () => {
       );
 
       expect(newLocationsState).toStrictEqual(expectedLocationState);
+    });
+  });
+
+  describe("When it receives a current state with 10 locations and a loadMoreLocations action with 10 locations", () => {
+    test("Then it should return a state with 20 locations", () => {
+      const initialLocations = getRandomLocations(10);
+      const newLocations = getRandomLocations(10);
+
+      const initialLocationsState: LocationsState = {
+        count: 10,
+        next: "",
+        previous: "",
+        locations: initialLocations,
+      };
+
+      const expectedLocationsState: LocationsState = {
+        count: 20,
+        next: "",
+        previous: "",
+        locations: [...initialLocations, ...newLocations],
+      };
+
+      const loadMorePayload: LocationsState = {
+        count: 20,
+        next: "",
+        previous: "",
+        locations: newLocations,
+      };
+
+      const newLocationsState = locationsReducer(
+        initialLocationsState,
+        loadMoreLocations({ payload: loadMorePayload })
+      );
+
+      expect(newLocationsState).toStrictEqual(expectedLocationsState);
     });
   });
 });

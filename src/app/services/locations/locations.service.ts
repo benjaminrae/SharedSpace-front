@@ -8,6 +8,7 @@ import { catchError, Observable, throwError } from "rxjs";
 import {
   deleteLocation,
   loadLocations,
+  loadMoreLocations,
 } from "../../store/locations-feature/locations-feature.actions";
 import {
   selectCount,
@@ -66,7 +67,7 @@ export class LocationsService {
       .pipe(catchError((error) => this.handleError(error, this.uiService)));
 
     locations$.subscribe((data) => {
-      this.store.dispatch(loadLocations({ payload: data }));
+      this.store.dispatch(loadMoreLocations({ payload: data }));
       this.uiService.hideLoading();
     });
   }
