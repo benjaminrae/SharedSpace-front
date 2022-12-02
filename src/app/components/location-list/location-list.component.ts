@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { Observable } from "rxjs";
 import { LocationsService } from "../../services/locations/locations.service";
 import { Locations } from "../../store/locations-feature/types";
@@ -8,27 +8,25 @@ import { Locations } from "../../store/locations-feature/types";
   templateUrl: "./location-list.component.html",
   styleUrls: ["./location-list.component.scss"],
 })
-export class LocationListComponent implements OnInit {
+export class LocationListComponent {
   @Input() owner!: boolean;
 
   locations$!: Observable<Locations>;
   count$!: Observable<number>;
   next$!: Observable<string | undefined>;
 
-  constructor(private readonly locationsService: LocationsService) {}
-
-  ngOnInit(): void {
+  constructor(private readonly locationsService: LocationsService) {
     if (!this.owner) {
-      this.locationsService.getLocations();
+      locationsService.getLocations();
     }
 
     if (this.owner) {
-      this.locationsService.getMyLocations();
+      locationsService.getMyLocations();
     }
 
-    this.locations$ = this.locationsService.selectLocations();
-    this.count$ = this.locationsService.selectCount();
-    this.next$ = this.locationsService.selectNext();
+    this.locations$ = locationsService.selectLocations();
+    this.count$ = locationsService.selectCount();
+    this.next$ = locationsService.selectNext();
   }
 
   showMore() {

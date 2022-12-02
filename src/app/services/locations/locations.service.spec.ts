@@ -256,4 +256,42 @@ describe("Given the service Locations Service", () => {
       expect(handleError).toHaveBeenCalled();
     });
   });
+
+  describe("When its method getNextLocations is invoked with 'nextlocations.com' ", () => {
+    test("Then it should return an observable with a list of locations after making a request to that link", () => {
+      const httpMock = TestBed.inject(HttpTestingController);
+      const requestLink = "nextlocations.com";
+
+      service.getNextLocations(requestLink);
+
+      const mockRequest = httpMock.expectOne(requestLink);
+
+      mockRequest.flush({ locations });
+
+      expect(mockRequest.request.method).toBe("GET");
+
+      httpMock.verify();
+    });
+  });
+
+  describe("When its method getNextLocations is invoked and the server returns 500", () => {
+    test("Then handleError should be called", () => {
+      const httpMock = TestBed.inject(HttpTestingController);
+      const requestLink = "nextlocations.com";
+
+      const handleError = jest.spyOn(service, "handleError");
+
+      service.getNextLocations(requestLink);
+
+      const mockRequest = httpMock.expectOne(requestLink);
+
+      mockRequest.flush("", { status: 500, statusText: "" });
+
+      expect(mockRequest.request.method).toBe("GET");
+
+      httpMock.verify();
+
+      expect(handleError).toHaveBeenCalled();
+    });
+  });
 });

@@ -3,10 +3,12 @@ import { Locations } from "../../store/locations-feature/types";
 import { getRandomLocations } from "../../factories/locationsFactory";
 import { LocationListComponent } from "./location-list.component";
 import { HttpClient, HttpHandler } from "@angular/common/http";
+import { createMock } from "@testing-library/angular/jest-utils";
 import { provideMockStore } from "@ngrx/store/testing";
 import userEvent from "@testing-library/user-event/";
-import { LocationsService } from "src/app/services/locations/locations.service";
-import { createMock } from "@testing-library/angular/jest-utils";
+import { LocationsService } from "../../services/locations/locations.service";
+import { ButtonComponent } from "../../core/button/button.component";
+import { of } from "rxjs";
 
 describe("Given a LocationListComponent", () => {
   describe("When it is rendered and there are 6 locations in the store", () => {
@@ -24,8 +26,6 @@ describe("Given a LocationListComponent", () => {
           }),
         ],
       });
-
-      screen.debug();
 
       const renderedCount = screen.queryByText(expectedCount);
       const renderedList = screen.queryAllByRole("listitem");
@@ -67,8 +67,14 @@ describe("Given a LocationListComponent", () => {
     test("Then locationService's getNextLocations should be invoked when Show more is clicked", async () => {
       const next = "nextlocations.com";
       const showMoreLabel = /show more/i;
+      const totalLocations = 10;
+      const locations = getRandomLocations(totalLocations);
 
       const locationsService = createMock(LocationsService);
+      locationsService.selectNext = jest.fn().mockReturnValue(of(next));
+      locationsService.selectCount = jest
+        .fn()
+        .mockReturnValue(of(totalLocations));
 
       await render(LocationListComponent, {
         providers: [
@@ -76,18 +82,21 @@ describe("Given a LocationListComponent", () => {
           HttpHandler,
           provideMockStore({
             initialState: {
-              locations: { next, locations: getRandomLocations(10) },
+              locations: { next, locations, count: totalLocations },
             },
           }),
         ],
         componentProviders: [
           { provide: LocationsService, useValue: locationsService },
         ],
+        declarations: [ButtonComponent],
       });
 
       const showMoreButton = screen.queryByRole("button", {
         name: showMoreLabel,
       });
+
+      expect(showMoreButton).not.toBeDisabled();
 
       await userEvent.click(showMoreButton!);
 
