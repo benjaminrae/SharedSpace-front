@@ -51,6 +51,9 @@ describe("Given a LocationListComponent", () => {
             initialState: { locations: { count: totalLocations, locations } },
           }),
         ],
+        componentProperties: {
+          owner: false,
+        },
       });
 
       const renderedCount = screen.queryByText(expectedCount);
