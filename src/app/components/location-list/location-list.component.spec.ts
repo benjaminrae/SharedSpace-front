@@ -4,6 +4,9 @@ import { getRandomLocations } from "../../factories/locationsFactory";
 import { LocationListComponent } from "./location-list.component";
 import { HttpClient, HttpHandler } from "@angular/common/http";
 import { provideMockStore } from "@ngrx/store/testing";
+import userEvent from "@testing-library/user-event/";
+import { LocationsService } from "src/app/services/locations/locations.service";
+import { createMock } from "@testing-library/angular/jest-utils";
 
 describe("Given a LocationListComponent", () => {
   describe("When it is rendered and there are 6 locations in the store", () => {
@@ -57,6 +60,38 @@ describe("Given a LocationListComponent", () => {
       expect(renderedCount).toBeInTheDocument();
       expect(renderedInformation).toBeInTheDocument();
       expect(renderedImage).toBeInTheDocument();
+    });
+  });
+
+  describe("When it is rendered and there is a next link in the store", () => {
+    test("Then locationService's getNextLocations should be invoked when Show more is clicked", async () => {
+      const next = "nextlocations.com";
+      const showMoreLabel = /show more/i;
+
+      const locationsService = createMock(LocationsService);
+
+      await render(LocationListComponent, {
+        providers: [
+          HttpClient,
+          HttpHandler,
+          provideMockStore({
+            initialState: {
+              locations: { next, locations: getRandomLocations(10) },
+            },
+          }),
+        ],
+        componentProviders: [
+          { provide: LocationsService, useValue: locationsService },
+        ],
+      });
+
+      const showMoreButton = screen.queryByRole("button", {
+        name: showMoreLabel,
+      });
+
+      await userEvent.click(showMoreButton!);
+
+      expect(locationsService.getNextLocations).toHaveBeenCalledWith(next);
     });
   });
 });
