@@ -14,6 +14,7 @@ export class LocationListComponent implements OnInit {
   locations$!: Observable<Locations>;
   count$!: Observable<number>;
   next$!: Observable<string | undefined>;
+  next!: string;
 
   constructor(private readonly locationsService: LocationsService) {}
 
@@ -33,7 +34,11 @@ export class LocationListComponent implements OnInit {
 
   showMore() {
     this.next$.subscribe((data) => {
-      this.locationsService.getNextLocations(data!);
+      if (data) {
+        this.next = data;
+      }
     });
+
+    this.locationsService.getNextLocations(this.next);
   }
 }
