@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
-import { loadLocations } from "./locations-feature.actions";
+import { deleteLocation, loadLocations } from "./locations-feature.actions";
 import { LocationsState } from "./types";
 
 const initialLocationsState: LocationsState = {
@@ -25,6 +25,17 @@ export const locationsFeature = createFeature({
         locations,
         next,
         previous,
+      })
+    ),
+
+    on(
+      deleteLocation,
+      (currentState, { payload }): LocationsState => ({
+        ...currentState,
+        count: currentState.count - 1,
+        locations: currentState.locations.filter(
+          (location) => location.id !== payload
+        ),
       })
     )
   ),

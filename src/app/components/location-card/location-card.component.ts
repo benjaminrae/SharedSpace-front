@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { LocationsService } from "../../services/locations/locations.service";
 import { LocationStructure } from "../../store/locations-feature/types";
 
 @Component({
@@ -9,4 +10,10 @@ import { LocationStructure } from "../../store/locations-feature/types";
 export class LocationCardComponent {
   @Input() location!: LocationStructure;
   @Input() owner!: boolean;
+
+  constructor(private readonly locationsService: LocationsService) {}
+
+  deleteLocation() {
+    this.locationsService.deleteLocation(this.location.id);
+  }
 }

@@ -7,6 +7,7 @@ const locationFactory = Factory.define<LocationStructure>(() => ({
   location: faker.address.cityName(),
   owner: faker.database.mongodbObjectId(),
   description: faker.random.words(20),
+  id: faker.database.mongodbObjectId(),
   images: {
     image: faker.image.business(),
     small: faker.image.business(),

@@ -1,3 +1,5 @@
+import { HttpClient, HttpHandler } from "@angular/common/http";
+import { provideMockStore } from "@ngrx/store/testing";
 import { render, screen } from "@testing-library/angular";
 import { ButtonComponent } from "../../core/button/button.component";
 import { getRandomLocation } from "../../factories/locationsFactory";
@@ -10,6 +12,7 @@ describe("Given a LocationCardComponent", () => {
       const expectedButton = /info/i;
 
       await render(LocationCardComponent, {
+        providers: [HttpClient, HttpHandler, provideMockStore({})],
         componentProperties: {
           location,
         },
