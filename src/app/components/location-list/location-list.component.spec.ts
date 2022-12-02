@@ -89,6 +89,9 @@ describe("Given a LocationListComponent", () => {
         componentProviders: [
           { provide: LocationsService, useValue: locationsService },
         ],
+        componentProperties: {
+          owner: true,
+        },
         declarations: [ButtonComponent],
       });
 
