@@ -4,8 +4,8 @@ import { LocationsState } from "./types";
 
 const initialLocationsState: LocationsState = {
   count: 0,
-  next: "",
-  previous: "",
+  next: undefined,
+  previous: undefined,
   locations: [],
 };
 

@@ -12,6 +12,7 @@ import {
 import {
   selectCount,
   selectLocations,
+  selectNext,
 } from "../../store/locations-feature/locations-feature.reducer";
 import { selectToken } from "../../store/user-feature/user-feature.reducer";
 
@@ -21,6 +22,8 @@ const { apiUrl } = environment;
   providedIn: "root",
 })
 export class LocationsService {
+  page = 1;
+
   private readonly paths = {
     locations: "/locations",
     add: "/add",
@@ -50,6 +53,24 @@ export class LocationsService {
     });
   }
 
+  getNextLocations(url: string) {
+    this.uiService.showLoading();
+
+    const locations$ = this.http
+      .get<LocationsState>(`${url}`, {
+        headers: {
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          Authorization: this.getBearerToken(),
+        },
+      })
+      .pipe(catchError((error) => this.handleError(error, this.uiService)));
+
+    locations$.subscribe((data) => {
+      this.store.dispatch(loadLocations({ payload: data }));
+      this.uiService.hideLoading();
+    });
+  }
+
   addLocation(formData: FormData) {
     return this.http
       .post(`${apiUrl}${this.paths.locations}${this.paths.add}`, formData, {
@@ -67,6 +88,10 @@ export class LocationsService {
 
   selectCount() {
     return this.store.select(selectCount);
+  }
+
+  selectNext() {
+    return this.store.select(selectNext);
   }
 
   handleError(error: HttpErrorResponse, uiService: UiService) {

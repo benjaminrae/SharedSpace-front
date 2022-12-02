@@ -3,21 +3,28 @@
 <div *ngIf="count$ | async; then thenBlock else elseBlock"></div>
 
 <ng-template #thenBlock>
+  <div class="location-list">
 
-  <ul>
+    <ul>
 
-    <li *ngFor="let location of locations$ | async">
+      <li *ngFor="let location of locations$ | async">
 
-      <app-location-card [location]="location" [owner]="owner">
+        <app-location-card [location]="location" [owner]="owner">
 
-      </app-location-card>
+        </app-location-card>
 
-    </li>
+      </li>
 
-  </ul>
+    </ul>
+
+    <app-button [disabled]="(next$ | async) === null || (next$ | async) === undefined " text="Show more"
+      class="location-list__show-more" (onClick)="showMore()">
+    </app-button>
+  </div>
 </ng-template>
 
 <ng-template #elseBlock>
+
   <div class="location-list__container">
     <img class="location-list__image" src="../../../assets/svgs/no-results.svg" alt="No results found">
     <span class="location-list__no-results">Try another search</span>

@@ -1,8 +1,9 @@
 import { render, screen } from "@testing-library/angular";
-import { of } from "rxjs";
 import { Locations } from "../../store/locations-feature/types";
 import { getRandomLocations } from "../../factories/locationsFactory";
 import { LocationListComponent } from "./location-list.component";
+import { HttpClient, HttpHandler } from "@angular/common/http";
+import { provideMockStore } from "@ngrx/store/testing";
 
 describe("Given a LocationListComponent", () => {
   describe("When it is rendered and there are 6 locations in the store", () => {
@@ -12,10 +13,13 @@ describe("Given a LocationListComponent", () => {
       const expectedCount = `${totalLocations} locations found`;
 
       await render(LocationListComponent, {
-        componentProperties: {
-          count$: of(totalLocations),
-          locations$: of(locations),
-        },
+        providers: [
+          HttpClient,
+          HttpHandler,
+          provideMockStore({
+            initialState: { locations: { count: totalLocations, locations } },
+          }),
+        ],
       });
 
       screen.debug();
@@ -37,10 +41,13 @@ describe("Given a LocationListComponent", () => {
       const informationText = "Try another search";
 
       await render(LocationListComponent, {
-        componentProperties: {
-          count$: of(totalLocations),
-          locations$: of(locations),
-        },
+        providers: [
+          HttpClient,
+          HttpHandler,
+          provideMockStore({
+            initialState: { locations: { count: totalLocations, locations } },
+          }),
+        ],
       });
 
       const renderedCount = screen.queryByText(expectedCount);
