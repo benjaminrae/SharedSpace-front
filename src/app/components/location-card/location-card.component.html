@@ -7,7 +7,7 @@
 
   <div class="location-card__owner-buttons" *ngIf="owner">
     <app-button [disabled]="true" text="Modify" [big]="true"></app-button>
-    <app-button [disabled]="true" text="Delete" [big]="true"></app-button>
+    <app-button text="Delete" [big]="true" (onClick)="deleteLocation()"></app-button>
   </div>
 
   <app-button [disabled]="true" [big]="true" text="Info"></app-button>

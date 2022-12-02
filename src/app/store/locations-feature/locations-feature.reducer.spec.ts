@@ -1,6 +1,9 @@
 import { Action } from "@ngrx/store";
-import { getRandomLocations } from "../../factories/locationsFactory";
-import { loadLocations } from "./locations-feature.actions";
+import {
+  getRandomLocation,
+  getRandomLocations,
+} from "../../factories/locationsFactory";
+import { deleteLocation, loadLocations } from "./locations-feature.actions";
 import { locationsFeature } from "./locations-feature.reducer";
 import { LocationsState } from "./types";
 
@@ -48,6 +51,27 @@ describe("Given a locationsReducer", () => {
         loadLocations({
           payload: { locations: newLocations, count, next, previous },
         })
+      );
+
+      expect(newLocationsState).toStrictEqual(expectedLocationState);
+    });
+  });
+
+  describe("When it receives an initial state with one stored location and it receives a deleteLocation action with that location's id", () => {
+    test("Then it should return a copy of the state without that location", () => {
+      const locationToDelete = getRandomLocation();
+
+      const expectedLocationState = initialLocationsState;
+
+      const initialState: LocationsState = {
+        ...initialLocationsState,
+        locations: [locationToDelete],
+        count: 1,
+      };
+
+      const newLocationsState = locationsReducer(
+        initialState,
+        deleteLocation({ payload: locationToDelete.id })
       );
 
       expect(newLocationsState).toStrictEqual(expectedLocationState);

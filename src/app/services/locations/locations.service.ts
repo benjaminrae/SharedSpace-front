@@ -5,7 +5,10 @@ import { UiService } from "../ui/ui.service";
 import { environment } from "../../../environments/environment";
 import { LocationsState } from "../../store/locations-feature/types";
 import { catchError, Observable, throwError } from "rxjs";
-import { loadLocations } from "../../store/locations-feature/locations-feature.actions";
+import {
+  deleteLocation,
+  loadLocations,
+} from "../../store/locations-feature/locations-feature.actions";
 import {
   selectCount,
   selectLocations,
@@ -22,6 +25,7 @@ export class LocationsService {
     locations: "/locations",
     add: "/add",
     myLocations: "/my-locations",
+    deleteLocation: "/delete-location",
   };
 
   private token$!: Observable<string>;
@@ -77,6 +81,27 @@ export class LocationsService {
     }
 
     return throwError(() => new Error(error.message));
+  }
+
+  deleteLocation(locationId: string) {
+    this.uiService.showLoading();
+    const response$ = this.http
+      .delete<{ message: string }>(
+        `${apiUrl}${this.paths.locations}${this.paths.deleteLocation}/${locationId}`,
+        {
+          headers: {
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            Authorization: this.getBearerToken(),
+          },
+        }
+      )
+      .pipe(catchError((error) => this.handleError(error, this.uiService)));
+
+    response$.subscribe((data) => {
+      this.uiService.hideLoading();
+      this.uiService.showSuccessModal(data.message);
+      this.store.dispatch(deleteLocation({ payload: locationId }));
+    });
   }
 
   getBearerToken() {

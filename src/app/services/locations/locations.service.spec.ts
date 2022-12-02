@@ -49,6 +49,7 @@ jest.mock("rxjs", (): unknown => ({
 
 describe("Given the service Locations Service", () => {
   let service: LocationsService;
+
   const locations = getRandomLocations(3);
 
   beforeEach(() => {
@@ -206,6 +207,49 @@ describe("Given the service Locations Service", () => {
       mockRequest.flush("", { status: 500, statusText: "" });
 
       expect(mockRequest.request.method).toBe("GET");
+
+      httpMock.verify();
+
+      expect(handleError).toHaveBeenCalled();
+    });
+  });
+
+  describe("When its method deleteLocation is invoked with id: '1234'", () => {
+    test("Then it should return a message 'Location successfully deleted'", () => {
+      const httpMock = TestBed.inject(HttpTestingController);
+
+      const idToDelete = "1234";
+      service.deleteLocation(idToDelete);
+      const message = "Location successfully deleted";
+
+      const mockRequest = httpMock.expectOne(
+        `${apiUrl}/locations/delete-location/${idToDelete}`
+      );
+
+      mockRequest.flush({ message });
+
+      expect(mockRequest.request.method).toBe("DELETE");
+
+      httpMock.verify();
+    });
+  });
+
+  describe("When its method deleteLocation is invoked with id: '1234' and the server responds with status 400", () => {
+    test("Then handleError should be called", () => {
+      const httpMock = TestBed.inject(HttpTestingController);
+
+      const handleError = jest.spyOn(service, "handleError");
+
+      const idToDelete = "1234";
+      service.deleteLocation(idToDelete);
+
+      const mockRequest = httpMock.expectOne(
+        `${apiUrl}/locations/delete-location/${idToDelete}`
+      );
+
+      mockRequest.flush("", { status: 400, statusText: "" });
+
+      expect(mockRequest.request.method).toBe("DELETE");
 
       httpMock.verify();
 

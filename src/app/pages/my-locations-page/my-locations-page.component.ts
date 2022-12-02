@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { LocationsService } from "../../services/locations/locations.service";
 import { Locations } from "../../store/locations-feature/types";
@@ -8,13 +8,15 @@ import { Locations } from "../../store/locations-feature/types";
   templateUrl: "./my-locations-page.component.html",
   styleUrls: ["./my-locations-page.component.scss"],
 })
-export class MyLocationsPageComponent {
+export class MyLocationsPageComponent implements OnInit {
   locations$!: Observable<Locations>;
   count$!: Observable<number>;
 
-  constructor(private readonly locationsService: LocationsService) {
-    locationsService.getMyLocations();
-    this.locations$ = locationsService.selectLocations();
-    this.count$ = locationsService.selectCount();
+  constructor(private readonly locationsService: LocationsService) {}
+
+  ngOnInit(): void {
+    this.locationsService.getMyLocations();
+    this.locations$ = this.locationsService.selectLocations();
+    this.count$ = this.locationsService.selectCount();
   }
 }

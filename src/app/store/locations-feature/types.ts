@@ -10,6 +10,7 @@ export interface LocationStructure {
     image: string;
     small: string;
   };
+  id: string;
 }
 
 export interface Services {
