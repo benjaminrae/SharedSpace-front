@@ -6,6 +6,11 @@ export const loadLocations = createAction(
   props<{ payload: LocationsState }>()
 );
 
+export const loadMoreLocations = createAction(
+  "[LOCATIONS] Load more locations",
+  props<{ payload: LocationsState }>()
+);
+
 export const deleteLocation = createAction(
   "[LOCATIONS] Delete location",
   props<{ payload: string }>()

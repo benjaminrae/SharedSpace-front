@@ -1,11 +1,15 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
-import { deleteLocation, loadLocations } from "./locations-feature.actions";
+import {
+  deleteLocation,
+  loadLocations,
+  loadMoreLocations,
+} from "./locations-feature.actions";
 import { LocationsState } from "./types";
 
 const initialLocationsState: LocationsState = {
   count: 0,
-  next: "",
-  previous: "",
+  next: undefined,
+  previous: undefined,
   locations: [],
 };
 
@@ -36,6 +40,20 @@ export const locationsFeature = createFeature({
         locations: currentState.locations.filter(
           (location) => location.id !== payload
         ),
+      })
+    ),
+
+    on(
+      loadMoreLocations,
+      (
+        currentState,
+        { payload: { count, locations, next, previous } }
+      ): LocationsState => ({
+        ...currentState,
+        count,
+        next,
+        previous,
+        locations: [...currentState.locations, ...locations],
       })
     )
   ),

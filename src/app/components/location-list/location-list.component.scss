@@ -9,6 +9,14 @@ ul {
 }
 
 .location-list {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 6rem;
+
+  &__show-more {
+    align-self: center;
+  }
+
   &__count {
     padding-bottom: 1rem;
   }
