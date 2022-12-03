@@ -27,6 +27,7 @@ export class LocationsService {
 
   private readonly paths = {
     locations: "/locations",
+    location: "/location",
     add: "/add",
     myLocations: "/my-locations",
     deleteLocation: "/delete-location",
@@ -159,5 +160,13 @@ export class LocationsService {
       this.store.dispatch(loadLocations({ payload: data }));
       this.uiService.hideLoading();
     });
+  }
+
+  getLocationById(locationId: string) {
+    return this.http
+      .get(
+        `${apiUrl}${this.paths.locations}${this.paths.location}/${locationId}`
+      )
+      .pipe(catchError((error) => this.handleError(error, this.uiService)));
   }
 }
