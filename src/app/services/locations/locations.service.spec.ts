@@ -294,4 +294,47 @@ describe("Given the service Locations Service", () => {
       expect(handleError).toHaveBeenCalled();
     });
   });
+
+  describe("When its method getLocationById is invoked with id '12345'", () => {
+    test("Then it should make a GET request to the correct URL", () => {
+      const httpMock = TestBed.inject(HttpTestingController);
+
+      const locationId = "12345";
+
+      const location$ = service.getLocationById(locationId);
+
+      location$.subscribe();
+
+      const mockRequest = httpMock.expectOne(
+        `${apiUrl}/locations/location/${locationId}`
+      );
+
+      mockRequest.flush({ location });
+
+      expect(mockRequest.request.method).toBe("GET");
+
+      httpMock.verify();
+    });
+  });
+
+  describe("When its method getLocationById is invoked and the server responds with status 404", () => {
+    test("Then handleError should have been called", () => {
+      const httpMock = TestBed.inject(HttpTestingController);
+
+      const locationId = "12345";
+
+      const location$ = service.getLocationById(locationId);
+
+      location$.subscribe();
+
+      const mockRequest = httpMock.expectOne(
+        `${apiUrl}/locations/location/${locationId}`
+      );
+
+      mockRequest.flush("", { status: 404, statusText: "" });
+      expect(mockRequest.request.method).toBe("GET");
+
+      httpMock.verify();
+    });
+  });
 });
