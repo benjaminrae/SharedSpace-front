@@ -24,6 +24,7 @@ import { LocationListComponent } from './components/location-list/location-list.
 import { LocationFormComponent } from './components/location-form/location-form.component';
 import { LocationFormPageComponent } from './pages/location-form-page/location-form-page.component';
 import { MyLocationsPageComponent } from './pages/my-locations-page/my-locations-page.component';
+import { LocationPageComponent } from './pages/location-page/location-page.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MyLocationsPageComponent } from './pages/my-locations-page/my-locations
     LocationFormComponent,
     LocationFormPageComponent,
     MyLocationsPageComponent,
+    LocationPageComponent,
   ],
   imports: [
     BrowserModule,
