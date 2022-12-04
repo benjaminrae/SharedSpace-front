@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
-import { LocationsService } from "src/app/services/locations/locations.service";
+import { LocationsService } from "../../services/locations/locations.service";
 
 @Component({
   selector: "app-filter",
@@ -38,24 +38,7 @@ export class FilterComponent {
   }
 
   resetFilters() {
-    this.services.setValue({
-      airConditioning: false,
-      allDayAccess: false,
-      eventManagement: false,
-      freeTeaCoffee: false,
-      freeTrial: false,
-      kitchen: false,
-      meetingRoom: false,
-      parking: false,
-      photocopier: false,
-      printer: false,
-      projector: false,
-      reception: false,
-      scanner: false,
-      tv: false,
-      whiteboard: false,
-      wifi: false,
-    });
+    this.services.reset();
 
     this.filterChange();
   }
