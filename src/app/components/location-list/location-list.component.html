@@ -1,3 +1,5 @@
+<app-filter></app-filter>
+
 <span class="location-list__count">{{count$ | async}} locations found</span>
 
 <div *ngIf="count$ | async; then thenBlock else elseBlock"></div>

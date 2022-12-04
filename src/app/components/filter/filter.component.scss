@@ -1,0 +1,30 @@
+@use "../../../styles/variables/colors";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+.filter {
+  &__button {
+    background-color: transparent;
+    border: none;
+    align-self: flex-start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 0.9;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    color: inherit;
+  }
+
+  &__filters {
+    display: none;
+
+    &--open {
+      display: block;
+    }
+  }
+}
