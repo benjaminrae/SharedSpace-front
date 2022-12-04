@@ -83,6 +83,7 @@ describe("Given a filter component", () => {
       const checkboxes = screen.queryAllByRole("checkbox");
 
       await userEvent.click(checkboxes[0]);
+      await userEvent.click(checkboxes[1]);
 
       await userEvent.click(clearButton!);
 
