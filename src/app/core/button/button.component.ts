@@ -18,6 +18,7 @@ export class ButtonComponent implements OnInit {
   @Input() text = "Click here";
   @Input() type = "submit";
   @Input() disabled!: boolean;
+  @Input() routerLink!: string;
   @Output() onClick = new EventEmitter();
   @ViewChild("button", { read: ElementRef })
   button!: ElementRef<HTMLButtonElement>;

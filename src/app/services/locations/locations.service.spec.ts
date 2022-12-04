@@ -332,6 +332,7 @@ describe("Given the service Locations Service", () => {
       );
 
       mockRequest.flush("", { status: 404, statusText: "" });
+
       expect(mockRequest.request.method).toBe("GET");
 
       httpMock.verify();

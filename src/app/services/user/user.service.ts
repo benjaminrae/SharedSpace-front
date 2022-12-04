@@ -14,7 +14,10 @@ import {
 } from "../../store/user-feature/user-feature.actions";
 import { UiService } from "../ui/ui.service";
 import { catchError, Observable, throwError } from "rxjs";
-import { selectIsLogged } from "../../store/user-feature/user-feature.reducer";
+import {
+  selectId,
+  selectIsLogged,
+} from "../../store/user-feature/user-feature.reducer";
 
 @Injectable({
   providedIn: "root",
@@ -79,5 +82,9 @@ export class UserService {
 
   getIsLogged() {
     return this.store.select(selectIsLogged);
+  }
+
+  getUserId() {
+    return this.store.select(selectId);
   }
 }

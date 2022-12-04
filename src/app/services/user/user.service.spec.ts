@@ -253,4 +253,37 @@ describe("Given the service User Service", () => {
       expect(uiService.showSuccessModal).toHaveBeenCalledWith(logoutMessage);
     });
   });
+
+  describe("When its method getUserId is invoked and id '12345' is in the store", () => {
+    test("Then it should return an observable with the user id", () => {
+      const id = "12345";
+
+      const store = getMockStore<Partial<ApplicationState>>({
+        initialState: {
+          user: {
+            id,
+            isLogged: true,
+            owner: true,
+            token: "",
+            username: "",
+          },
+        },
+      });
+
+      const userService = new UserService(
+        {} as HttpClient,
+        store,
+        {} as UiService
+      );
+
+      let userId: string;
+      const result$ = userService.getUserId();
+
+      result$.subscribe((data) => {
+        userId = data;
+
+        expect(userId).toBe(id);
+      });
+    });
+  });
 });

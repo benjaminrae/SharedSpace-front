@@ -64,8 +64,6 @@ describe("Given an AppComponent", () => {
         declarations: [HeaderComponent, LayoutComponent],
         routes,
       });
-
-      screen.debug();
     });
   });
 

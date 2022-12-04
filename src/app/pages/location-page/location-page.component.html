@@ -1,0 +1,40 @@
+<div class="location-page">
+  <div *ngIf="location then withLocation; else noLocation"></div>
+
+  <ng-template #noLocation>
+    <p>No information available for this location.</p>
+  </ng-template>
+
+  <ng-template #withLocation>
+
+    <img alt="{{location.name}}" class="location-page__image" sizes="(max-width: 600px) 248px, 1118px"
+      srcset="{{location.images.small}} 248w, {{location.images.image}} 1118w" src="{{location.images.image}}">
+
+
+
+    <div class="location-page__buttons" *ngIf="(id$ | async)! === location.owner">
+      <app-button [disabled]="true" text="Modify" [big]="true"></app-button>
+      <app-button text="Delete" [big]="true"></app-button>
+    </div>
+    <h2>{{location.name}}</h2>
+    <span class="location-page__location">
+      <ng-icon name="iconoirPinAlt" color="currentColor" strokeWidth="3"></ng-icon>{{ location.location }}
+    </span>
+
+    <h3>Description</h3>
+
+    <p>{{location.description}}</p>
+
+    <h3>Services</h3>
+
+
+    <ul>
+      <div *ngFor="let service of location.services | keyvalue">
+        <li
+          [className]="service.value ? 'location-page__service' : 'location-page__service location-page__service--strikeout'">
+          {{this.separateKeys(service.key)}}</li>
+      </div>
+    </ul>
+  </ng-template>
+
+</div>

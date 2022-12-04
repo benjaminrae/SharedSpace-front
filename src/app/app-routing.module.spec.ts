@@ -40,7 +40,6 @@ describe("Given the app component", () => {
       const loginHeading = screen.queryByRole("heading", {
         name: loginHeadingText,
       });
-      screen.debug();
 
       expect(loginHeading).toBeInTheDocument();
     });
@@ -72,7 +71,6 @@ describe("Given the app component", () => {
       const registerHeading = screen.queryByRole("heading", {
         name: registerHeadingText,
       });
-      screen.debug();
 
       expect(registerHeading).toBeInTheDocument();
     });

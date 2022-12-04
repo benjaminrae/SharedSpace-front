@@ -5,7 +5,7 @@ export interface LocationStructure {
   location: string;
   owner: string;
   description: string;
-  services?: Partial<Services>;
+  services: Services;
   images: {
     image: string;
     small: string;

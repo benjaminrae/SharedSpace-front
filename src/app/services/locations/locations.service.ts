@@ -3,7 +3,10 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { UiService } from "../ui/ui.service";
 import { environment } from "../../../environments/environment";
-import { LocationsState } from "../../store/locations-feature/types";
+import {
+  LocationsState,
+  LocationStructure,
+} from "../../store/locations-feature/types";
 import { catchError, Observable, throwError } from "rxjs";
 import {
   deleteLocation,
@@ -164,7 +167,7 @@ export class LocationsService {
 
   getLocationById(locationId: string) {
     return this.http
-      .get(
+      .get<{ location: LocationStructure }>(
         `${apiUrl}${this.paths.locations}${this.paths.location}/${locationId}`
       )
       .pipe(catchError((error) => this.handleError(error, this.uiService)));

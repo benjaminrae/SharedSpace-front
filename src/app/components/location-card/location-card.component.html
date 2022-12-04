@@ -10,5 +10,6 @@
     <app-button text="Delete" [big]="true" (onClick)="deleteLocation()"></app-button>
   </div>
 
-  <app-button [disabled]="true" [big]="true" text="Info"></app-button>
+  <app-button routerLink="/locations/{{location.name.replaceAll(' ', '-')}}/{{location.id}}" [big]="true" text="Info">
+  </app-button>
 </article>
