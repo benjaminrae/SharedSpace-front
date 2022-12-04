@@ -19,12 +19,17 @@ import { LayoutComponent } from "./components/layout/layout.component";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
 import { LocationCardComponent } from "./components/location-card/location-card.component";
 import { NgIconsModule } from "@ng-icons/core";
-import { iconoirPinAlt } from "@ng-icons/iconoir";
-import { LocationListComponent } from './components/location-list/location-list.component';
-import { LocationFormComponent } from './components/location-form/location-form.component';
-import { LocationFormPageComponent } from './pages/location-form-page/location-form-page.component';
-import { MyLocationsPageComponent } from './pages/my-locations-page/my-locations-page.component';
-import { LocationPageComponent } from './pages/location-page/location-page.component';
+import {
+  iconoirPinAlt,
+  iconoirFilter,
+  iconoirDeleteCircledOutline,
+} from "@ng-icons/iconoir";
+import { LocationListComponent } from "./components/location-list/location-list.component";
+import { LocationFormComponent } from "./components/location-form/location-form.component";
+import { LocationFormPageComponent } from "./pages/location-form-page/location-form-page.component";
+import { MyLocationsPageComponent } from "./pages/my-locations-page/my-locations-page.component";
+import { LocationPageComponent } from "./pages/location-page/location-page.component";
+import { FilterComponent } from "./components/filter/filter.component";
 
 @NgModule({
   declarations: [
@@ -41,6 +46,7 @@ import { LocationPageComponent } from './pages/location-page/location-page.compo
     LocationFormPageComponent,
     MyLocationsPageComponent,
     LocationPageComponent,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +62,11 @@ import { LocationPageComponent } from './pages/location-page/location-page.compo
     CoreModule,
     FormsModule,
     ReactiveFormsModule,
-    NgIconsModule.withIcons({ iconoirPinAlt }),
+    NgIconsModule.withIcons({
+      iconoirPinAlt,
+      iconoirFilter,
+      iconoirDeleteCircledOutline,
+    }),
   ],
   providers: [UiService],
   bootstrap: [AppComponent],

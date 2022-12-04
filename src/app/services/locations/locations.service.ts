@@ -172,4 +172,17 @@ export class LocationsService {
       )
       .pipe(catchError((error) => this.handleError(error, this.uiService)));
   }
+
+  getFilteredLocations(queryParams: string) {
+    this.uiService.showLoading();
+
+    const locations$ = this.http
+      .get<LocationsState>(`${apiUrl}${this.paths.locations}${queryParams}`)
+      .pipe(catchError((error) => this.handleError(error, this.uiService)));
+
+    locations$.subscribe((data) => {
+      this.store.dispatch(loadLocations({ payload: data }));
+      this.uiService.hideLoading();
+    });
+  }
 }
