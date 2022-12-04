@@ -44,7 +44,7 @@ describe("Given a LocationFormComponent", () => {
     });
 
     test("And it should show 15 checkboxes", async () => {
-      const totalCheckboxes = 15;
+      const totalCheckboxes = 16;
 
       await render(LocationFormComponent, {
         providers: [FormBuilder, provideMockStore({}), HttpClient, HttpHandler],
