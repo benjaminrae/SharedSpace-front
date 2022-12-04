@@ -1,5 +1,5 @@
 import { HttpClient, HttpHandler } from "@angular/common/http";
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { provideMockStore } from "@ngrx/store/testing";
 import { render, screen } from "@testing-library/angular";
 import { createMock } from "@testing-library/angular/jest-utils";
@@ -7,6 +7,10 @@ import userEvent from "@testing-library/user-event";
 import { LocationsService } from "../../services/locations/locations.service";
 
 import { FilterComponent } from "./filter.component";
+
+beforeEach(() => {
+  jest.clearAllMocks();
+});
 
 describe("Given a filter component", () => {
   const filterLabel = /filter/i;
@@ -44,10 +48,12 @@ describe("Given a filter component", () => {
       const locationsService = createMock(LocationsService);
 
       await render(FilterComponent, {
-        providers: [FormBuilder, HttpClient, HttpHandler, provideMockStore({})],
+        providers: [HttpClient, HttpHandler, provideMockStore({})],
         componentProviders: [
           { provide: LocationsService, useValue: locationsService },
+          { provide: FormBuilder },
         ],
+        imports: [ReactiveFormsModule],
       });
 
       const filterButton = screen.queryByRole("button", { name: filterLabel });
