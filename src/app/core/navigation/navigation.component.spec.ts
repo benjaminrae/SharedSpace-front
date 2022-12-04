@@ -126,7 +126,6 @@ describe("Given a Navigation component", () => {
         providers: [HttpClient, HttpHandler, provideMockStore({})],
       });
 
-      screen.debug();
       const hamburgerButton = screen.queryByRole("button", {
         name: buttonLabel,
       });

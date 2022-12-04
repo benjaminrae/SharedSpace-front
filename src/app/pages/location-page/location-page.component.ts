@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
-import { UserService } from "src/app/services/user/user.service";
+import { UserService } from "../../services/user/user.service";
 import { LocationsService } from "../../services/locations/locations.service";
 import { UiService } from "../../services/ui/ui.service";
 import { LocationStructure } from "../../store/locations-feature/types";
