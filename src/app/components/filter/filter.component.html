@@ -11,6 +11,10 @@
   <span>Services</span>
   <form (change)="filterChange()">
     <div class="form-group form-group--checkboxes" [formGroup]="services">
+      <label for="airConditioning"><input type="checkbox" name="airConditioning" id="airConditioning"
+          formControlName="airConditioning">
+        Air conditioning
+      </label>
       <label for="allDayAccess"><input type="checkbox" name="allDayAccess" id="allDayAccess"
           formControlName="allDayAccess">
         24h access
