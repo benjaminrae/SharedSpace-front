@@ -34,6 +34,17 @@ ul {
     font-weight: bold;
     font-size: 2rem;
   }
+  &__aside {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__filter {
+    flex: 2;
+  }
+  &__map {
+    height: 450px;
+    width: 50%;
+  }
 }
 
 @media only screen and (min-width: 588px) {

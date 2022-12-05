@@ -7,7 +7,7 @@ import { environment } from "../environments/environment";
 import { EffectsModule } from "@ngrx/effects";
 import { CoreModule } from "./core/core.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HttpClientJsonpModule } from "@angular/common/http";
 import { UiService } from "./services/ui/ui.service";
 import { AppComponent } from "./app.component";
 import { metaReducers, reducers } from "./store";
@@ -30,6 +30,8 @@ import { LocationFormPageComponent } from "./pages/location-form-page/location-f
 import { MyLocationsPageComponent } from "./pages/my-locations-page/my-locations-page.component";
 import { LocationPageComponent } from "./pages/location-page/location-page.component";
 import { FilterComponent } from "./components/filter/filter.component";
+import { MapComponent } from "./components/map/map.component";
+import { GoogleMapsModule } from "@angular/google-maps";
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { FilterComponent } from "./components/filter/filter.component";
     MyLocationsPageComponent,
     LocationPageComponent,
     FilterComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +70,8 @@ import { FilterComponent } from "./components/filter/filter.component";
       iconoirFilter,
       iconoirDeleteCircledOutline,
     }),
+    GoogleMapsModule,
+    HttpClientJsonpModule,
   ],
   providers: [UiService],
   bootstrap: [AppComponent],
