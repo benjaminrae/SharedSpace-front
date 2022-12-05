@@ -14,7 +14,7 @@
 
     <div class="location-page__buttons" *ngIf="(id$ | async)! === location.owner">
       <app-button [disabled]="true" text="Modify" [big]="true"></app-button>
-      <app-button text="Delete" [big]="true"></app-button>
+      <app-button text="Delete" [big]="true" (onClick)="deleteLocation()"></app-button>
     </div>
     <h2>{{location.name}}</h2>
     <span class="location-page__location">
