@@ -1,4 +1,4 @@
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
 import { render, screen } from "@testing-library/angular";
 import { createMock } from "@testing-library/angular/jest-utils";
@@ -11,6 +11,8 @@ import { ButtonComponent } from "../../core/button/button.component";
 import { LocationFormComponent } from "./location-form.component";
 import { provideMockStore } from "@ngrx/store/testing";
 import { HttpClient, HttpHandler } from "@angular/common/http";
+import { getRandomLocation } from "../../factories/locationsFactory";
+import { of } from "rxjs";
 
 describe("Given a LocationFormComponent", () => {
   const imageAlt = /your image/i;
@@ -175,6 +177,52 @@ describe("Given a LocationFormComponent", () => {
       expect(uiService.hideLoading).toHaveBeenCalled();
       expect(uiService.showSuccessModal).toHaveBeenCalled();
       expect(uiService.navigate).toHaveBeenCalledWith("/");
+    });
+  });
+
+  describe("When it is rendered with a locationId '12345' and isEdit true", () => {
+    test("Then it should show a the locations values in the inputs", async () => {
+      const locationId = "12345";
+      const isEdit = true;
+      const locationsService = createMock(LocationsService);
+
+      const location = getRandomLocation();
+
+      locationsService.getLocationById = jest
+        .fn()
+        .mockReturnValue(of({ location }));
+
+      await render(LocationFormComponent, {
+        declarations: [ButtonComponent],
+        providers: [HttpClient, HttpHandler, provideMockStore({}), Validators],
+        componentProviders: [
+          { provide: LocationsService, useValue: locationsService },
+          { provide: FormBuilder },
+        ],
+        imports: [ReactiveFormsModule],
+        componentProperties: {
+          isEdit,
+          locationId,
+        },
+      });
+
+      screen.debug();
+
+      const nameInput = screen.queryByRole("textbox", {
+        name: nameLabel,
+      });
+      const locationInput = screen.queryByRole("textbox", {
+        name: locationLabel,
+      });
+      const descriptionInput = screen.queryByRole("textbox", {
+        name: descriptionLabel,
+      });
+      const image = screen.queryByRole("img");
+
+      expect(nameInput).toHaveValue(location.name);
+      expect(locationInput).toHaveValue(location.location);
+      expect(descriptionInput).toHaveValue(location.description);
+      expect((image as HTMLImageElement).src).toBe(location.images.image);
     });
   });
 });
