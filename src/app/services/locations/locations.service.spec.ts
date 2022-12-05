@@ -381,4 +381,64 @@ describe("Given the service Locations Service", () => {
       expect(handleError).toHaveBeenCalled();
     });
   });
+
+  describe("Given its method addLocation is invoked with location form data and a location id", () => {
+    test("Then it should emit a put request to the correct url", async () => {
+      const newLocation = getRandomLocation();
+      const image = new File(["image"], "image.png", {
+        type: "image/png",
+      });
+
+      const formData = new FormData();
+
+      formData.append("name", newLocation.name);
+      formData.append("description", newLocation.description);
+      formData.append("location", newLocation.location);
+      formData.append("image", image);
+
+      const httpMock = TestBed.inject(HttpTestingController);
+
+      const editedLocation$ = service.editLocation(formData, newLocation.id);
+
+      editedLocation$.subscribe((data) => {
+        expect(data).toStrictEqual({ location: newLocation });
+      });
+
+      const mockRequest = httpMock.expectOne(
+        `${apiUrl}/locations/edit-location/${newLocation.id}`
+      );
+
+      mockRequest.flush({ location: newLocation });
+
+      expect(mockRequest.request.method).toBe("PUT");
+
+      httpMock.verify();
+    });
+  });
+
+  describe("When its method editLocation is invoked and the server returns 500", () => {
+    test("Then handleError should be called", () => {
+      const newLocation = getRandomLocation();
+
+      const httpMock = TestBed.inject(HttpTestingController);
+
+      const handleError = jest.spyOn(service, "handleError");
+
+      const error$ = service.editLocation(new FormData(), newLocation.id);
+
+      error$.subscribe();
+
+      const mockRequest = httpMock.expectOne(
+        `${apiUrl}/locations/edit-location/${newLocation.id}`
+      );
+
+      mockRequest.flush("", { status: 500, statusText: "" });
+
+      expect(mockRequest.request.method).toBe("PUT");
+
+      httpMock.verify();
+
+      expect(handleError).toHaveBeenCalled();
+    });
+  });
 });

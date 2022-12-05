@@ -34,6 +34,7 @@ export class LocationsService {
     add: "/add",
     myLocations: "/my-locations",
     deleteLocation: "/delete-location",
+    editLocation: "/edit-location",
   };
 
   private token$!: Observable<string>;
@@ -84,6 +85,21 @@ export class LocationsService {
           Authorization: this.getBearerToken(),
         },
       })
+      .pipe(catchError((error) => this.handleError(error, this.uiService)));
+  }
+
+  editLocation(formData: FormData, locationId: string) {
+    return this.http
+      .put(
+        `${apiUrl}${this.paths.locations}${this.paths.editLocation}/${locationId}`,
+        formData,
+        {
+          headers: {
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            Authorization: this.getBearerToken(),
+          },
+        }
+      )
       .pipe(catchError((error) => this.handleError(error, this.uiService)));
   }
 
