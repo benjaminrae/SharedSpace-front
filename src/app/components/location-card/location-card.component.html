@@ -6,7 +6,8 @@
   </span>
 
   <div class="location-card__owner-buttons" *ngIf="owner">
-    <app-button [disabled]="true" text="Modify" [big]="true"></app-button>
+    <app-button routerLink="/edit-location/{{location.name.replaceAll(' ', '-')}}/{{location.id}}" text="Modify"
+      [big]="true"></app-button>
     <app-button text="Delete" [big]="true" (onClick)="deleteLocation()"></app-button>
   </div>
 

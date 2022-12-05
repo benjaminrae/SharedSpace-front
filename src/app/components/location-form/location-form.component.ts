@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { LocationsService } from "../../services/locations/locations.service";
@@ -10,7 +10,9 @@ import { Services } from "../../store/locations-feature/types";
   templateUrl: "./location-form.component.html",
   styleUrls: ["./location-form.component.scss"],
 })
-export class LocationFormComponent {
+export class LocationFormComponent implements OnInit {
+  @Input() isEdit!: boolean;
+  @Input() locationId!: string;
   file!: File;
   fileUrl!: SafeUrl;
   formData = new FormData();
@@ -47,20 +49,50 @@ export class LocationFormComponent {
     private readonly locationService: LocationsService
   ) {}
 
+  ngOnInit(): void {
+    if (this.isEdit) {
+      window.scrollTo(0, 0);
+      this.locationService
+        .getLocationById(this.locationId)
+        .subscribe((data) => {
+          this.locationForm.patchValue(
+            {
+              name: data.location.name,
+              description: data.location.description,
+              location: data.location.location,
+              services: { ...data.location.services },
+            },
+            { emitEvent: true }
+          );
+          this.fileUrl = data.location.images.image;
+          this.locationForm.controls.image.removeValidators(
+            Validators.required
+          );
+          this.locationForm.enable();
+        });
+    }
+  }
+
   submitForm() {
     this.uiService.showLoading();
     this.getFormData();
-    const response$ = this.locationService.addLocation(this.formData);
+
+    const response$ = this.isEdit
+      ? this.locationService.editLocation(this.formData, this.locationId)
+      : this.locationService.addLocation(this.formData);
 
     response$.subscribe(async () => {
-      this.uiService.showSuccessModal("Your location was added successfully");
+      this.uiService.showSuccessModal("Your location was saved successfully");
       this.uiService.hideLoading();
-      await this.uiService.navigate("/");
+      await this.uiService.navigate(this.isEdit ? "/my-locations" : "/");
     });
   }
 
   getFormData() {
-    this.formData.append("image", this.file);
+    if (this.file) {
+      this.formData.append("image", this.file);
+    }
+
     this.formData.append("name", this.locationForm.get("name")!.value!);
     this.formData.append("location", this.locationForm.get("location")!.value!);
     this.formData.append(
