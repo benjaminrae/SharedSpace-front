@@ -1,3 +1,3 @@
-<h2>Add your location</h2>
+<h2>{{this.isEdit ? 'Edit your location' : 'Add your location'}}</h2>
 
-<app-location-form></app-location-form>
+<app-location-form [isEdit]="isEdit" [locationId]="locationId"></app-location-form>

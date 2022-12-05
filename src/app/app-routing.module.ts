@@ -19,6 +19,11 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: "edit-location/:locationName/:locationId",
+    component: LocationFormPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: "my-locations",
     component: MyLocationsPageComponent,
     canActivate: [AuthGuard],
