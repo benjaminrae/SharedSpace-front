@@ -206,8 +206,6 @@ describe("Given a LocationFormComponent", () => {
         },
       });
 
-      screen.debug();
-
       const nameInput = screen.queryByRole("textbox", {
         name: nameLabel,
       });
@@ -223,6 +221,61 @@ describe("Given a LocationFormComponent", () => {
       expect(locationInput).toHaveValue(location.location);
       expect(descriptionInput).toHaveValue(location.description);
       expect((image as HTMLImageElement).src).toBe(location.images.image);
+    });
+  });
+
+  describe("When it is rendered with a locationId '12345' and isEdit true", () => {
+    test("Then it should invoke when the user changes the location to 'Madrid' and uploads a new image and submits the form", async () => {
+      const locationId = "12345";
+      const isEdit = true;
+      const locationsService = createMock(LocationsService);
+      const uiService = createMock(UiService);
+      const newLocation = "Madrid";
+      const newImage = new File(["image"], "image.jpg", { type: "image/jpg" });
+      const data = {
+        subscribe: jest.fn().mockImplementation((callback: () => void) => {
+          callback();
+        }),
+      };
+      locationsService.editLocation = jest.fn().mockReturnValue(data);
+
+      const location = getRandomLocation();
+
+      locationsService.getLocationById = jest
+        .fn()
+        .mockReturnValue(of({ location }));
+
+      await render(LocationFormComponent, {
+        declarations: [ButtonComponent],
+        providers: [HttpClient, HttpHandler, provideMockStore({}), Validators],
+        componentProviders: [
+          { provide: LocationsService, useValue: locationsService },
+          { provide: UiService, useValue: uiService },
+          { provide: FormBuilder },
+        ],
+        imports: [ReactiveFormsModule],
+        componentProperties: {
+          isEdit,
+          locationId,
+        },
+      });
+
+      const locationInput = screen.queryByRole("textbox", {
+        name: locationLabel,
+      });
+      const imageInput = screen.queryByLabelText(imageLabel);
+      const form = screen.queryByTestId("form");
+
+      await userEvent.type(locationInput!, newLocation);
+      await userEvent.upload(imageInput!, newImage);
+
+      form?.dispatchEvent(new Event("ngSubmit"));
+
+      expect(uiService.showLoading).toHaveBeenCalled();
+      expect(locationsService.editLocation).toHaveBeenCalled();
+      expect(uiService.hideLoading).toHaveBeenCalled();
+      expect(uiService.showSuccessModal).toHaveBeenCalled();
+      expect(uiService.navigate).toHaveBeenCalledWith("/my-locations");
     });
   });
 });

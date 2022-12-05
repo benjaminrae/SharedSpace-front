@@ -84,7 +84,7 @@ export class LocationFormComponent implements OnInit {
     response$.subscribe(async () => {
       this.uiService.showSuccessModal("Your location was saved successfully");
       this.uiService.hideLoading();
-      await this.uiService.navigate("/");
+      await this.uiService.navigate(this.isEdit ? "/my-locations" : "/");
     });
   }
 
