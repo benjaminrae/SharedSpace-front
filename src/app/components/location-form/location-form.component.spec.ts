@@ -257,6 +257,7 @@ describe("Given a LocationFormComponent", () => {
         componentProperties: {
           isEdit,
           locationId,
+          file: newImage,
         },
       });
 
