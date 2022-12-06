@@ -1,7 +1,7 @@
 <aside class="location-list__aside">
-  <app-filter class="location-list__filter"></app-filter>
-
   <app-map [locations$]="locations$ " class="location-list__map"></app-map>
+
+  <app-filter class="location-list__filter"></app-filter>
 </aside>
 
 <span class="location-list__count">{{count$ | async}} locations found</span>
