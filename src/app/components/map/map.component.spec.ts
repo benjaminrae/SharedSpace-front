@@ -1,22 +1,20 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
+import { HttpClient, HttpHandler } from "@angular/common/http";
+import { provideMockStore } from "@ngrx/store/testing";
+import { render, screen } from "@testing-library/angular";
 import { MapComponent } from "./map.component";
 
-describe("MapComponent", () => {
-  let component: MapComponent;
-  let fixture: ComponentFixture<MapComponent>;
+describe("Given a MapComponent", () => {
+  describe("When it is rendered", () => {
+    test("Then it should show a map on the screen", async () => {
+      await render(MapComponent, {
+        providers: [HttpClient, HttpHandler, provideMockStore({})],
+      });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [MapComponent],
-    }).compileComponents();
+      const renderedMap = screen.queryByTestId("map");
 
-    fixture = TestBed.createComponent(MapComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+      screen.debug();
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
+      expect(renderedMap).toBeInTheDocument();
+    });
   });
 });

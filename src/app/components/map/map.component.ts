@@ -1,14 +1,15 @@
 import { Component, Input, OnInit } from "@angular/core";
 import * as L from "leaflet";
 import Geocoder from "leaflet-control-geocoder";
-import { Locations } from "src/app/store/locations-feature/types";
+import { Locations } from "../../store/locations-feature/types";
 import { GeolocationService } from "@ng-web-apis/geolocation";
-import { LocationsService } from "src/app/services/locations/locations.service";
+import { LocationsService } from "../../services/locations/locations.service";
 import { Observable } from "rxjs";
 
+// TemplateUrl: "./map.component.html",
 @Component({
   selector: "app-map",
-  templateUrl: "./map.component.html",
+  template: `<div id="map" data-testid="map"></div>`,
   styleUrls: ["./map.component.scss"],
 })
 export class MapComponent implements OnInit {
