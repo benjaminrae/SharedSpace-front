@@ -8,6 +8,7 @@ module.exports = {
     "!<rootDir>/src/app/**/index.ts",
     "!<rootDir>/src/app/**/*.module.ts",
     "<rootDir>/src/app/**/app-routing.module.ts",
+    "!<rootDir>/src/app/components/map/map.component.ts",
   ],
 
   coverageDirectory: "coverage",
