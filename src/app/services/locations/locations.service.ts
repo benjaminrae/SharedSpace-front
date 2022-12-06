@@ -21,7 +21,7 @@ import {
 import { selectToken } from "../../store/user-feature/user-feature.reducer";
 import { GoogleGeocodeResponse } from "./types";
 
-const { apiUrl } = environment;
+const { apiUrl, agmApiKey } = environment;
 
 @Injectable({
   providedIn: "root",
@@ -205,7 +205,7 @@ export class LocationsService {
 
   getGeocodeInformation(location: string) {
     return this.http.get<GoogleGeocodeResponse>(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=AIzaSyCHJldnFuYLDsuaf8jVoadU0D4d592c5VU`
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${agmApiKey}`
     );
   }
 }

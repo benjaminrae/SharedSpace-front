@@ -16,7 +16,7 @@ import { UiService } from "../ui/ui.service";
 import { throwError } from "rxjs";
 import { GoogleGeocodeResponse } from "./types";
 
-const { apiUrl } = environment;
+const { apiUrl, agmApiKey } = environment;
 
 const providers = [provideMockStore({})];
 
@@ -460,7 +460,7 @@ describe("Given the service Locations Service", () => {
       });
 
       const mockRequest = httpMock.expectOne(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=AIzaSyCHJldnFuYLDsuaf8jVoadU0D4d592c5VU`
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${agmApiKey}`
       );
 
       mockRequest.flush(geocodeData);
