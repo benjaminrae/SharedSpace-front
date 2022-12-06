@@ -16,6 +16,8 @@ export class MapComponent implements OnInit {
   private map!: L.Map;
   private readonly geocoder!: Geocoder;
   private position!: GeolocationPosition;
+  private readonly iconSize = [25, 41] as L.PointExpression;
+  private readonly iconAnchor = [12, 41] as L.PointExpression;
 
   constructor(
     private readonly geolocation$: GeolocationService,
@@ -42,8 +44,8 @@ export class MapComponent implements OnInit {
         {
           icon: L.icon({
             iconUrl: "assets/svgs/position.svg",
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
+            iconSize: this.iconSize,
+            iconAnchor: this.iconAnchor,
           }),
         }
       )
@@ -68,8 +70,8 @@ export class MapComponent implements OnInit {
             const marker = L.marker([geocodeData.lat, geocodeData.lng], {
               icon: L.icon({
                 iconUrl: "assets/svgs/pin.svg",
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
+                iconSize: this.iconSize,
+                iconAnchor: this.iconAnchor,
               }),
             });
             const link = `<a href="/locations/${location.name}/${location.id}">${location.name}</a>`;
