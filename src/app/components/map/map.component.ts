@@ -1,17 +1,19 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import * as L from "leaflet";
 import { Locations } from "../../store/locations-feature/types";
 import { GeolocationService } from "@ng-web-apis/geolocation";
 import { LocationsService } from "../../services/locations/locations.service";
-import { Observable } from "rxjs";
+import { Observable, take } from "rxjs";
 
 @Component({
   selector: "app-map",
-  template: `<div id="map" data-testid="map"></div>`,
+  templateUrl: "./map.component.html",
   styleUrls: ["./map.component.scss"],
 })
-export class MapComponent implements OnInit {
+export class MapComponent {
   @Input() locations$!: Observable<Locations>;
+  isOpen = false;
+  isInitialised = false;
   private map!: L.Map;
   private position!: GeolocationPosition;
   private readonly iconSize = [25, 41] as L.PointExpression;
@@ -22,8 +24,8 @@ export class MapComponent implements OnInit {
     private readonly locationsService: LocationsService
   ) {}
 
-  ngOnInit() {
-    this.geolocation$.subscribe({
+  createMap() {
+    this.geolocation$.pipe(take(1)).subscribe({
       next: (position) => {
         this.position = position;
 
@@ -83,5 +85,14 @@ export class MapComponent implements OnInit {
           })
       );
     });
+  }
+
+  toggleMap() {
+    this.isOpen = !this.isOpen;
+
+    if (this.isOpen && !this.isInitialised) {
+      this.createMap();
+      this.isInitialised = true;
+    }
   }
 }

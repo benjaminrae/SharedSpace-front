@@ -1,6 +1,6 @@
 import { HttpClient, HttpHandler } from "@angular/common/http";
 import { provideMockStore } from "@ngrx/store/testing";
-import { render, screen } from "@testing-library/angular";
+import { render, screen, waitFor } from "@testing-library/angular";
 import { of } from "rxjs";
 import { getRandomLocations } from "../../factories/locationsFactory";
 import { MapComponent } from "./map.component";
@@ -12,6 +12,7 @@ import {
   GoogleGeocodeResponse,
   GoogleGeocodeResult,
 } from "src/app/services/locations/types";
+import userEvent from "@testing-library/user-event";
 
 const mockGeolocation = {
   getCurrentPosition: jest
@@ -34,16 +35,20 @@ const mockGeolocation = {
 
 const geolocationService = createMock(GeolocationService);
 
-geolocationService.subscribe = jest.fn().mockImplementation((position) => ({
-  next: jest
-    .fn()
-    .mockImplementation((callback: (position: GeolocationPosition) => void) => {
-      callback(position);
+geolocationService.pipe = jest.fn().mockReturnValue({
+  subscribe: jest.fn().mockImplementation((position) => ({
+    next: jest
+      .fn()
+      .mockImplementation(
+        (callback: (position: GeolocationPosition) => void) => {
+          callback(position);
+        }
+      ),
+    error: jest.fn().mockImplementation((callback: () => void) => {
+      callback();
     }),
-  error: jest.fn().mockImplementation((callback: () => void) => {
-    callback();
-  }),
-}));
+  })),
+});
 
 const geometry: Geometry = {
   location: { lat: 10, lng: 10 },
@@ -79,19 +84,10 @@ const locations = getRandomLocations(count);
 
 describe("Given a MapComponent", () => {
   describe("When it is rendered", () => {
-    test("Then it should show a map on the screen", async () => {
-      await render(MapComponent, {
-        providers: [HttpClient, HttpHandler, provideMockStore({})],
-      });
+    test("Then it should show a button with 'Map' which shows a map when clicked", async () => {
+      const mapLabel = /map/i;
+      const mapTestId = "map";
 
-      const renderedMap = screen.queryByTestId("map");
-
-      expect(renderedMap).toBeInTheDocument();
-    });
-  });
-
-  describe("When it is rendered then geolocation.subscribe should be invoked", () => {
-    test("Then it should show a pin on the map for each location", async () => {
       await render(MapComponent, {
         providers: [HttpClient, HttpHandler, provideMockStore({})],
         componentProperties: {
@@ -101,9 +97,24 @@ describe("Given a MapComponent", () => {
           { provide: GeolocationService, useValue: geolocationService },
           { provide: LocationsService, useValue: locationService },
         ],
+        detectChanges: true,
       });
 
-      expect(geolocationService.subscribe).toHaveBeenCalled();
+      const mapButton = screen.queryByRole("button", {
+        name: mapLabel,
+      });
+
+      expect(mapButton).toBeInTheDocument();
+
+      await userEvent.click(mapButton!);
+
+      screen.debug();
+
+      await waitFor(() => {
+        const map = screen.queryByTestId(mapTestId);
+
+        expect(map).toBeInTheDocument();
+      });
     });
   });
 });

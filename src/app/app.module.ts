@@ -23,6 +23,7 @@ import {
   iconoirPinAlt,
   iconoirFilter,
   iconoirDeleteCircledOutline,
+  iconoirMap,
 } from "@ng-icons/iconoir";
 import { LocationListComponent } from "./components/location-list/location-list.component";
 import { LocationFormComponent } from "./components/location-form/location-form.component";
@@ -68,6 +69,7 @@ import { MapComponent } from "./components/map/map.component";
       iconoirPinAlt,
       iconoirFilter,
       iconoirDeleteCircledOutline,
+      iconoirMap,
     }),
     HttpClientJsonpModule,
   ],
