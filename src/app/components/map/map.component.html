@@ -1,0 +1,7 @@
+<div [className]="isOpen ? 'map__container map__container--open':'map__container'">
+  <button class="filter__button" (click)="toggleMap()">
+    <ng-icon name="iconoirMap" color="currentColor" strokeWidth="3"></ng-icon>Map
+  </button>
+
+  <div *ngIf="isInitialised" id="map" data-testid="map"></div>
+</div>

@@ -39,12 +39,6 @@ ul {
     flex-direction: column;
     justify-content: space-between;
   }
-  &__filter {
-    flex: 2;
-  }
-  &__map {
-    display: none;
-  }
 }
 
 @media only screen and (min-width: 588px) {
@@ -54,13 +48,6 @@ ul {
 }
 
 @media only screen and (min-width: 880px) {
-  .location-list {
-    &__map {
-      display: block;
-      height: 300px;
-      width: 100%;
-    }
-  }
   ul {
     grid-template-columns: repeat(3, 1fr);
   }
