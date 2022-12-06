@@ -26,6 +26,8 @@
     "@fontsource/poppins": "^4.5.10",
     "@ng-icons/core": "^22.4.0",
     "@ng-icons/iconoir": "^22.4.0",
+    "@ng-web-apis/common": "^2.1.0",
+    "@ng-web-apis/geolocation": "^2.0.0",
     "@ngrx/effects": "^14.3.2",
     "@ngrx/entity": "^14.3.2",
     "@ngrx/eslint-plugin": "^14.3.2",

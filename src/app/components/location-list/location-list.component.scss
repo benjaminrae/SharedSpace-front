@@ -42,8 +42,7 @@ ul {
     flex: 2;
   }
   &__map {
-    height: 450px;
-    width: 50%;
+    display: none;
   }
 }
 
@@ -54,6 +53,13 @@ ul {
 }
 
 @media only screen and (min-width: 880px) {
+  .location-list {
+    &__map {
+      display: block;
+      height: 450px;
+      width: 50%;
+    }
+  }
   ul {
     grid-template-columns: repeat(3, 1fr);
   }

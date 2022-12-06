@@ -31,7 +31,6 @@ import { MyLocationsPageComponent } from "./pages/my-locations-page/my-locations
 import { LocationPageComponent } from "./pages/location-page/location-page.component";
 import { FilterComponent } from "./components/filter/filter.component";
 import { MapComponent } from "./components/map/map.component";
-import { GoogleMapsModule } from "@angular/google-maps";
 
 @NgModule({
   declarations: [
@@ -70,7 +69,6 @@ import { GoogleMapsModule } from "@angular/google-maps";
       iconoirFilter,
       iconoirDeleteCircledOutline,
     }),
-    GoogleMapsModule,
     HttpClientJsonpModule,
   ],
   providers: [UiService],
