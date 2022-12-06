@@ -3,6 +3,8 @@ import * as L from "leaflet";
 import Geocoder from "leaflet-control-geocoder";
 import { Locations } from "src/app/store/locations-feature/types";
 import { GeolocationService } from "@ng-web-apis/geolocation";
+import { LocationsService } from "src/app/services/locations/locations.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-map",
@@ -10,12 +12,15 @@ import { GeolocationService } from "@ng-web-apis/geolocation";
   styleUrls: ["./map.component.scss"],
 })
 export class MapComponent implements OnInit {
-  @Input() locations?: Locations;
+  @Input() locations$!: Observable<Locations>;
   private map!: L.Map;
   private readonly geocoder!: Geocoder;
   private position!: GeolocationPosition;
 
-  constructor(private readonly geolocation$: GeolocationService) {}
+  constructor(
+    private readonly geolocation$: GeolocationService,
+    private readonly locationsService: LocationsService
+  ) {}
 
   ngOnInit() {
     this.geolocation$.subscribe((position) => {
@@ -41,22 +46,38 @@ export class MapComponent implements OnInit {
             iconAnchor: [12, 41],
           }),
         }
-      ).addTo(this.map);
+      )
+        .bindPopup("Your location")
+        .addTo(this.map);
     });
+
+    this.addMarkers();
   }
 
   addMarkers() {
-    // This.locations?.forEach((location) => {
-    //   const marker = L.marker([location.lat, location.lng], {
-    //     icon: L.icon({
-    //       iconUrl: "assets/svgs/pin.svg",
-    //       iconSize: [25, 41],
-    //       iconAnchor: [12, 41],
-    //     }),
-    //   });
-    //   marker.bindPopup(location.name);
-    //   marker.addTo(this.map);
-    // });
+    this.locations$?.subscribe((locations) => {
+      locations.forEach((location) =>
+        this.locationsService
+          .getGeocodeInformation(location.location)
+          .subscribe(({ results }) => {
+            const [
+              {
+                geometry: { location: geocodeData },
+              },
+            ] = results;
+            const marker = L.marker([geocodeData.lat, geocodeData.lng], {
+              icon: L.icon({
+                iconUrl: "assets/svgs/pin.svg",
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+              }),
+            });
+            const link = `<a href="/locations/${location.name}/${location.id}">${location.name}</a>`;
+            marker.bindPopup(link);
+            marker.addTo(this.map);
+          })
+      );
+    });
   }
 
   getGeocodeLocation(location: string) {
