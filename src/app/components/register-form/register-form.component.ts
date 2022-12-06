@@ -7,6 +7,7 @@ import { UserService } from "../../services/user/user.service";
 @Component({
   selector: "app-register-form",
   templateUrl: "./register-form.component.html",
+  styleUrls: ["./register-form.component.scss"],
   providers: [UserService, UiService],
 })
 export class RegisterFormComponent {

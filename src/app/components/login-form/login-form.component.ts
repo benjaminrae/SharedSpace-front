@@ -8,6 +8,7 @@ import { UserCredentials } from "../../store/user-feature/types";
 @Component({
   selector: "app-login-form",
   templateUrl: "./login-form.component.html",
+  styleUrls: ["./login-form.component.scss"],
 })
 export class LoginFormComponent {
   loginForm = this.fb.group({

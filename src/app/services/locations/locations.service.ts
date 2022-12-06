@@ -19,8 +19,9 @@ import {
   selectNext,
 } from "../../store/locations-feature/locations-feature.reducer";
 import { selectToken } from "../../store/user-feature/user-feature.reducer";
+import { GoogleGeocodeResponse } from "./types";
 
-const { apiUrl } = environment;
+const { apiUrl, agmApiKey } = environment;
 
 @Injectable({
   providedIn: "root",
@@ -200,5 +201,11 @@ export class LocationsService {
       this.store.dispatch(loadLocations({ payload: data }));
       this.uiService.hideLoading();
     });
+  }
+
+  getGeocodeInformation(location: string) {
+    return this.http.get<GoogleGeocodeResponse>(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${agmApiKey}`
+    );
   }
 }

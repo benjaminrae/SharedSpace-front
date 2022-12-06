@@ -19,6 +19,7 @@ jobs:
         run: npm run build:environments
         env:
           API_URL: ${{ secrets.API_URL }}
+          AGM_API_KEY: ${{ secrets.AGM_API_KEY }}
       - name: Coverage
         run: npm run test:coverage
       - name: SonarCloud Scan

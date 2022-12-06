@@ -1,11 +1,15 @@
-<app-filter></app-filter>
+<aside class="location-list__aside">
+  <app-map [locations$]="locations$ " class="location-list__map"></app-map>
+
+  <app-filter class="location-list__filter"></app-filter>
+</aside>
 
 <span class="location-list__count">{{count$ | async}} locations found</span>
 
 <div *ngIf="count$ | async; then thenBlock else elseBlock"></div>
 
 <ng-template #thenBlock>
-  <div class="location-list">
+  <main class="location-list">
 
     <ul>
 
@@ -22,7 +26,7 @@
     <app-button [disabled]="(next$ | async) === null || (next$ | async) === undefined " text="Show more"
       class="location-list__show-more" (onClick)="showMore()">
     </app-button>
-  </div>
+  </main>
 </ng-template>
 
 <ng-template #elseBlock>

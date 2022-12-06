@@ -14,8 +14,9 @@ import { LocationsService } from "./locations.service";
 import { createMock } from "@testing-library/angular/jest-utils";
 import { UiService } from "../ui/ui.service";
 import { throwError } from "rxjs";
+import { GoogleGeocodeResponse } from "./types";
 
-const { apiUrl } = environment;
+const { apiUrl, agmApiKey } = environment;
 
 const providers = [provideMockStore({})];
 
@@ -439,6 +440,34 @@ describe("Given the service Locations Service", () => {
       httpMock.verify();
 
       expect(handleError).toHaveBeenCalled();
+    });
+  });
+
+  describe("When it's method getGeocodeInformation is invoked with location Barcelona", () => {
+    test("Then it should emit a GET request to the correct url", () => {
+      const httpMock = TestBed.inject(HttpTestingController);
+      const location = "Barcelona";
+
+      const geocodeData: Partial<GoogleGeocodeResponse> = {
+        results: [],
+        status: "200",
+      };
+
+      const geocodeInformation$ = service.getGeocodeInformation(location);
+
+      geocodeInformation$.subscribe((data) => {
+        expect(data).toStrictEqual(geocodeData);
+      });
+
+      const mockRequest = httpMock.expectOne(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${agmApiKey}`
+      );
+
+      mockRequest.flush(geocodeData);
+
+      expect(mockRequest.request.method).toBe("GET");
+
+      httpMock.verify();
     });
   });
 });
