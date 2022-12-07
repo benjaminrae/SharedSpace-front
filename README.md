@@ -8,6 +8,11 @@
 
 SharedSpace is a website that allows coworking owners to add and manage their coworking locations. It is built using Angular, Ngrx, SCSS, Jest, and Angular Testing Library.
 
+[Visit SharedSpace](https://benjamin-rae-front-final-project-2022.netlify.app/)
+
+![Login and register](resources/screenshots/login-register.webp)
+![Home and map](resources/screenshots/list.webp)
+
 ### **Features**
 
 - Add and manage coworking locations
