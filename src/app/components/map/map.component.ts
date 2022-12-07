@@ -79,8 +79,9 @@ export class MapComponent {
                 iconAnchor: this.iconAnchor,
               }),
             });
-            const link = `<a href="/locations/${location.name}/${location.id}">${location.name}</a>`;
-            marker.bindPopup(link);
+            const popup = `<div style="width:100px;display:flex;flex-direction:column;gap:1rem;align-items:center"><a href="/locations/${location.name}/${location.id}">${location.name}</a><img src="${location.images.image}" alt="${location.name}"></div>`;
+
+            marker.bindPopup(popup);
             marker.addTo(this.map);
           })
       );
