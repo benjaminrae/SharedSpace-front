@@ -4,7 +4,6 @@
 :host {
   display: flex;
   flex-direction: column;
-  padding: 1rem 0;
 }
 
 .filter {
@@ -21,11 +20,18 @@
     color: inherit;
   }
 
+  &__title {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-weight: bold;
+  }
+
   &__filters {
     display: none;
 
     &--open {
       display: block;
+      padding-bottom: 1rem;
     }
   }
 }
