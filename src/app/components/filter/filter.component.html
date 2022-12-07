@@ -8,7 +8,7 @@
     <ng-icon name="iconoirDeleteCircledOutline" color="currentColor" strokeWidth="3"></ng-icon>Clear
   </button>
 
-  <span>Services</span>
+  <div class="filter__title">Services</div>
   <form (change)="filterChange()">
     <div class="form-group form-group--checkboxes" [formGroup]="services">
       <label for="airConditioning"><input type="checkbox" name="airConditioning" id="airConditioning"
