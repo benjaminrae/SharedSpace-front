@@ -23,7 +23,7 @@
 
     </ul>
 
-    <app-button [disabled]="(next$ | async) === null || (next$ | async) === undefined " text="Show more"
+    <app-button *ngIf="(next$ | async) !== null && (next$ | async) !== undefined " text="Show more"
       class="location-list__show-more" (onClick)="showMore()">
     </app-button>
   </main>
